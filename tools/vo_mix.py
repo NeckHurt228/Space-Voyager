@@ -22,6 +22,9 @@ PLAN.json
   "duck_db": 12,                      # how far the clip audio drops under the voice
   "vo_gain_db": 0,
   "wps": 2.8,                         # speaking rate for `check` (words per second)
+  "video_len": 7.4,                   # edited video length, so `check` can flag overruns
+  "vo_is_hook": true,                 # false when the clip's own audio is the hook and
+                                      # the VO only comes in later (e.g. a closing line)
   "lines": [
     {"at": 0.15, "text": "Day one of sandbag detail."},
     {"at": 4.9,  "text": "He did not need to go that fast."},
@@ -114,7 +117,7 @@ def split_take(vo: Path, n: int) -> list[tuple[float, float]]:
 
 
 # --------------------------------------------------------------------------
-def timing_table(lines, lens, payoff, video_len=None) -> list[str]:
+def timing_table(lines, lens, payoff, video_len=None, vo_is_hook=True) -> list[str]:
     rows, issues = [], []
     for i, (ln, d) in enumerate(zip(lines, lens)):
         start, end = ln["at"], ln["at"] + d
@@ -125,7 +128,7 @@ def timing_table(lines, lens, payoff, video_len=None) -> list[str]:
                         if i + 1 < len(lines) else f"runs {end - nxt:.2f}s past the end")
         if payoff is not None and start < payoff + PAYOFF_GUARD and end > payoff - PAYOFF_GUARD:
             flag.append(f"talks over the payoff at {payoff}s, so move it after {payoff + PAYOFF_GUARD:.2f}s")
-        if i == 0 and start > 0.4:
+        if i == 0 and vo_is_hook and start > 0.4:
             flag.append("first line starts late; the voice should hit within 0.3s")
         rows.append(f"  {i + 1}. {start:5.2f}-{end:5.2f}s ({d:.2f}s)  {ln.get('text', '')[:60]}"
                     + ("" if not flag else "   <-- " + "; ".join(flag)))
@@ -139,7 +142,8 @@ def cmd_check(plan: dict) -> None:
     lines = plan["lines"]
     lens = [est_len(ln.get("text", ""), wps) for ln in lines]
     print(f"Estimated at {wps} words/s:")
-    print("\n".join(timing_table(lines, lens, plan.get("payoff"))))
+    print("\n".join(timing_table(lines, lens, plan.get("payoff"), plan.get("video_len"),
+                                  plan.get("vo_is_hook", True))))
 
 
 def cmd_mix(video: Path, plan: dict, plan_dir: Path, out: Path) -> None:
@@ -173,7 +177,7 @@ def cmd_mix(video: Path, plan: dict, plan_dir: Path, out: Path) -> None:
     vlen = duration(video)
     lens = [round(b - a, 2) for _, a, b in pieces]
     print("Measured voiceover timing:")
-    print("\n".join(timing_table(lines, lens, plan.get("payoff"), vlen)))
+    print("\n".join(timing_table(lines, lens, plan.get("payoff"), vlen, plan.get("vo_is_hook", True))))
 
     gain = float(plan.get("vo_gain_db", 0))
     duck = float(plan.get("duck_db", 12))
