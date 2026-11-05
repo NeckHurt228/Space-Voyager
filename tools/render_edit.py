@@ -183,14 +183,18 @@ def render(plan_path: Path) -> Path:
 
     f = []
     # ---- audio: bleeps on the source timeline, then cut
-    bleeps = plan.get("bleeps", [])
-    bexpr = "+".join(f"between(t,{a},{b})" for a, b in bleeps) or "0"
+    # bleeps: [a, b] = mute + 1 kHz tone; {"start": a, "end": b, "tone": false} = mute only
+    # (e.g. when a meme SFX covers the word instead of the beep)
+    bl = [{"start": x[0], "end": x[1], "tone": True} if isinstance(x, list) else {"tone": True, **x}
+          for x in plan.get("bleeps", [])]
+    bexpr = "+".join(f"between(t,{b['start']},{b['end']})" for b in bl) or "0"
+    texpr = "+".join(f"between(t,{b['start']},{b['end']})" for b in bl if b["tone"]) or "0"
     if info["has_audio"]:
         f.append(f"[0:a]aformat=sample_rates=48000:channel_layouts=stereo,volume=enable='{bexpr}':volume=0[o]")
     else:
         f.append(f"anullsrc=r=48000:cl=stereo,atrim=0:{max(s['out'] for s in segs) + 1}[o]")
     f.append(f"sine=f=1000:r=48000,aformat=sample_rates=48000:channel_layouts=stereo,"
-             f"volume={plan.get('bleep_volume', 0.25)},volume=enable='not({bexpr})':volume=0[bl]")
+             f"volume={plan.get('bleep_volume', 0.25)},volume=enable='not({texpr})':volume=0[bl]")
     f.append("[o][bl]amix=inputs=2:normalize=0:duration=first[asrc]")
 
     n = len(segs)
@@ -223,15 +227,35 @@ def render(plan_path: Path) -> Path:
     f.append(f"[vb]subtitles='{ass_esc}':fontsdir='{FONT_DIR}',format=yuv420p[vout]")
 
     # ---- SFX
+    # {"type": "boom", "at": 7.3}  - synthesized bass hit
+    # {"type": "file", "path": "assets/sfx/x.mp3", "at": 7.3, "trim": [0, 1.2], "gain_db": 6}
+    #   "at" is when the file's first sample plays; "hit" (seconds into the file) shifts it so the
+    #   sound's attack lands exactly on "at" instead
     sfx = plan.get("sfx", [])
+    extra_inputs: list[str] = []
     mix_in = "[ac]"
     for k, s in enumerate(sfx):
-        if s.get("type", "boom") == "boom":
+        kind = s.get("type", "boom")
+        at = s["at"]
+        if kind == "boom":
             gen = ("aevalsrc='0.9*sin(2*PI*(42+70*exp(-9*t))*t)*exp(-3.2*t)':s=48000:d=1.2,"
                    "aformat=sample_rates=48000:channel_layouts=stereo")
+        elif kind == "file":
+            fp = Path(s["path"])
+            fp = fp if fp.is_absolute() else ROOT / fp
+            if not fp.exists():
+                die(f"sfx file not found: {fp}")
+            extra_inputs += ["-i", str(fp)]
+            idx = len(extra_inputs) // 2  # input 0 is the source clip
+            t0, t1 = s.get("trim", [0, None])
+            trim = f"atrim={t0}" + (f":{t1}" if t1 else "")
+            fade = f",afade=t=out:st={max(0.0, (t1 or 0) - t0 - 0.25):.3f}:d=0.25" if t1 else ""
+            gen = (f"[{idx}:a]{trim},asetpts=PTS-STARTPTS{fade},"
+                   "aformat=sample_rates=48000:channel_layouts=stereo")
+            at = at - (s.get("hit", t0) - t0)
         else:
-            die(f"unknown sfx type {s.get('type')}")
-        ms = int(round(s["at"] * 1000))
+            die(f"unknown sfx type {kind}")
+        ms = max(0, int(round(at * 1000)))
         f.append(f"{gen},volume={s.get('gain_db', 0)}dB,adelay={ms}|{ms}[sfx{k}]")
         mix_in += f"[sfx{k}]"
     if sfx:
@@ -242,7 +266,8 @@ def render(plan_path: Path) -> Path:
     graph = ";".join(f)
     tmp = out.with_name(out.stem + "_pre.mp4")
     out.parent.mkdir(parents=True, exist_ok=True)
-    run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-i", str(src), "-filter_complex", graph,
+    run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-i", str(src), *extra_inputs,
+         "-filter_complex", graph,
          "-map", "[vout]", "-map", "[amix]", "-c:v", "libx264", "-preset", "medium", "-crf", "18",
          "-pix_fmt", "yuv420p", "-c:a", "pcm_s16le", "-t", f"{dur:.3f}", str(tmp.with_suffix(".mov"))])
     tmp = tmp.with_suffix(".mov")

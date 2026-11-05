@@ -42,6 +42,11 @@ the 70% literal / 30% attitude rule, and the banned "copywriter" vocabulary. Thi
 - These are the defaults in `tools/render_edit.py`. They were calibrated by rendering competitor captions side by side with their real frames (via `vidiq_get_images`, which is free).
 
 ## 4. Sound palette
+Sound effects the user supplies live in `assets/sfx/` and plug into the edit plan as
+`{"type": "file", "path": "assets/sfx/fahh.mp3", "at": <payoff s>, "hit": <attack s into the file>, "trim": [0, 1.4], "gain_db": 12}`.
+Line the **attack** (not the file start) up with the payoff, and keep it about 1–2 dB louder than the loudest speech.
+When a meme SFX lands on a censored word, it can replace the beep: use `{"start": a, "end": b, "tone": false}` in `bleeps`.
+- `fahh.mp3`: the "FAHH" reaction groan. Attack at 0.14s, body to about 1.0s, quiet tail to 2.3s. It needs about +12 dB.
 | Moment | Comedy | Story |
 |---|---|---|
 | Hook (0–1s) | Tense drone, or a goofy track to misdirect, or the original sound if it's loud | Original audio (dialogue), with no music yet |
