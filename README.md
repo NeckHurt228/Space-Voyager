@@ -10,8 +10,12 @@ For each clip, it:
 2. **Builds the hook**: the trim-in frame, first caption, opening sound and 3 ranked titles.
 3. **Writes a pacing plan**: a second-by-second edit list (captions + colours, SFX, effects, where
    the payoff lands, where to hard-cut), plus a `captions.srt` you can import into your editor.
-4. **Checks your finished edit** and lists what slipped.
-5. **Learns from results**: it logs every clip in `reports/history.csv`. After 10+ posted clips with
+4. **Writes and mixes a voiceover**: funny, human-sounding scripts in one of 5 personas (inner monologue,
+   deadpan narrator, buddy commentator, object voice, drill sergeant). It checks the timing so the
+   voice never covers the payoff, generates the audio with vidIQ's ElevenLabs voices (or uses your own
+   recording), and mixes it in with ducking and Shorts-level loudness.
+5. **Checks your finished edit** and lists what slipped.
+6. **Learns from results**: it logs every clip in `reports/history.csv`. After 10+ posted clips with
    views, it tells you which rubric items actually predict *your* views.
 
 ## Use it
@@ -44,11 +48,24 @@ It measures length, cuts, motion and loudness per 0.1s, dead starts, payoff cand
 jumps in loudness and motion), tail after the payoff, and dead air. It also writes contact sheets of the
 whole clip, the hook and the payoff. It needs `ffmpeg` and Python 3 with Pillow (`pip install pillow`).
 
+## Voiceover on its own
+
+```
+python3 tools/vo_mix.py check reports/my_clip/vo_plan.json          # do the lines fit their slots?
+python3 tools/vo_mix.py mix clips/my_edit.mp4 reports/my_clip/vo_plan.json
+```
+
+Give it one voice take with all the lines separated by pauses (TTS output or your own recording).
+It splits the take, places each line at its time, lowers the clip's own sound under the voice
+by 12 dB, and normalises the result to -14 LUFS.
+
 ## Files
 - `.claude/skills/clip-coach/SKILL.md`: the agent's workflow
 - `.claude/skills/clip-coach/benchmarks.md`: the research data (top videos, second-by-second breakdowns)
 - `.claude/skills/clip-coach/scoring.md`: the 100-point rubric and tiers
 - `.claude/skills/clip-coach/hook-library.md`: hook types, title formulas, caption style, sound palette, pacing templates
+- `.claude/skills/clip-coach/voiceover.md`: VO personas, voices, humour and timing rules, pipeline
 - `tools/clip_analyzer.py`: the measurement script
+- `tools/vo_mix.py`: voiceover timing check and mixer
 
 Optional: connect vidIQ in Claude to analyse clips from URLs and to pull fresh benchmark data.

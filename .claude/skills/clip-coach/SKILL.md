@@ -20,6 +20,7 @@ Reference files (read them; don't work from memory):
 - `benchmarks.md`: the real numbers from the three channels, and what the hits do second by second.
 - `scoring.md`: the 100-point rubric (60 content, judged by you; 40 structure, measured by the script).
 - `hook-library.md`: hook types, title formulas, caption style, SFX palette and pacing templates.
+- `voiceover.md`: VO personas and voices, humour and timing rules, the TTS pipeline and mixing.
 
 Be blunt. A 35/100 clip should be called a skip. The research showed the **clip choice + title**
 decides whether a video hits 60K or 26M on the same channel with the same editing. The edit
@@ -96,6 +97,17 @@ Also write `reports/<clip-name>/captions.srt` with the caption lines and timings
 plan, so they can import it into their editor. Write the whole coaching report to
 `reports/<clip-name>/coach.md`.
 
+## Step 5b: Voiceover (when the user wants VO, or a clip needs a joke it doesn't have)
+Follow `voiceover.md`:
+1. Pick **one persona** and a voice for it. Write **2–3 lines** (3–8 words each) in the house humour
+   style: say what the viewer feels, understatement, end on a flat undercut. No VO on the payoff.
+2. Write `reports/<clip-name>/vo_plan.json` using **edited-video timestamps**, and run
+   `python3 tools/vo_mix.py check` on it. Fix every flagged line before generating audio.
+3. Generate one take: vidIQ `vidiq_voiceover_generate` (check `vidiq_balance` first), or have the user
+   record it. Then run `python3 tools/vo_mix.py mix <edited video> <plan>`.
+4. Update `captions.srt` so VO lines are the captions (word-synced) and action captions only fill the gaps.
+Offer 2 personas when the choice isn't obvious: one script each, and say which one you'd pick.
+
 ## Step 6: Post-edit check (finished export)
 Run `python3 tools/clip_analyzer.py "<export>" --mode edited --out reports`, read the sheets,
 and check against the plan: hook energy in second 1, no static stretches, payoff timing,
@@ -105,8 +117,10 @@ button column). List only what to change, most important first.
 ## Step 7: Track results
 Append a row to `reports/history.csv` (create it with this header if missing):
 ```
-date,clip,format,hook_type,content_score,structure_score,total,verdict,title_used,views_24h,views_7d,likes
+date,clip,format,hook_type,content_score,structure_score,total,verdict,title_used,views_24h,views_7d,likes,vo_style
 ```
+`vo_style` is the persona used (e.g. `inner-monologue/Chris`), or `none`. Once there are 5+ posted videos
+with VO and 5+ without, compare them and tell the user whether VO is earning its place.
 Leave the views columns empty. When the user later tells you how a clip did, fill them in.
 Once there are 10+ rows with views, compare scores against results, tell them which
 rubric items actually predict their views, and suggest weight changes to `scoring.md`.
