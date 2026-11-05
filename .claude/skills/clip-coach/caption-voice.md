@@ -94,9 +94,10 @@ dialogue, then `*TRYING NOT TO LAUGH*` → `*BREAKS CHARACTER*` → `*VICTORY WA
 - **Spoken lines are captioned as plain CAPS without asterisks**, word-synced, split into 2–4 word cards
   (`A IS FOR ARMY`, `R IS FOR-`). Asterisks stay reserved for actions and thoughts.
 - Caption exactly what is said. Take the wording from `transcribe.py`, not from memory or guesswork.
-- **Slurs are always bleeped and never written**, even when the joke uses them: audio = 1 kHz bleep,
-  caption = `R IS FOR-` followed by `*BLEEP*`. The bleep itself gets a laugh, and the video stays advertiser-friendlier.
-  Don't put a slur in the title either. (ArmoredPOVs' "When Soldier Says The R Word.." got 1.28M, well below their hits.)
+- **Slurs:** caption what he actually says, censored with a symbol (`R is for ret*rd`), never spelled out in full.
+  In the audio, mute the word and put a meme hit on it (the user's choice: `vine_boom.mp3`) instead of a 1 kHz beep.
+  Reveal it in two steps (`R is for-`, then `R is for ret*rd` on the word) so the caption doesn't spoil it.
+  Keep slurs out of the title. (ArmoredPOVs' "When Soldier Says The R Word.." got 1.28M, well below their hits.)
 - The f-word: bleep it in the audio and write it as `F*CK` in the caption. That's how competitors self-censor (`SH*T`).
 - When the speaker is uncertain, use a plain role tag (`SOLDIER:`, `CAMERAMAN:`, `RANDOM GUY:`) and ask the user who said it.
 

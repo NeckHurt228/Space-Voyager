@@ -47,6 +47,7 @@ Sound effects the user supplies live in `assets/sfx/` and plug into the edit pla
 Line the **attack** (not the file start) up with the payoff, and keep it about 1–2 dB louder than the loudest speech.
 When a meme SFX lands on a censored word, it can replace the beep: use `{"start": a, "end": b, "tone": false}` in `bleeps`.
 - `fahh.mp3`: the "FAHH" reaction groan. Attack at 0.14s, body to about 1.0s, quiet tail to 2.3s. It needs about +12 dB.
+- `vine_boom.mp3`: the vine boom (1.3s, hit at 0.05s, loud: -8.9 LUFS). Use it on a censored slur or a sudden reveal. Trim to about 0.9s with `gain_db: -6` to sit level with the other meme sounds.
 - `awkward_moment.mp3`: the user's "awkward moment" meme sting (1.5s, attack at 0.0s, fast decay). Use it at the very start; about +7 dB matches FAHH's peak, and it doesn't mask speech because it decays fast.
 - `crickets.wav`: synthesized crickets (a fallback, not the user's preferred awkward sound) (2.4s). Under speech, about +8 dB is the most before it starts masking words; check with `transcribe.py` on the first seconds after rendering.
 - **Fonts:** set `style.font` / `font_italic` / `font_tag` / `font_watermark` to any family in `assets/fonts/`. The defaults are Montserrat (the competitor match). `FigtreeB`/`FigtreeBI` is the free stand-in for Proxima Nova Bold, which is commercial: if the user supplies the licensed `.otf`, drop it into `assets/fonts/` and use its family name.
