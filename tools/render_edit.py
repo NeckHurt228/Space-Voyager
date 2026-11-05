@@ -95,12 +95,17 @@ def build_ass(plan: dict, path: Path) -> None:
     y_default = st.get("caption_y", 1150)  # TOP edge of the main text
     gap = st.get("tag_gap", 0)             # space between tag box and main box (negative = overlap)
     lift = st.get("tag_lift", 0)           # fine-tune for font ascent/descent differences
+    # font family names as registered in assets/fonts (any .ttf/.otf dropped there can be used)
+    f_main = st.get("font", "MontserratXB")
+    f_ital = st.get("font_italic", "MontserratXBI")
+    f_tag = st.get("font_tag", "MontserratB")
+    f_mark = st.get("font_watermark", "MontserratSB")
     styles = [
-        f"Style: Box,MontserratXB,{size},&H00FFFFFF,&H00FFFFFF,&H00070707,&H00070707,0,0,0,0,100,100,0,0,3,{pad},0,8,40,40,0,1",
-        f"Style: BoxI,MontserratXBI,{size},&H002020E6,&H002020E6,&H00070707,&H00070707,0,0,0,0,100,100,0,0,3,{pad},0,8,40,40,0,1",
-        f"Style: Tag,MontserratB,{tag_size},&H0000E5FF,&H0000E5FF,&H00070707,&H00070707,0,0,0,0,100,100,0,0,3,{tag_pad},0,2,40,40,0,1",
-        f"Style: Mark,MontserratSB,{st.get('watermark_size', 50)},&H00FFFFFF,&H00FFFFFF,&H00000000,&H80000000,0,0,0,0,100,100,0,0,1,0,3,5,40,40,0,1",
-        f"Style: Head,MontserratXB,{st.get('header_size', 58)},&H00FFFFFF,&H00FFFFFF,&H00070707,&H00070707,0,0,0,0,100,100,6,0,3,{pad},0,8,40,40,0,1",
+        f"Style: Box,{f_main},{size},&H00FFFFFF,&H00FFFFFF,&H00070707,&H00070707,0,0,0,0,100,100,0,0,3,{pad},0,8,40,40,0,1",
+        f"Style: BoxI,{f_ital},{size},&H002020E6,&H002020E6,&H00070707,&H00070707,0,0,0,0,100,100,0,0,3,{pad},0,8,40,40,0,1",
+        f"Style: Tag,{f_tag},{tag_size},&H0000E5FF,&H0000E5FF,&H00070707,&H00070707,0,0,0,0,100,100,0,0,3,{tag_pad},0,2,40,40,0,1",
+        f"Style: Mark,{f_mark},{st.get('watermark_size', 50)},&H00FFFFFF,&H00FFFFFF,&H00000000,&H80000000,0,0,0,0,100,100,0,0,1,0,3,5,40,40,0,1",
+        f"Style: Head,{f_main},{st.get('header_size', 58)},&H00FFFFFF,&H00FFFFFF,&H00070707,&H00070707,0,0,0,0,100,100,6,0,3,{pad},0,8,40,40,0,1",
     ]
     lines = _ass_header(styles)
 
