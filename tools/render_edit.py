@@ -123,7 +123,8 @@ def build_ass(plan: dict, path: Path) -> None:
             text = text.replace("*", r"{\c&HFFFFFF&}*{\c&H2020E6&}")
         elif c.get("color") and c["color"] != "white":
             text = rf"{{\c{tag_colors.get(c['color'], c['color'])}}}" + text
-        ev(2, a, b, "BoxI" if red else "Box", rf"{{\pos({x},{y})\xbord{pad}\ybord{pad_y}}}{text}")
+        fs = rf"\fs{c['size']}" if c.get("size") else ""  # per-caption size, e.g. one big punch word
+        ev(2, a, b, "BoxI" if red else "Box", rf"{{\pos({x},{y})\xbord{pad}\ybord{pad_y}{fs}}}{text}")
         if c.get("tag"):
             ty = y - pad_y - tag_pad_y - gap - lift
             ev(3, a, b, "Tag", rf"{{\pos({x},{ty})\xbord{tag_pad}\ybord{tag_pad_y}\c{tag_colors.get(c.get('tag_color', 'green'), c.get('tag_color'))}}}{c['tag']}")
