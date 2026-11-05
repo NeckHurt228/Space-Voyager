@@ -37,11 +37,19 @@ With Claude Code in this folder:
 Put raw footage in `clips/`. Reports, contact sheets and captions go to `reports/<clip-name>/`.
 Neither folder is committed to git.
 
+## Listening to the clip
+
+```
+bash tools/setup_asr.sh                          # once: installs Whisper small (~250MB, checksum-verified)
+python3 tools/transcribe.py clips/my_clip.mp4    # word-timed transcript, low-confidence words marked '?'
+```
+
 ## The analyzer on its own
 
 ```
 python3 tools/clip_analyzer.py clips/my_clip.mp4 --mode raw     # before editing
 python3 tools/clip_analyzer.py clips/my_final.mp4 --mode edited # after editing
+python3 tools/clip_analyzer.py clips/my_final.mp4 --mode edited --payoff 8.5  # if the punchline is spoken
 ```
 
 It measures length, cuts, motion and loudness per 0.1s, dead starts, payoff candidates (the biggest
@@ -67,5 +75,7 @@ by 12 dB, and normalises the result to -14 LUFS.
 - `.claude/skills/clip-coach/voiceover.md`: VO personas, voices, humour and timing rules, pipeline
 - `tools/clip_analyzer.py`: the measurement script
 - `tools/vo_mix.py`: voiceover timing check and mixer
+- `tools/transcribe.py` + `tools/setup_asr.sh`: speech-to-text so the agent hears the clip
+- `.claude/skills/clip-coach/caption-voice.md`: the competitors' verbatim captions and the caption-writing rules
 
 Optional: connect vidIQ in Claude to analyse clips from URLs and to pull fresh benchmark data.

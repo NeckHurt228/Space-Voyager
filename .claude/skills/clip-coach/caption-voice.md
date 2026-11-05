@@ -90,6 +90,16 @@ dialogue, then `*TRYING NOT TO LAUGH*` → `*BREAKS CHARACTER*` → `*VICTORY WA
 | Emotion label (story) | `*ONE STATE*` | Story build | `*DISSAPOINTED*`, `*TRYING NOT TO LAUGH*` |
 | Event label (story) | `*TWO-WORD EVENT*` | Story payoff | `*REUNION HUG*`, `*VICTORY WALK*` |
 
+## 3b. Spoken words, swearing and slurs
+- **Spoken lines are captioned as plain CAPS without asterisks**, word-synced, split into 2–4 word cards
+  (`A IS FOR ARMY`, `R IS FOR-`). Asterisks stay reserved for actions and thoughts.
+- Caption exactly what is said. Take the wording from `transcribe.py`, not from memory or guesswork.
+- **Slurs are always bleeped and never written**, even when the joke uses them: audio = 1 kHz bleep,
+  caption = `R IS FOR-` followed by `*BLEEP*`. The bleep itself gets a laugh, and the video stays advertiser-friendlier.
+  Don't put a slur in the title either. (ArmoredPOVs' "When Soldier Says The R Word.." got 1.28M, well below their hits.)
+- The f-word: bleep it in the audio and write it as `F*CK` in the caption. That's how competitors self-censor (`SH*T`).
+- When the speaker is uncertain, use a plain role tag (`SOLDIER:`, `CAMERAMAN:`, `RANDOM GUY:`) and ask the user who said it.
+
 ## 4. Rules for writing captions
 
 - Write about 70% literal, 30% attitude. Attitude goes only on the payoff and the last caption.

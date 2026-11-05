@@ -40,10 +40,22 @@ python3 tools/clip_analyzer.py "<path>" --mode raw --out reports
 ```
 Use `--type comedy` or `--type story` if you already know which it is (auto picks comedy ≤18s).
 Then **Read every contact sheet it prints** (`sheet_overview.jpg`, `sheet_hook.jpg`,
-`sheet_payoff.jpg`). They are your eyes. Check that the detected payoff candidate is
-actually the funny/emotional moment; if it's a different one, use the right time and say so.
-The script can't hear words. If dialogue matters and the user didn't tell you what is
-said, ask once in a short question. Don't guess at dialogue.
+`sheet_payoff.jpg`). They are your eyes.
+
+**Always listen too.** Never score a clip from the pictures alone:
+```bash
+python3 tools/transcribe.py "<path>" --out reports      # first time on a machine: bash tools/setup_asr.sh
+```
+This prints a word-timed transcript (main pass + a per-line second opinion; `?` = low confidence).
+In military clips the joke is very often **spoken** (a chant, a one-liner, an NCO yelling), with nothing
+visible on screen. A clip that looks like a skip can be a strong post.
+- If the two passes disagree on a word that will go into a caption, give the user both readings and ask
+  them to confirm. Don't put a guess on screen.
+- If the structure suggests the wording (e.g. a spelled acronym A-R-M-Y), you may re-run with `--prompt`,
+  but say which words came from the hint.
+- Then check the analyzer's payoff candidate against **both** the sheets and the transcript. Its detector only
+  sees loudness and motion, so for a spoken punchline re-run it with `--payoff <seconds of the punchline word>`
+  and use that structure score.
 
 **URL** (YouTube / TikTok / Instagram source clip): if the vidIQ tools are available, run
 `vidiq_watch_shortform_content` with a prompt asking for a second-by-second breakdown

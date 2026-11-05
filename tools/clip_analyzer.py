@@ -179,10 +179,14 @@ def median(xs: list[float]) -> float:
     return s[len(s) // 2] if s else 0.0
 
 
-def find_payoffs(motion: list[float], loud: list[float], dur: float, skip: float = 0.0, k: int = 3):
+def find_payoffs(motion: list[float], loud: list[float], dur: float, skip: float = 0.0, k: int = 3,
+                 forced: float | None = None):
     """Rank moments where motion and loudness jump relative to the previous second.
     `skip` = seconds of dead start; positions are reported relative to the clip
-    as it will be once that dead start is trimmed."""
+    as it will be once that dead start is trimmed.
+    `forced` = the real payoff time when it's known from the transcript/visuals (speech
+    punchlines don't always show up as the biggest loudness/motion jump); the strongest
+    bin within 0.5s of it becomes the first candidate."""
     n = len(motion)
     win = int(1.0 / BIN)
     jump_l, jump_m = [], []
@@ -198,6 +202,9 @@ def find_payoffs(motion: list[float], loud: list[float], dur: float, skip: float
     live = max(1e-6, dur - skip)
     start = s0 + max(1, int(0.12 * (n - s0)))  # a payoff in the first ~12% is just the hook
     cands = []
+    if forced is not None:
+        lo, hi = max(0, int((forced - 0.5) / BIN)), min(n, int((forced + 0.5) / BIN) + 1)
+        cands.append(max(range(lo, hi), key=lambda i: score[i]) if hi > lo else min(n - 1, int(forced / BIN)))
     order = sorted(range(start, n), key=lambda i: score[i], reverse=True)
     for i in order:
         if all(abs(i - c) * BIN >= 1.0 for c in cands):
@@ -207,7 +214,8 @@ def find_payoffs(motion: list[float], loud: list[float], dur: float, skip: float
     return [{"time": round(i * BIN, 2), "position": round((i * BIN - skip) / live, 2),
              "strength": round(score[i], 2),            # relative to the rest of this clip
              "loudness_jump_db": round(jump_l[i], 1),    # absolute: vs previous second
-             "motion_jump": round(jump_m[i], 3)} for i in cands]
+             "motion_jump": round(jump_m[i], 3),
+             "manual": forced is not None and j == 0} for j, i in enumerate(cands)]
 
 
 def dead_spans(motion: list[float], loud: list[float], min_len: float = 0.8):
@@ -364,7 +372,7 @@ def score_structure(r: dict, b: dict, mode: str) -> dict:
 
 
 # --------------------------------------------------------------------------
-def analyze(path: Path, clip_type: str, mode: str, out_root: Path) -> dict:
+def analyze(path: Path, clip_type: str, mode: str, out_root: Path, payoff: float | None = None) -> dict:
     meta = probe(path)
     dur = meta["duration"]
     if dur <= 0:
@@ -412,7 +420,7 @@ def analyze(path: Path, clip_type: str, mode: str, out_root: Path) -> dict:
             "dead_start_s": round(dead_start, 1),
         },
         "audio": {"median_db": round(med_l, 1), "peak_db": round(max(loud), 1)},
-        "payoff_candidates": find_payoffs(motion, loud, dur, dead_start),
+        "payoff_candidates": find_payoffs(motion, loud, dur, dead_start, forced=payoff),
         "dead_spans": dead_spans(motion, loud),
         "static_spans": static_spans(motion, cuts, dur, b["max_static"]),
         "curves": {"bin_s": BIN,
@@ -452,7 +460,7 @@ def summary(r: dict) -> str:
         f"- Cuts: {len(r['cuts'])} ({r['cuts_per_10s']}/10s) | longest shot {r['longest_shot_s']}s",
         f"- Hook: motion {r['hook']['motion_first_1s']}, loudness {r['hook']['loudness_first_1s_db']} dB "
         f"(median {r['audio']['median_db']}), dead start {r['hook']['dead_start_s']}s",
-        "- Payoff candidates: " + (", ".join(f"{p['time']}s ({int(p['position']*100)}%, strength {p['strength']})"
+        "- Payoff candidates: " + (", ".join(f"{p['time']}s ({int(p['position']*100)}%, strength {p['strength']}{', MANUAL' if p.get('manual') else ''})"
                                         for p in r["payoff_candidates"]) or "none"),
         f"- STRUCTURE SCORE: {s['total']}/40  " + " ".join(f"{k}={v}" for k, v in s["points"].items()),
     ]
@@ -471,13 +479,15 @@ def main() -> None:
                     help="raw = source clip before editing; edited = your finished short")
     ap.add_argument("--out", type=Path, default=Path("reports"))
     ap.add_argument("--json", action="store_true", help="print full JSON instead of summary")
+    ap.add_argument("--payoff", type=float, help="the real payoff time in seconds, if known (e.g. the "
+                    "punchline word from the transcript); overrides automatic detection")
     a = ap.parse_args()
     for tool in ("ffmpeg", "ffprobe"):
         if not shutil.which(tool):
             die(f"{tool} not found on PATH")
     if not a.clip.exists():
         die(f"{a.clip} not found")
-    r = analyze(a.clip, a.type, a.mode, a.out)
+    r = analyze(a.clip, a.type, a.mode, a.out, a.payoff)
     print(json.dumps(r, indent=2) if a.json else summary(r))
 
 

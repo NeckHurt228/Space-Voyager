@@ -14,6 +14,7 @@
 | **Breaking a known rule** | Royal Guard breaks character, 38.4M | State the rule in the header or first caption, then show someone pushing it |
 | **Comment-argument bait** | Kid burning patch (11.5K comments) | Open on the act that viewers will judge |
 | **Misdirect** | Wrong gun, 18.1M | Serious action + goofy music (or the reverse), so the viewer senses a twist coming |
+| **Relatable service humour** (a complaint, chant or one-liner about military life) | Combatful: "Military Caught Sleeping On Job" 15.4M, "Bro Is Not Getting Payed Enough" 4.8M | Open on the first spoken line. If it's a list or acronym, show a progress tracker (`A R M Y`) so viewers stay for the last item. Veterans comment their own versions |
 
 ## 2. Title formulas
 - **Comedy:** `When [Role] [specific dramatic verb + object]..` + 1 emoji (💀 😭) + `#military #usa` (or `#airsoft #fail`)
