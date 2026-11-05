@@ -74,7 +74,7 @@ python3 tools/render_edit.py reports/my_clip/edit_plan.json
 ```
 
 It renders a 1080x1920 Short in the competitor style: jump cuts, bleeps, punch-ins and shake, black and white on the payoff,
-Anton captions with role tags, an optional header tracker, a bass-hit SFX, and -14 LUFS loudness. It also mixes in the
+ArmoredPOVs-style captions (Montserrat on black boxes, coloured role tags, red italic punchlines), a centre band with blurred bars, a bass-hit SFX, and -14 LUFS loudness. It also mixes in the
 voiceover when one exists.
 
 ## Files
@@ -86,7 +86,7 @@ voiceover when one exists.
 - `tools/clip_analyzer.py`: the measurement script
 - `tools/vo_mix.py`: voiceover timing check and mixer
 - `tools/render_edit.py`: renders the finished edit from an edit plan
-- `assets/fonts/Anton-Regular.ttf`: caption font (SIL Open Font License)
+- `assets/fonts/`: Montserrat (captions) and Anton fonts (SIL Open Font License)
 - `tools/transcribe.py` + `tools/setup_asr.sh`: speech-to-text so the agent hears the clip
 - `.claude/skills/clip-coach/caption-voice.md`: the competitors' verbatim captions and the caption-writing rules
 

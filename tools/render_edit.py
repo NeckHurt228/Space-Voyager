@@ -10,8 +10,10 @@ What it does (all driven by the plan):
   * fits any aspect to 1080x1920 with a blurred copy of the frame behind it
   * punch-ins / slow push-ins / shake (zooms, in edited-timeline seconds)
   * black & white windows (payoff)
-  * burned-in captions: Anton, white with black outline, coloured ROLE: tag above,
-    pop-in animation, plus an optional persistent header (e.g. an A-R-M-Y tracker)
+  * burned-in captions in the ArmoredPOVs look: Montserrat ExtraBold on solid black boxes,
+    coloured ROLE: tag on its own box on top, red italic punchlines with white asterisks,
+    per-caption x/y placement near the speaker, optional header tracker and watermark
+  * "band" framing (style.band_aspect): sharp centre band, blurred copy of the frame above/below
   * synthesized SFX (bass "boom") at given times
   * loudness normalised to -14 LUFS (two-pass)
   * optional voiceover: runs tools/vo_mix.py with the plan's "vo_plan" afterwards
@@ -33,7 +35,7 @@ W, H = 1080, 1920
 
 # ASS colours are &HBBGGRR
 COLORS = {"white": "&HFFFFFF&", "yellow": "&H00E5FF&", "red": "&H2020FF&", "cyan": "&HFFE500&",
-          "green": "&H50E040&", "orange": "&H0090FF&", "grey": "&HB0B0B0&"}
+          "green": "&H50E040&", "orange": "&H0090FF&", "grey": "&HB0B0B0&"}  # (legacy)
 
 
 def die(msg: str) -> None:
@@ -69,57 +71,70 @@ def col(name: str) -> str:
     return COLORS.get(name, name)
 
 
-def build_ass(plan: dict, path: Path) -> None:
-    st = plan.get("style", {})
-    font = st.get("font", "Anton")
-    size = st.get("size", 104)
-    tag_size = st.get("tag_size", 62)
-    y = st.get("caption_y", 1180)          # lower-middle, clear of the bottom ~15%
-    head_y = st.get("header_y", 360)
-    pop = r"{\fscx70\fscy70\t(0,90,\fscx108\fscy108)\t(90,150,\fscx100\fscy100)}"
+def _ass_header(styles: list[str]) -> list[str]:
+    return ["[Script Info]", "ScriptType: v4.00+", f"PlayResX: {W}", f"PlayResY: {H}",
+            "WrapStyle: 2", "ScaledBorderAndShadow: yes", "", "[V4+ Styles]",
+            "Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, "
+            "Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, "
+            "Shadow, Alignment, MarginL, MarginR, MarginV, Encoding", *styles, "",
+            "[Events]", "Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text"]
 
-    lines = [
-        "[Script Info]", "ScriptType: v4.00+", f"PlayResX: {W}", f"PlayResY: {H}",
-        "WrapStyle: 0", "ScaledBorderAndShadow: yes", "",
-        "[V4+ Styles]",
-        "Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, "
-        "Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, "
-        "Shadow, Alignment, MarginL, MarginR, MarginV, Encoding",
-        f"Style: Cap,{font},{size},&H00FFFFFF,&H00FFFFFF,&H00000000,&H90000000,0,0,0,0,100,100,1,0,1,7,4,5,60,60,0,1",
-        f"Style: Tag,{font},{tag_size},&H00FFFFFF,&H00FFFFFF,&H00000000,&H90000000,0,0,0,0,100,100,2,0,1,5,3,5,60,60,0,1",
-        f"Style: Head,{font},{st.get('header_size', 150)},&H00FFFFFF,&H00FFFFFF,&H00000000,&H90000000,0,0,0,0,100,100,0,0,1,8,4,5,40,40,0,1",
-        f"Style: Mark,{font},44,&H00FFFFFF,&H00FFFFFF,&H00000000,&H90000000,0,0,0,0,100,100,1,0,1,3,2,5,40,40,0,1",
-        "", "[Events]", "Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text",
+
+def build_ass(plan: dict, path: Path) -> None:
+    """ArmoredPOVs-style captions: Montserrat ExtraBold on a solid black box, the ROLE: tag as
+    coloured text on its own black box sitting on top, punchlines in red italic with white
+    asterisks, optional small watermark at the bottom centre."""
+    st = plan.get("style", {})
+    # sizes calibrated against ArmoredPOVs frames (rendered side by side at the same scale)
+    size = st.get("size", 88)              # main caption font size (1080-wide canvas)
+    tag_size = st.get("tag_size", 50)
+    pad = st.get("pad", 14)                # black box padding left/right of the main text
+    pad_y = st.get("pad_y", 2)             # ...and above/below (the font's ascent already adds room)
+    tag_pad = st.get("tag_pad", 9)
+    tag_pad_y = st.get("tag_pad_y", 1)
+    y_default = st.get("caption_y", 1150)  # TOP edge of the main text
+    gap = st.get("tag_gap", 0)             # space between tag box and main box (negative = overlap)
+    lift = st.get("tag_lift", 0)           # fine-tune for font ascent/descent differences
+    styles = [
+        f"Style: Box,MontserratXB,{size},&H00FFFFFF,&H00FFFFFF,&H00070707,&H00070707,0,0,0,0,100,100,0,0,3,{pad},0,8,40,40,0,1",
+        f"Style: BoxI,MontserratXBI,{size},&H002020E6,&H002020E6,&H00070707,&H00070707,0,0,0,0,100,100,0,0,3,{pad},0,8,40,40,0,1",
+        f"Style: Tag,MontserratB,{tag_size},&H0000E5FF,&H0000E5FF,&H00070707,&H00070707,0,0,0,0,100,100,0,0,3,{tag_pad},0,2,40,40,0,1",
+        f"Style: Mark,MontserratSB,{st.get('watermark_size', 50)},&H00FFFFFF,&H00FFFFFF,&H00000000,&H80000000,0,0,0,0,100,100,0,0,1,0,3,5,40,40,0,1",
+        f"Style: Head,MontserratXB,{st.get('header_size', 58)},&H00FFFFFF,&H00FFFFFF,&H00070707,&H00070707,0,0,0,0,100,100,6,0,3,{pad},0,8,40,40,0,1",
     ]
+    lines = _ass_header(styles)
 
     def ev(layer, a, b, style, text):
         lines.append(f"Dialogue: {layer},{ass_time(a)},{ass_time(b)},{style},,0,0,0,,{text}")
 
+    tag_colors = {"green": "&H3BEA3B&", "teal": "&HEAFC37&", "cyan": "&HEAFC37&", "yellow": "&H00E5FF&",
+                  "white": "&HFFFFFF&", "red": "&H2020E6&", "orange": "&H0090FF&"}
     for c in plan.get("captions", []):
         a, b = c["start"], c["end"]
+        x, y = c.get("x", 540), c.get("y", y_default)
         text = c["text"].replace("\n", r"\N")
-        anim = pop if c.get("pop", True) else ""
-        ev(2, a, b, "Cap", rf"{{\pos(540,{y})\c{col(c.get('color', 'white'))}}}{anim}{text}")
+        red = c.get("color") == "red"
+        if red:  # red italic, asterisks stay white
+            text = text.replace("*", r"{\c&HFFFFFF&}*{\c&H2020E6&}")
+        elif c.get("color") and c["color"] != "white":
+            text = rf"{{\c{tag_colors.get(c['color'], c['color'])}}}" + text
+        ev(2, a, b, "BoxI" if red else "Box", rf"{{\pos({x},{y})\xbord{pad}\ybord{pad_y}}}{text}")
         if c.get("tag"):
-            ev(2, a, b, "Tag", rf"{{\pos(540,{y - size // 2 - 46})\c{col(c.get('tag_color', 'yellow'))}}}{c['tag']}")
+            ty = y - pad_y - tag_pad_y - gap - lift
+            ev(3, a, b, "Tag", rf"{{\pos({x},{ty})\xbord{tag_pad}\ybord{tag_pad_y}\c{tag_colors.get(c.get('tag_color', 'green'), c.get('tag_color'))}}}{c['tag']}")
 
-    # header tracker: each state shows the full word, with filled letters solid and the rest faint
-    for h in plan.get("header", []):
+    for h in plan.get("header", []):  # optional progress tracker, in the same box style
         word, filled = h["word"], h["filled"]
-        hl = h.get("highlight", "yellow")
         parts = []
         for i, ch in enumerate(word):
-            if i < filled - 1:
-                parts.append(rf"{{\alpha&H00&\c{col('white')}}}{ch}")
-            elif i == filled - 1:
-                parts.append(rf"{{\alpha&H00&\c{col(hl)}}}{ch}")
-            else:
-                parts.append(rf"{{\alpha&HC8&\c{col('white')}}}{ch}")
-        anim = r"{\fscx92\fscy92\t(0,120,\fscx100\fscy100)}"
-        ev(1, h["start"], h["end"], "Head", rf"{{\pos(540,{head_y})}}{anim}" + " ".join(parts))
+            colr = "&H00E5FF&" if i == filled - 1 else "&HFFFFFF&"
+            alpha = "&H00&" if i < filled else "&HB0&"
+            parts.append(rf"{{\alpha{alpha}\c{colr}}}{ch}")
+        ev(1, h["start"], h["end"], "Head", rf"{{\pos(540,{st.get('header_y', 300)})}}" + "".join(parts))
 
     if plan.get("watermark"):
-        ev(0, 0, plan["_duration"], "Mark", rf"{{\pos(540,{st.get('watermark_y', 1600)})\alpha&H40&}}{plan['watermark']}")
+        ev(0, 0, plan["_duration"], "Mark",
+           rf"{{\pos(540,{st.get('watermark_y', 1785)})\alpha&H08&}}{plan['watermark']}")
 
     path.write_text("\n".join(lines) + "\n", encoding="utf-8")
 
@@ -190,8 +205,13 @@ def render(plan_path: Path) -> Path:
 
     # ---- video: 9:16 with blurred fill, 2x for smooth zoom, zoom/shake, B&W, captions
     f.append(f"[vc]fps={fps},split[vbg][vfg]")
-    f.append(f"[vbg]scale={W}:{H}:force_original_aspect_ratio=increase,crop={W}:{H},boxblur=40:2,eq=brightness=-0.08[bg]")
-    f.append(f"[vfg]scale={W}:{H}:force_original_aspect_ratio=decrease[fg]")
+    band = plan.get("style", {}).get("band_aspect")  # e.g. 0.74 = width/height of the sharp centre band
+    f.append(f"[vbg]scale={W}:{H}:force_original_aspect_ratio=increase,crop={W}:{H},"
+             f"boxblur=22:3,eq=brightness=-0.03:saturation=0.9[bg]")
+    if band:
+        f.append(f"[vfg]crop='min(iw,ih*{band})':'min(ih,iw/{band})',scale={W}:-2[fg]")
+    else:
+        f.append(f"[vfg]scale={W}:{H}:force_original_aspect_ratio=decrease[fg]")
     f.append(f"[bg][fg]overlay=(W-w)/2:(H-h)/2,scale={W * 2}:{H * 2}:flags=lanczos[v916]")
     z = zoom_expr(plan.get("zooms", []))
     sx, sy = shake_expr(plan.get("shake", []), "x"), shake_expr(plan.get("shake", []), "y")
@@ -232,9 +252,14 @@ def render(plan_path: Path) -> Path:
     meas = run(["ffmpeg", "-hide_banner", "-nostats", "-i", str(tmp), "-af",
                 f"loudnorm={target}:print_format=json", "-f", "null", "-"])
     m = json.loads(meas[meas.rfind("{"): meas.rfind("}") + 1])
-    run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-i", str(tmp), "-af",
-         f"loudnorm={target}:measured_I={m['input_i']}:measured_TP={m['input_tp']}:"
-         f"measured_LRA={m['input_lra']}:measured_thresh={m['input_thresh']}:offset={m['target_offset']}:linear=true",
+    try:
+        silent = float(m["input_i"]) < -70
+    except ValueError:  # "-inf" for pure silence
+        silent = True
+    af = ["-af", f"loudnorm={target}:measured_I={m['input_i']}:measured_TP={m['input_tp']}:"
+                 f"measured_LRA={m['input_lra']}:measured_thresh={m['input_thresh']}:"
+                 f"offset={m['target_offset']}:linear=true"] if not silent else []
+    run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-i", str(tmp), *af,
          "-c:v", "copy", "-c:a", "aac", "-b:a", "192k", "-movflags", "+faststart", str(out)])
     tmp.unlink(missing_ok=True)
     ass.unlink(missing_ok=True)

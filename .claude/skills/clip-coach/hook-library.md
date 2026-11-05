@@ -29,15 +29,17 @@
 ## 3. Caption spec (house style)
 **Before writing any caption text, read `caption-voice.md`.** It has the competitors' verbatim text boxes,
 the 70% literal / 30% attitude rule, and the banned "copywriter" vocabulary. This section covers only the look.
-- **Position:** centred, lower-middle third. Keep it out of the bottom ~15% (the title and description sit there) and out of the right-side button column.
-- **Role tag:** small, uppercase, coloured box above the line: `SOLDIER:` / `AIRSOFTER:` / `ENEMY:` / `INSTRUCTOR:` / `C-RAM:`.
-- **Action line:** bold condensed sans-serif, uppercase, white with a heavy black outline, wrapped in asterisks: `*THROWS GRENADE*`.
-- **Colour code:** yellow = setup, white = neutral/dialogue, **red = punchline**, cyan = a new character or object (`*CIVILIAN PLANE*`).
+- **Position:** next to whoever is speaking or acting (several captions can be on screen at once, one per person). Default is just below the subject's head or chest; action/context captions go near the top of the band. Keep clear of faces, the bottom ~15% and the right-side button column.
+- **Role tag:** small Montserrat Bold, uppercase, **coloured text on its own black box**, sitting directly on top of the main box: `SOLDIER:` green, `POV-SOLDIER:` / `AIRSOFTER:` / `SOLDIER 2:` teal, `C-RAM:` / `FIRST SERGEANT:` yellow. Repeat the tag on every spoken line.
+- **Main text:** Montserrat ExtraBold, white, on a **solid black rectangle** with tight padding (no outline, no shadow). Speech is typed as spoken (`Marine?`, `The Word..`, `A is for Army`). Actions and thoughts are UPPERCASE in asterisks (`*THROWS GRENADE*`).
+- **Colour code:** white = speech and neutral actions. **Red italic with white asterisks = the punchline/thought** (`*SH*T WRONG GUN..*`, `*THINKS ABOUT IT..*`). Yellow small text on black = a side note (`(suspicious)`).
 - **Pace:** a new line every 0.5–1.0s in comedy. Word-by-word synced captions for dialogue in story clips.
 - **Escalation:** repeated beats become `NO...` → `NOO- X2` → `NO! X3`.
 - **Endings:** trail off with `..` on the last caption (`*ENEMY IS COOKED..*`, `DAMN..`).
-- **Header** (story clips): `*AT GRADUATION CEREMONY*`, static at the top.
-- **Watermark:** `@yourhandle` at the bottom centre, all the way through.
+- **Header:** rare at ArmoredPOVs; Combatful uses one for story clips (`*AT GRADUATION CEREMONY*`). Use the same black-box style.
+- **Framing:** a sharp centre band (about 0.74 width:height), with a blurred copy of the same frame filling the top and bottom. Captions appear and disappear on hard cuts, with no pop-in animation.
+- **Watermark:** `@yourhandle`, Montserrat SemiBold, white with a soft shadow, about 50px, at the bottom centre (y≈1785 of 1920), all the way through.
+- These are the defaults in `tools/render_edit.py`. They were calibrated by rendering competitor captions side by side with their real frames (via `vidiq_get_images`, which is free).
 
 ## 4. Sound palette
 | Moment | Comedy | Story |

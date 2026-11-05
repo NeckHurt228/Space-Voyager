@@ -126,8 +126,12 @@ Offer 2 personas when the choice isn't obvious: one script each, and say which o
 Write `reports/<clip-name>/edit_plan.json` from the pacing plan and run
 `python3 tools/render_edit.py reports/<clip-name>/edit_plan.json`. The plan fields are documented at the top of
 `tools/render_edit.py`. `segments`/`bleeps` use source seconds; everything else uses edited-video seconds.
-House style defaults: Anton captions with a black outline, a coloured `ROLE:` tag, pop-in, red text + B&W +
-punch-in + boom on the payoff, zooms that tighten beat by beat (about 1.05 → 1.35), and a shake on bleeps.
+House style defaults (ArmoredPOVs look, calibrated against their real frames): Montserrat ExtraBold on
+solid black boxes, the `ROLE:` tag as coloured text on its own black box on top, red italic punchlines with
+white asterisks, captions placed next to the speaker, set `style.band_aspect: 0.74` for the centre band with
+blurred bars, B&W + a small punch-in + a boom on the payoff, light shake on bleeps, and a watermark if a handle is set.
+To check the look against a competitor, pull their Short covers with `vidiq_get_images` (free) and compare
+frames side by side.
 Then **look at frames** from the render (hook, each beat, payoff, end) before delivering, and fix any caption
 that covers a face or the action, or text that's too small (captions should span roughly 50–70% of the width).
 If a `vo_plan` is set and its audio exists, the renderer mixes the VO into `final_vo.mp4`.
