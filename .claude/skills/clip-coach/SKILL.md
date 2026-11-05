@@ -122,6 +122,16 @@ Follow `voiceover.md`:
 4. Update `captions.srt` so VO lines are the captions (word-synced) and action captions only fill the gaps.
 Offer 2 personas when the choice isn't obvious: one script each, and say which one you'd pick.
 
+## Step 5c: Render the edit (when the user asks you to edit the video)
+Write `reports/<clip-name>/edit_plan.json` from the pacing plan and run
+`python3 tools/render_edit.py reports/<clip-name>/edit_plan.json`. The plan fields are documented at the top of
+`tools/render_edit.py`. `segments`/`bleeps` use source seconds; everything else uses edited-video seconds.
+House style defaults: Anton captions with a black outline, a coloured `ROLE:` tag, pop-in, red text + B&W +
+punch-in + boom on the payoff, zooms that tighten beat by beat (about 1.05 → 1.35), and a shake on bleeps.
+Then **look at frames** from the render (hook, each beat, payoff, end) before delivering, and fix any caption
+that covers a face or the action, or text that's too small (captions should span roughly 50–70% of the width).
+If a `vo_plan` is set and its audio exists, the renderer mixes the VO into `final_vo.mp4`.
+
 ## Step 6: Post-edit check (finished export)
 Run `python3 tools/clip_analyzer.py "<export>" --mode edited --out reports`, read the sheets,
 and check against the plan: hook energy in second 1, no static stretches, payoff timing,
