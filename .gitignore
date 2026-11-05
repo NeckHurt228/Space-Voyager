@@ -1,0 +1,7 @@
+# raw footage and generated reports stay local
+clips/*
+!clips/.gitkeep
+reports/*
+!reports/.gitkeep
+!reports/history.csv
+__pycache__/
