@@ -26,6 +26,8 @@
 - A pop-culture label on a skill clip works: "When John Wick Tries Airsoft…" got 27.9M from a 5s clip.
 
 ## 3. Caption spec (house style)
+**Before writing any caption text, read `caption-voice.md`.** It has the competitors' verbatim text boxes,
+the 70% literal / 30% attitude rule, and the banned "copywriter" vocabulary. This section covers only the look.
 - **Position:** centred, lower-middle third. Keep it out of the bottom ~15% (the title and description sit there) and out of the right-side button column.
 - **Role tag:** small, uppercase, coloured box above the line: `SOLDIER:` / `AIRSOFTER:` / `ENEMY:` / `INSTRUCTOR:` / `C-RAM:`.
 - **Action line:** bold condensed sans-serif, uppercase, white with a heavy black outline, wrapped in asterisks: `*THROWS GRENADE*`.

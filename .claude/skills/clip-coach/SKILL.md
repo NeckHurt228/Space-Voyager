@@ -21,6 +21,8 @@ Reference files (read them; don't work from memory):
 - `scoring.md`: the 100-point rubric (60 content, judged by you; 40 structure, measured by the script).
 - `hook-library.md`: hook types, title formulas, caption style, SFX palette and pacing templates.
 - `voiceover.md`: VO personas and voices, humour and timing rules, the TTS pipeline and mixing.
+- `caption-voice.md`: the competitors' verbatim text boxes and how to write captions that read as human.
+  **Read it before writing any caption.** Run every caption against its rules before you deliver it.
 
 Be blunt. A 35/100 clip should be called a skip. The research showed the **clip choice + title**
 decides whether a video hits 60K or 26M on the same channel with the same editing. The edit
