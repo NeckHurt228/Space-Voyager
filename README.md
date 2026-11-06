@@ -86,6 +86,7 @@ voiceover when one exists.
 - `tools/clip_analyzer.py`: the measurement script
 - `tools/vo_mix.py`: voiceover timing check and mixer
 - `tools/render_edit.py`: renders the finished edit from an edit plan
+- `tools/remove_overlay.py`: removes baked-in emojis, stickers or small text from a clip (needs `opencv-python-headless`)
 - `assets/fonts/`: Montserrat (captions) and Anton fonts (SIL Open Font License)
 - `tools/transcribe.py` + `tools/setup_asr.sh`: speech-to-text so the agent hears the clip
 - `.claude/skills/clip-coach/caption-voice.md`: the competitors' verbatim captions and the caption-writing rules
