@@ -89,6 +89,15 @@ Watch the clip once with **the sound off**, then once with sound. Tick each one.
 
 ---
 
+## Your 4 editing habits to fix (from your 100K and 40K videos)
+1. **Captions in 2–4 word chunks**, never one word at a time.
+2. **Never explain what's about to happen.** A voiceover goes after the payoff.
+3. **Let the best moment run 2–3 seconds** (the reunion hug lasted under 1 second).
+4. **Crop away other people's text** instead of blurring it.
+5. **Keep the face in frame.** If the joke is someone's reaction, never cut to their chin.
+
+---
+
 ## The 10-second version
 1. **Did something happen?** No → skip.
 2. **Can I see it on a phone with the sound off?** No → skip, or only post it if the audio joke is great.

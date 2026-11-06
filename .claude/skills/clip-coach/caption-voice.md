@@ -101,6 +101,14 @@ dialogue, then `*TRYING NOT TO LAUGH*` → `*BREAKS CHARACTER*` → `*VICTORY WA
 - The f-word: bleep it in the audio and write it as `F*CK` in the caption. That's how competitors self-censor (`SH*T`).
 - When the speaker is uncertain, use a plain role tag (`SOLDIER:`, `CAMERAMAN:`, `RANDOM GUY:`) and ask the user who said it.
 
+## 3c. Lessons from the user's own posted videos
+- **No one-word captions.** Both posted videos (100K and 40K) captioned speech and VO one word at a time
+  ("oh", "you", "AS", "boy"). Single words don't tell the story and expose mis-transcriptions. Use 2–4 word chunks.
+- **Never let a VO or caption announce the payoff** ("This soldier doesn't realize that officer is not going to
+  let that slide" spoiled the 40K skit's only surprise). VO goes after the payoff, or it's a joke that doesn't telegraph.
+- **Caption the funniest real line as speech** ("Hey, where are you going?") instead of describing it (`*calls out left student*`).
+- **Keep one caption colour scheme:** white text, red italic only for the punchline.
+
 ## 4. Rules for writing captions
 
 - Write about 70% literal, 30% attitude. Attitude goes only on the payoff and the last caption.
