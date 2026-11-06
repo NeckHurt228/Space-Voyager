@@ -18,6 +18,13 @@
 | **Relatable service humour** (a complaint, chant or one-liner about military life) | Combatful: "Military Caught Sleeping On Job" 15.4M, "Bro Is Not Getting Payed Enough" 4.8M | Open on the first spoken line. If it's a list or acronym, show a progress tracker (`A R M Y`) so viewers stay for the last item. Veterans comment their own versions |
 
 ## 2. Title formulas
+**The user's channel standard: every title starts with "When".**
+Template: `When [Role] [specific, slightly dramatic action/situation].. [1 emoji] #military #usa`.
+The format only works with a specific action ("Breaks Physics" 26.6M vs "Has Too Much Fun" 60K, same format). Hint at the
+situation, never the result, and never reuse a title. An ironic title can usually be rewritten into the format
+("How Rangers Clear Buildings" → "When Rangers Clear A Building.."). Exception worth A/B testing: Combatful-style
+statements for reunions ("He Hasn't Seen His Brother In 4 Years...").
+
 - **Comedy:** `When [Role] [specific dramatic verb + object]..` + 1 emoji (💀 😭) + `#military #usa` (or `#airsoft #fail`)
   - Good: "When Soldier Breaks Physics..", "When C-RAM Goes Too Far 💀..", "When Airsofter Brings Wrong Gun.."
   - Bad: "When Soldier Has Too Much Fun..", "When Soldiers Get Creative.." (vague; the payoff can't be predicted) → 60–500K
