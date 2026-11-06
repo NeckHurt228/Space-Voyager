@@ -6,6 +6,18 @@ proven formula. Log every VO video with its `vo_style` in `reports/history.csv` 
 views against non-VO videos once there are 5+ of each. Keep using a style only if it beats the
 captions-only version.
 
+## 0. The user MUST add a voiceover to every video (for originality and monetization)
+So the job is never "VO or not"; it's making the VO help. Use the **two-line formula**:
+1. **Rule / stakes line, early, in a quiet gap.** It explains the rule or the situation so the payoff hits harder, and **never
+   says what will happen.** Examples: "Air Force rule: he can't move... until she taps him." / "Basic training rule: see an
+   officer... salute." This line is also the most "original commentary" for YouTube's reused-content review.
+2. **Joke after the payoff** (optional for reunions: let the music and the hug play). Examples: "He's been frozen for three days."
+   / "Somewhere, a farmer is very confused."
+- Use silent stretches as VO slots (they fix audio holes at the same time).
+- Never cover the original funny line or the payoff. Never use generic lines ("most wholesome thing I've seen").
+- Lessons from the posted videos: the skit's VO announced the payoff ("doesn't realize that officer is not going to let
+  that slide"); the reunion's VO was generic. Both are banned patterns.
+
 ## 1. Pick a persona (one per video)
 
 | Persona | When it fits | Sounds like | vidIQ voice (ElevenLabs) |

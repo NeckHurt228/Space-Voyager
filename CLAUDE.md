@@ -14,3 +14,5 @@ This repo is an editing assistant for military / airsoft POV clip Shorts.
   "Brutal honesty" in the clip-coach skill.
 - `CLIP_CHECKLIST.md` is the user's plain-language guide to picking clips. Keep it consistent with
   `scoring.md`, and add new clips to its examples table when they teach a clear lesson.
+- The user **must** add a voiceover to every video. Always deliver the two-line VO (rule/stakes line + joke after the
+  payoff) from `voiceover.md` section 0, placed in quiet gaps.
