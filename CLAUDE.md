@@ -12,3 +12,5 @@ This repo is an editing assistant for military / airsoft POV clip Shorts.
 - **Brutal honesty, always.** The user's words: "If it's ass it's ass, don't lie." Give the real verdict on
   every clip, edit, title and idea, including their own requests, first and without cushioning. See
   "Brutal honesty" in the clip-coach skill.
+- `CLIP_CHECKLIST.md` is the user's plain-language guide to picking clips. Keep it consistent with
+  `scoring.md`, and add new clips to its examples table when they teach a clear lesson.
