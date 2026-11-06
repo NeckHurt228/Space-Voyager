@@ -7,13 +7,14 @@
 | **Fake problem → reveal** | Graduation surprise, 72.9M | Open on the problem being announced ("we have a small problem…"), with a header describing the place |
 | **Real world enters the game** | Homeowner thinks airsoft gun is real, 66.4M | Open on the outsider (homeowner, police, Karen, trespasser) reacting, not on the game |
 | **Morality / sportsmanship** | Enemy shows true sportsmanship, 55.1M | Open on the moment of choice: the enemy has the shot, or the opponent is down |
-| **Reunion / emotional surprise** | They never thought they'd see each other, 54.6M | Open on the person who doesn't know yet, with a caption describing them (`*HASN'T SEEN HIM IN 4 YEARS*`) |
+| **Reunion / emotional surprise** (**proven on the user's channel: about 100K on a new channel**) | They never thought they'd see each other, 54.6M | Open on the person who doesn't know yet, with a caption describing them (`*HASN'T SEEN HIM IN 4 YEARS*`) |
 | **Clever play / skill** | Spidey senses, 53.1M | Open on the threat approaching, so the viewer sees it before the player reacts |
 | **Danger setup → fail** | Soldier breaks physics, 26.6M | Open mid-throw or mid-shot, with a tense drone |
 | **Object given a personality** | C-RAM "thinks about it", 26.2M | Give a machine or weapon a `ROLE:` tag and inner thoughts |
 | **Breaking a known rule** | Royal Guard breaks character, 38.4M | State the rule in the header or first caption, then show someone pushing it |
 | **Comment-argument bait** | Kid burning patch (11.5K comments) | Open on the act that viewers will judge |
 | **Misdirect** | Wrong gun, 18.1M | Serious action + goofy music (or the reverse), so the viewer senses a twist coming |
+| **Skit / staged comedy** (**proven on the user's channel: 40K+**) | User's own skit | The joke is clear within 2–3s, one idea with a twist at the end; it lands for soldiers and civilians |
 | **Relatable service humour** (a complaint, chant or one-liner about military life) | Combatful: "Military Caught Sleeping On Job" 15.4M, "Bro Is Not Getting Payed Enough" 4.8M | Open on the first spoken line. If it's a list or acronym, show a progress tracker (`A R M Y`) so viewers stay for the last item. Veterans comment their own versions |
 
 ## 2. Title formulas

@@ -44,16 +44,34 @@ Watch the clip once with **the sound off**, then once with sound. Tick each one.
 ---
 
 ## Step 4: Which type is it?
-Clips that do best, in order:
+**Your own channel's results come first.** They beat any competitor data.
+
+**Proven on YOUR channel:**
+- **Reunion / emotional surprise:** about **100K** on a new channel with only a few videos. Everyone gets it, it hits hard and people share it.
+  Competitors agree: Combatful's biggest videos are reunions (72.9M, 54.6M, 31.4M).
+- **Funny skit (staged comedy):** **40K+**.
+
+**From competitor data** (not tested on your channel yet), roughly best first:
 1. **Danger → fail.** Something dangerous goes wrong (the mortar flip).
 2. **Something real breaks into the game** (in airsoft clips: the homeowner thinks the airsoft gun is real).
-3. **A good-sport moment** (the enemy shows sportsmanship).
+3. **A good-sport moment.**
 4. **A clever move / skill.**
-5. **A reunion / emotional surprise** (longer story clips).
-6. **Relatable military humour** (complaining about the Army). Solid, rarely huge.
-7. **Animals + soldiers.** Cute, broad appeal, rarely huge.
+5. **Relatable military humour** (complaining about the Army). Solid, rarely huge.
+6. **Animals + soldiers.** Cute, broad appeal, rarely huge.
 
 **If it doesn't fit any of these types, that's a warning sign.**
+
+**What makes a reunion clip good:**
+- [ ] The person being surprised **doesn't know**, and you can see that in the first 2 seconds.
+- [ ] You can **see their face** when they realise.
+- [ ] **A real reaction:** tears, running, a big hug or falling to their knees. A small smile isn't enough.
+- [ ] A **fake problem or misdirect** before the reveal works even better (Combatful's "missing diploma" got 72.9M).
+- [ ] **About 20–45 seconds:** the build-up needs time, but cut every slow part.
+
+**What makes a skit good:**
+- [ ] The joke is clear within **2–3 seconds**.
+- [ ] **One idea**, with a twist at the end.
+- [ ] Relatable to soldiers **and** understandable to civilians.
 
 ---
 
@@ -66,6 +84,8 @@ Clips that do best, in order:
 | **Monkey on guard tower** | Solid | Clear and cute, but no big moment. Someone else's caption is baked in |
 | **ARMY acronym chant** | Solid | Funny, but the joke is only spoken, so it needs captions. Dark footage |
 | **Sandbag run (no audio joke)** | Skip | Nothing happens on screen |
+| **Your reunion clip** | **~100K (posted)** | Emotional, anyone gets it, shareable. Your best type so far |
+| **Your funny skit** | **40K+ (posted)** | Staged comedy that landed |
 
 ---
 
