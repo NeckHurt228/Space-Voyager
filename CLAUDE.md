@@ -16,3 +16,5 @@ This repo is an editing assistant for military / airsoft POV clip Shorts.
   `scoring.md`, and add new clips to its examples table when they teach a clear lesson.
 - The user **must** add ONE transformative voiceover line to every video (a rule line before the payoff, or a "why" line
   after it). See `voiceover.md` section 0. Always deliver it with exact placement in a quiet gap.
+- **User preferences:** no slow motion on payoffs (the user disliked it on the Rangers flashbang). The user often edits
+  videos themselves: then deliver a clean cut plus a step-by-step edit guide, not a rendered edit.
