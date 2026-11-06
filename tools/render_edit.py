@@ -210,7 +210,8 @@ def render(plan_path: Path) -> Path:
     info = probe(src)
     fps = plan.get("fps", info["fps"])
     segs = plan["segments"]
-    dur = sum(s["out"] - s["in"] for s in segs)
+    # a segment may carry "speed" (0.5 = half-speed slow motion; audio is pitch-kept with atempo)
+    dur = sum((s["out"] - s["in"]) / s.get("speed", 1.0) for s in segs)
     plan["_duration"] = dur
 
     ass = base / "_captions.ass"
@@ -237,8 +238,16 @@ def render(plan_path: Path) -> Path:
     f.append(f"[asrc]asplit={n}" + "".join(f"[as{i}]" for i in range(n)))
     cat = ""
     for i, s in enumerate(segs):
-        f.append(f"[vs{i}]trim={s['in']}:{s['out']},setpts=PTS-STARTPTS[v{i}]")
-        f.append(f"[as{i}]atrim={s['in']}:{s['out']},asetpts=PTS-STARTPTS[a{i}]")
+        sp = float(s.get("speed", 1.0))
+        f.append(f"[vs{i}]trim={s['in']}:{s['out']},setpts=(PTS-STARTPTS)/{sp}[v{i}]")
+        atempo = ""
+        if sp != 1.0:
+            r, chain = sp, []
+            while r < 0.5:
+                chain.append("atempo=0.5"); r /= 0.5
+            chain.append(f"atempo={r:.4f}")
+            atempo = "," + ",".join(chain) + (f",volume={s['slow_volume']}" if "slow_volume" in s else "")
+        f.append(f"[as{i}]atrim={s['in']}:{s['out']},asetpts=PTS-STARTPTS{atempo}[a{i}]")
         cat += f"[v{i}][a{i}]"
     f.append(f"{cat}concat=n={n}:v=1:a=1[vc][ac]")
 
@@ -247,10 +256,12 @@ def render(plan_path: Path) -> Path:
     band = plan.get("style", {}).get("band_aspect")  # e.g. 0.74 = width/height of the sharp centre band
     f.append(f"[vbg]scale={W}:{H}:force_original_aspect_ratio=increase,crop={W}:{H},"
              f"boxblur=22:3,eq=brightness=-0.03:saturation=0.9[bg]")
+    # style.grade: lift dark, muddy footage (brighter, more contrast, a touch of sharpening)
+    grade = ",eq=brightness=0.06:contrast=1.18:saturation=1.12:gamma=1.08,unsharp=5:5:0.9" if plan.get("style", {}).get("grade") else ""
     if band:
-        f.append(f"[vfg]crop='min(iw,ih*{band})':'min(ih,iw/{band})',scale={W}:-2[fg]")
+        f.append(f"[vfg]crop='min(iw,ih*{band})':'min(ih,iw/{band})'{grade},scale={W}:-2[fg]")
     else:
-        f.append(f"[vfg]scale={W}:{H}:force_original_aspect_ratio=decrease[fg]")
+        f.append(f"[vfg]null{grade},scale={W}:{H}:force_original_aspect_ratio=decrease[fg]")
     f.append(f"[bg][fg]overlay=(W-w)/2:(H-h)/2,scale={W * 2}:{H * 2}:flags=lanczos[v916]")
     z = zoom_expr(plan.get("zooms", []))
     sx, sy = shake_expr(plan.get("shake", []), "x"), shake_expr(plan.get("shake", []), "y")
@@ -275,7 +286,14 @@ def render(plan_path: Path) -> Path:
     for k, s in enumerate(sfx):
         kind = s.get("type", "boom")
         at = s["at"]
-        if kind == "boom":
+        if kind == "drone":  # low tension bed: two detuned low tones with a slow pulse
+            d = s.get("dur", 3.0)
+            # pitched where phone speakers can play it (they drop most sound below ~200 Hz)
+            gen = (f"aevalsrc='0.3*(0.5*sin(2*PI*110*t)+sin(2*PI*220*t)+0.6*sin(2*PI*329.6*t)+0.25*sin(2*PI*441*t))"
+                   f"*(0.75+0.25*sin(2*PI*1.6*t))':s=48000:d={d},"
+                   f"afade=t=in:d=0.4,afade=t=out:st={max(0.0, d - 0.12):.3f}:d=0.12,"
+                   "aformat=sample_rates=48000:channel_layouts=stereo")
+        elif kind == "boom":
             gen = ("aevalsrc='0.9*sin(2*PI*(42+70*exp(-9*t))*t)*exp(-3.2*t)':s=48000:d=1.2,"
                    "aformat=sample_rates=48000:channel_layouts=stereo")
         elif kind == "file":
