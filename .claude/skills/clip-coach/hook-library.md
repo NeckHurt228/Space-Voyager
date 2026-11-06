@@ -48,6 +48,8 @@ the 70% literal / 30% attitude rule, and the banned "copywriter" vocabulary. Thi
   (reunion at 4.5s, skit at 1.5s) and left the payoff silent (the skit's freeze).
 - **No audio hole longer than about 1s.** The skit had 3.2s at about -30 dB in the middle: keep the original sound or add a quiet bed.
 - **Reunions:** start soft music early (about the midpoint) and swell it at the reveal. The posted reunion only brought music in for the last 2.8s.
+- **Never put the flash/explosion payoff in black and white.** Switch back to colour right before it (the user's Rangers edit turned the orange flash into a grey smudge).
+- **Minimum caption time is about 0.6s** (3 words). The user's Rangers edit had 0.3s captions on the funniest beat (the kick).
 - **Export at about -14 LUFS, true peak -1 dB.** Both posted videos peaked at 0.0 dBFS, and the skit sat at -11.8 LUFS.
 Sound effects the user supplies live in `assets/sfx/` and plug into the edit plan as
 `{"type": "file", "path": "assets/sfx/fahh.mp3", "at": <payoff s>, "hit": <attack s into the file>, "trim": [0, 1.4], "gain_db": 12}`.
