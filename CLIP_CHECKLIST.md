@@ -89,12 +89,17 @@ Watch the clip once with **the sound off**, then once with sound. Tick each one.
 
 ---
 
-## Your 4 editing habits to fix (from your 100K and 40K videos)
+## Your editing habits to fix (from your 100K and 40K videos)
 1. **Captions in 2–4 word chunks**, never one word at a time.
 2. **Never explain what's about to happen.** A voiceover goes after the payoff.
 3. **Let the best moment run 2–3 seconds** (the reunion hug lasted under 1 second).
 4. **Crop away other people's text** instead of blurring it.
 5. **Keep the face in frame.** If the joke is someone's reaction, never cut to their chin.
+6. **The hit sound goes on the payoff,** not the setup (both videos had the big boom in the wrong place).
+7. **No silent stretches over 1 second** (the skit had 3 seconds of near-silence).
+8. **Reunions: start soft music early and swell it at the reveal.**
+9. **Caption the setup lines in full** ("We're waiting for her, boy"). They make the payoff land.
+10. **Export at about -14 LUFS with peaks at -1 dB** (keep the master volume under 100%).
 
 ---
 

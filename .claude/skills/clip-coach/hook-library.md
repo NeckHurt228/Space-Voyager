@@ -43,6 +43,12 @@ the 70% literal / 30% attitude rule, and the banned "copywriter" vocabulary. Thi
 - These are the defaults in `tools/render_edit.py`. They were calibrated by rendering competitor captions side by side with their real frames (via `vidiq_get_images`, which is free).
 
 ## 4. Sound palette
+**Lessons from the user's posted videos (audio-checked):**
+- The hit sound (boom) goes **on the payoff only**. Both posted videos put their loudest boom on a setup beat
+  (reunion at 4.5s, skit at 1.5s) and left the payoff silent (the skit's freeze).
+- **No audio hole longer than about 1s.** The skit had 3.2s at about -30 dB in the middle: keep the original sound or add a quiet bed.
+- **Reunions:** start soft music early (about the midpoint) and swell it at the reveal. The posted reunion only brought music in for the last 2.8s.
+- **Export at about -14 LUFS, true peak -1 dB.** Both posted videos peaked at 0.0 dBFS, and the skit sat at -11.8 LUFS.
 Sound effects the user supplies live in `assets/sfx/` and plug into the edit plan as
 `{"type": "file", "path": "assets/sfx/fahh.mp3", "at": <payoff s>, "hit": <attack s into the file>, "trim": [0, 1.4], "gain_db": 12}`.
 Line the **attack** (not the file start) up with the payoff, and keep it about 1–2 dB louder than the loudest speech.
