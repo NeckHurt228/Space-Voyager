@@ -105,6 +105,7 @@ def build_ass(plan: dict, path: Path) -> None:
         f"Style: BoxI,{f_ital},{size},&H002020E6,&H002020E6,&H00070707,&H00070707,0,0,0,0,100,100,0,0,3,{pad},0,8,40,40,0,1",
         f"Style: Tag,{f_tag},{tag_size},&H0000E5FF,&H0000E5FF,&H00070707,&H00070707,0,0,0,0,100,100,0,0,3,{tag_pad},0,2,40,40,0,1",
         f"Style: Mark,{f_mark},{st.get('watermark_size', 50)},&H00FFFFFF,&H00FFFFFF,&H00000000,&H80000000,0,0,0,0,100,100,0,0,1,0,3,5,40,40,0,1",
+        "Style: Draw,Arial,20,&H00FFFFFF,&H00FFFFFF,&H002020E6,&H00000000,0,0,0,0,100,100,0,0,1,0,0,7,0,0,0,1",
         f"Style: Head,{f_main},{st.get('header_size', 58)},&H00FFFFFF,&H00FFFFFF,&H00070707,&H00070707,0,0,0,0,100,100,6,0,3,{pad},0,8,40,40,0,1",
     ]
     lines = _ass_header(styles)
@@ -141,6 +142,34 @@ def build_ass(plan: dict, path: Path) -> None:
     if plan.get("watermark"):
         ev(0, 0, plan["_duration"], "Mark",
            rf"{{\pos(540,{st.get('watermark_y', 1785)})\alpha&H08&}}{plan['watermark']}")
+
+    # red circle + arrow marker: {"start","end","x","y","r"} in output pixels (1080x1920)
+    for mk in plan.get("markers", []):
+        r = mk.get("r", 70); x, y = mk["x"], mk["y"]; t = mk.get("thick", 10)
+        k = 0.5523 * r  # bezier ring drawn in a 0..2r box, then placed so its centre lands on (x, y)
+        c = r
+        circle = (f"m {c + r} {c} b {c + r} {c + k} {c + k} {c + r} {c} {c + r} b {c - k} {c + r} {c - r} {c + k} {c - r} {c} "
+                  f"b {c - r} {c - k} {c - k} {c - r} {c} {c - r} b {c + k} {c - r} {c + r} {c - k} {c + r} {c}")
+        # tracking: optional "path": [[t_rel_seconds, x, y], ...] keyframes (piecewise, one event per step)
+        path_pts = mk.get("path") or [[0, x, y], [mk["end"] - mk["start"], x, y]]
+        shaft = "m 0 14 l 14 0 l 112 98 l 98 112"
+        head = "m 150 150 l 84 132 l 132 84"
+        tip = 0.72 * r + t
+        for (t0, xa, ya), (t1, xb, yb) in zip(path_pts, path_pts[1:]):
+            a_, b_ = mk["start"] + t0, mk["start"] + t1
+            ms = int((t1 - t0) * 1000)
+            mv = lambda ox, oy: rf"\move({int(xa + ox)},{int(ya + oy)},{int(xb + ox)},{int(yb + oy)},0,{ms})"
+            ev(4, a_, b_, "Draw",
+               rf"{{\an7{mv(-r, -r)}\bord{t}\shad0\1a&HFF&\3c&H2020E6&\3a&H00&\p1}}{circle}{{\p0}}")
+            # arrow from the upper left, tip touching the ring at 45 degrees
+            ev(4, a_, b_, "Draw",
+               rf"{{\an7{mv(-tip - 150, -tip - 150)}\bord0\shad0\1c&H2020E6&\1a&H00&\p1}}{shaft} {head}{{\p0}}")
+
+    # full-screen white flash: {"at": seconds, "dur": 0.3}
+    for fl in plan.get("flashes", []):
+        a = fl["at"]; d = fl.get("dur", 0.3)
+        ev(5, a, a + d, "Draw",
+           rf"{{\an7\pos(0,0)\bord0\shad0\1c&HFFFFFF&\fad(0,{int(d * 1000)})\p1}}m 0 0 l {W} 0 l {W} {H} l 0 {H}{{\p0}}")
 
     path.write_text("\n".join(lines) + "\n", encoding="utf-8")
 
@@ -225,8 +254,11 @@ def render(plan_path: Path) -> Path:
     f.append(f"[bg][fg]overlay=(W-w)/2:(H-h)/2,scale={W * 2}:{H * 2}:flags=lanczos[v916]")
     z = zoom_expr(plan.get("zooms", []))
     sx, sy = shake_expr(plan.get("shake", []), "x"), shake_expr(plan.get("shake", []), "y")
+    # zoom centre (fractions of the frame), e.g. style.zoom_center [0.62, 0.45] to follow a subject off-centre
+    cx, cy = plan.get("style", {}).get("zoom_center", [0.5, 0.5])
     f.append(f"[v916]zoompan=z='{z}':d=1:s={W}x{H}:fps={fps}:"
-             f"x='iw/2-(iw/zoom/2)+{sx}':y='ih/2-(ih/zoom/2)+{sy}'[vz]")
+             f"x='max(0,min(iw-iw/zoom,iw*{cx}-(iw/zoom/2)+{sx}))':"
+             f"y='max(0,min(ih-ih/zoom,ih*{cy}-(ih/zoom/2)+{sy}))'[vz]")
     bw = "+".join(f"between(t,{b['start']},{b['end']})" for b in plan.get("bw", [])) or "0"
     f.append(f"[vz]hue=s=0:enable='{bw}',eq=contrast=1.12:enable='{bw}'[vb]")
     ass_esc = str(ass).replace("\\", "/").replace(":", r"\:").replace("'", r"\'")
