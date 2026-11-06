@@ -6,17 +6,18 @@ proven formula. Log every VO video with its `vo_style` in `reports/history.csv` 
 views against non-VO videos once there are 5+ of each. Keep using a style only if it beats the
 captions-only version.
 
-## 0. The user MUST add a voiceover to every video (for originality and monetization)
-So the job is never "VO or not"; it's making the VO help. Use the **two-line formula**:
-1. **Rule / stakes line, early, in a quiet gap.** It explains the rule or the situation so the payoff hits harder, and **never
-   says what will happen.** Examples: "Air Force rule: he can't move... until she taps him." / "Basic training rule: see an
-   officer... salute." This line is also the most "original commentary" for YouTube's reused-content review.
-2. **Joke after the payoff** (optional for reunions: let the music and the hug play). Examples: "He's been frozen for three days."
-   / "Somewhere, a farmer is very confused."
-- Use silent stretches as VO slots (they fix audio holes at the same time).
-- Never cover the original funny line or the payoff. Never use generic lines ("most wholesome thing I've seen").
-- Lessons from the posted videos: the skit's VO announced the payoff ("doesn't realize that officer is not going to let
-  that slide"); the reunion's VO was generic. Both are banned patterns.
+## 0. The user MUST add ONE transformative voiceover line to every video
+One line only. It must **add information the clip doesn't show** (a rule, a reason, a fact). That is what makes it
+transformative. Two placements:
+1. **Rule line, before the payoff, in a quiet gap:** it states the rule, then we watch it get broken or lived. It raises
+   tension and never says what will happen. "Air Force rule: he can't move... until she taps him." / "Basic training rule: see
+   an officer... you salute."
+2. **"Why" line, after the payoff:** a dry explanation of why it happened. "That's why you dig the baseplate in." / "That's
+   why they practice with flashbangs first."
+- Banned: describing what's visible, predicting the payoff ("he doesn't realize..."), generic feelings ("most wholesome thing").
+- Only state facts you're confident are true; otherwise phrase it loosely or flag it for the user to verify.
+- Put it in a silent stretch where possible (it fixes audio holes too). Never cover the original funny line or the payoff.
+- Caption it in 2–4 word chunks with a `NARRATOR:` tag.
 
 ## 1. Pick a persona (one per video)
 
