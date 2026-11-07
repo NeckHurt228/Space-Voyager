@@ -57,6 +57,8 @@ the 70% literal / 30% attitude rule, and the banned "copywriter" vocabulary. Thi
 - **Reunions:** start soft music early (about the midpoint) and swell it at the reveal. The posted reunion only brought music in for the last 2.8s.
 - **Never put the flash/explosion payoff in black and white.** Switch back to colour right before it (the user's Rangers edit turned the orange flash into a grey smudge).
 - **Minimum caption time is about 0.6s** (3 words). The user's Rangers edit had 0.3s captions on the funniest beat (the kick).
+- **Export at 1080×1920 minimum (4K if the editor allows), 30/60fps, High/Recommended bitrate.** The user's last 3 posts
+  (720p exports) stalled at 1.5–3k; export resolution is being tested as a cause. Never deliver or recommend 720p.
 - **Export at about -14 LUFS, true peak -1 dB.** Both posted videos peaked at 0.0 dBFS, and the skit sat at -11.8 LUFS.
 Sound effects the user supplies live in `assets/sfx/` and plug into the edit plan as
 `{"type": "file", "path": "assets/sfx/fahh.mp3", "at": <payoff s>, "hit": <attack s into the file>, "trim": [0, 1.4], "gain_db": 12}`.

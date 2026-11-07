@@ -18,3 +18,5 @@ This repo is an editing assistant for military / airsoft POV clip Shorts.
   after it). See `voiceover.md` section 0. Always deliver it with exact placement in a quiet gap.
 - **User preferences:** no slow motion on payoffs (the user disliked it on the Rangers flashbang). The user often edits
   videos themselves: then deliver a clean cut plus a step-by-step edit guide, not a rendered edit.
+- **Export:** always 1080×1920 or higher (the user is testing whether 720p exports caused 3 posts to stall at
+  1.5–3k). Note: the files the user uploads here are often shrunk copies, so never infer their posted resolution from them.
