@@ -14,6 +14,11 @@ channel tracks or masks, where in the video, at what size and height. Update thi
 - Main caption ~88px Montserrat ExtraBold on a black box; spans 50-70% of the width on the key lines.
 - They appear and disappear on hard cuts. No pop-in animation (until the profile says otherwise).
 
+- **Narrator / voiceover captions stay in ONE fixed spot for the whole video** (default x 540, y 1450, knee height
+  in waist-level shots). The user called it out when they jumped between shots ("randomly changes position from bottom
+  to the top"). Pick a spot that works in every shot instead of re-placing per shot. Speech/action captions can still sit
+  beside their owner. Narrator cards: 2 words at a time (3 only when a 2-word card would flash under ~0.6s).
+
 ## 2. Tracking: when a caption or marker follows something
 **Track when** (any one):
 - its subject **moves more than ~8% of the frame width** (≈90px) while the caption is up: a soldier running across,
