@@ -22,7 +22,10 @@ Read before you start (don't work from memory):
 House rules (from the user, never break them):
 - **Brutal honesty first.** Open with the score and verdict in plain words. If the clip is weak, say "this is
   weak" in the first line, then make the video anyway, because they asked for it.
-- **No slow motion on payoffs.** Export **1080x1920** (the renderer's default; never lower).
+- **No slow motion on payoffs.** Export **4K 60 fps** (`"export": {"width": 2160, "height": 3840}`, source interpolated
+  to 60 fps first, see `techniques.md`); never below 1080x1920.
+- **Voiceover should sound emotional, not flat.** Use ElevenLabs (`eleven_v4` with tags like `[dramatically]`, a trailer/
+  narrator voice such as Odom) when the connector is available; `tools/tts_local.py` is only the fallback.
 - **One transformative voiceover line** in every video (`clip-coach/voiceover.md` section 0): a rule line
   before the payoff or a "why" line after it, placed in a quiet gap, never on the payoff.
 - Never put B&W on a flash / explosion payoff (switch back to colour right before it). Minimum caption time

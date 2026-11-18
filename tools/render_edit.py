@@ -29,6 +29,12 @@ it is reused while those fields don't change), stage B tracks/masks on that base
 `--base-only` stops after stage A, so you can look at the framed video and pick track points / boxes
 in output pixels (tools/scene_probe.py base.mov lists people, faces and objects with their boxes).
 
+Export ("export", optional; default 1080x1920 at the source frame rate):
+  "export": {"width": 2160, "height": 3840, "fps": 60, "motion": "interpolate" | "duplicate"}
+  4K is worth it on YouTube even from a small source (4K uploads get a better codec / bitrate). 60 fps from a
+  30 fps source needs in-between frames: "interpolate" (motion-compensated; check fast motion for warping on the
+  QA sheet) or "duplicate" (repeated frames, no artifacts). All plan coordinates stay on the 1080x1920 canvas.
+
 Tracking / masking fields:
   "tracks":   [{"id": "gunner", "at": 1.2, "box": [x, y, w, h]}            # object's box at time `at`
                {"id": "nade", "at": 2.0, "point": [x, y], "size": 120}]     # or a point (box = size x size)
@@ -111,16 +117,34 @@ def _text_width(text: str, size: float) -> float:
     return 0.68 * size * len(longest)
 
 
+def _smooth_path(xs: list[float], win: int) -> list[float]:
+    """Zero-lag smoothing (Gaussian-weighted, centred, edges held) so a tracked caption glides instead of
+    copying every jolt of the tracker."""
+    import numpy as np
+    if win < 3 or len(xs) < 3:
+        return xs
+    sig = win / 4.0
+    k = np.exp(-0.5 * (np.arange(-win, win + 1) / sig) ** 2)
+    k /= k.sum()
+    padded = np.pad(np.asarray(xs, float), (win, win), mode="edge")
+    return list(np.convolve(padded, k, mode="valid"))
+
+
 def _follow_positions(c: dict, tr: dict, fps: float, size: float, n_lines: int) -> list[tuple]:
-    """Per-frame (start, end, x, y) for a caption riding on a tracked box."""
+    """(start, end, x0, y0, x1, y1) pieces for a caption riding on a tracked box.
+
+    "smooth": seconds of smoothing on the caption's own path (default 0.35; 0 = raw tracker),
+    "follow_amount": 0..1, how much of the subject's motion the caption copies (default 1; 0.5 = it
+    moves half as far, calmer on violent motion while still drifting with the subject).
+    Each piece is emitted with \\move, so libass interpolates between frames (smooth at 60 fps too)."""
     a, b = c["start"], c["end"]
     dx, dy = c.get("offset", [0, 0])
     anchor = c.get("anchor", "above")
     box_h = n_lines * size * 1.18
     half_w = _text_width(c["text"], c.get("size", size)) / 2 + 20
-    out = []
     i0, i1 = int(round(a * fps)), max(int(round(b * fps)), int(round(a * fps)) + 1)
-    for i in range(i0, i1):
+    xs, ys = [], []
+    for i in range(i0, i1 + 1):
         cx, cy, w, h = vision.position_at(tr, i / fps)
         if anchor == "above":
             y = cy - h / 2 - box_h - 24
@@ -128,9 +152,21 @@ def _follow_positions(c: dict, tr: dict, fps: float, size: float, n_lines: int) 
             y = cy + h / 2 + 24
         else:
             y = cy - box_h / 2
-        x = min(max(cx + dx, half_w + 30), W - half_w - 30)
-        y = min(max(y + dy, 170), 1600 - box_h)
-        out.append((max(a, i / fps), min(b, (i + 1) / fps), int(x), int(y)))
+        xs.append(cx + dx)
+        ys.append(y + dy)
+    amt = float(c.get("follow_amount", 1.0))
+    xs = [xs[0] + amt * (v - xs[0]) for v in xs]
+    ys = [ys[0] + amt * (v - ys[0]) for v in ys]
+    win = int(round(float(c.get("smooth", 0.35)) * fps / 2))
+    xs, ys = _smooth_path(xs, win), _smooth_path(ys, win)
+    clamp_x = lambda v: int(min(max(v, half_w + 30), W - half_w - 30))
+    clamp_y = lambda v: int(min(max(v, 170), 1600 - box_h))
+    out = []
+    for k in range(len(xs) - 1):
+        t0, t1 = (i0 + k) / fps, (i0 + k + 1) / fps
+        if t0 >= b:
+            break
+        out.append((max(a, t0), min(b, t1), clamp_x(xs[k]), clamp_y(ys[k]), clamp_x(xs[k + 1]), clamp_y(ys[k + 1])))
     return out
 
 
@@ -189,15 +225,19 @@ def build_ass(plan: dict, path: Path, behind_path: Path | None = None, tracks: d
                 die(f"caption '{c['text']}' follows unknown track '{c['follow']}'")
             pieces = _follow_positions(c, tracks[c["follow"]], fps, c.get("size", size), c["text"].count("\n") + 1)
         else:
-            pieces = [(a, b, c.get("x", 540), c.get("y", y_default))]
+            x, y = c.get("x", 540), c.get("y", y_default)
+            pieces = [(a, b, x, y, x, y)]
         target = None
         if c.get("behind"):
             target, any_behind = behind_lines, True
-        for (pa, pb, x, y) in pieces:
-            ev(2, pa, pb, "BoxI" if red else "Box", rf"{{\pos({x},{y})\xbord{pad}\ybord{pad_y}{fs}}}{text}", target)
+        for (pa, pb, x, y, x2, y2) in pieces:
+            ms = max(1, int(round((pb - pa) * 1000)))
+            place = rf"\pos({x},{y})" if (x, y) == (x2, y2) else rf"\move({x},{y},{x2},{y2},0,{ms})"
+            ev(2, pa, pb, "BoxI" if red else "Box", rf"{{{place}\xbord{pad}\ybord{pad_y}{fs}}}{text}", target)
             if c.get("tag"):
-                ty = y - pad_y - tag_pad_y - gap - lift
-                ev(3, pa, pb, "Tag", rf"{{\pos({x},{ty})\xbord{tag_pad}\ybord{tag_pad_y}\c{tag_colors.get(c.get('tag_color', 'green'), c.get('tag_color'))}}}{c['tag']}", target)
+                dty = - pad_y - tag_pad_y - gap - lift
+                tplace = rf"\pos({x},{y + dty})" if (x, y) == (x2, y2) else rf"\move({x},{y + dty},{x2},{y2 + dty},0,{ms})"
+                ev(3, pa, pb, "Tag", rf"{{{tplace}\xbord{tag_pad}\ybord{tag_pad_y}\c{tag_colors.get(c.get('tag_color', 'green'), c.get('tag_color'))}}}{c['tag']}", target)
 
     for h in plan.get("header", []):  # optional progress tracker, in the same box style
         word, filled = h["word"], h["filled"]
@@ -528,18 +568,38 @@ def _render_stage_b(plan: dict, base_vid: Path, out: Path, fps: float, dur: floa
     n_frames = int(round(dur * fps))
     tracks = _resolve_tracks(plan, base_vid, fps)
     ass, ass_b = base / "_captions.ass", base / "_captions_behind.ass"
-    any_behind = build_ass(plan, ass, ass_b, tracks, fps)
+    # ---- export size / frame rate. Captions stay authored on the 1080x1920 canvas; libass redraws them
+    # at the export size, so text is sharp at 4K instead of being upscaled with the picture.
+    ex = plan.get("export", {})
+    ew, eh = int(ex.get("width", W)), int(ex.get("height", H))
+    efps = float(ex.get("fps", fps))
+    pre = ""
+    if abs(efps - fps) > 0.01:
+        if ex.get("motion", "interpolate") == "interpolate":  # motion-compensated in-between frames
+            pre += f"minterpolate=fps={efps}:mi_mode=mci:mc_mode=aobmc:me_mode=bidir:vsbmc=1,"
+        else:  # "duplicate": repeat frames (no warping risk, motion stays 30 fps-smooth)
+            pre += f"fps={efps},"
+    if (ew, eh) != (W, H):
+        pre += f"scale={ew}:{eh}:flags=lanczos,"
+    pre = pre.rstrip(",") or "null"
+    any_behind = build_ass(plan, ass, ass_b, tracks, efps)
     sub = f"subtitles='{_ff_path(ass)}':fontsdir='{_ff_path(FONT_DIR)}'"
     inputs = ["-i", str(base_vid)]
     if any_behind:
         mask_vid = base / "_mask.mkv"
         _render_masks(plan, base_vid, tracks, fps, n_frames, mask_vid)
         inputs += ["-i", str(mask_vid)]
-        vgraph = (f"[0:v]split[va][vb];[va]subtitles='{_ff_path(ass_b)}':fontsdir='{_ff_path(FONT_DIR)}'[vt];"
-                  f"[1:v]format=gray[m];[vb][m]alphamerge[cut];[vt][cut]overlay=0:0:format=auto[vc];"
+        vgraph = (f"[0:v]{pre},split[va][vb];[va]subtitles='{_ff_path(ass_b)}':fontsdir='{_ff_path(FONT_DIR)}'[vt];"
+                  f"[1:v]fps={efps},scale={ew}:{eh},format=gray[m];[vb][m]alphamerge[cut];[vt][cut]overlay=0:0:format=auto[vc];"
                   f"[vc]{sub},format=yuv420p[vout]")
     else:
-        vgraph = f"[0:v]{sub},format=yuv420p[vout]"
+        vgraph = f"[0:v]{pre},{sub},format=yuv420p[vout]"
+    venc = ["-c:v", "libx264", "-preset", "medium", "-crf", "18", "-pix_fmt", "yuv420p"]
+    if ew * eh > 1920 * 1080 * 1.5:  # 4K: H.264 High@5.2 (what YouTube ingests fine), a bit more bitrate headroom
+        venc = ["-c:v", "libx264", "-preset", "medium", "-crf", "17", "-pix_fmt", "yuv420p",
+                "-profile:v", "high", "-level:v", "5.2"]
+    if abs(efps - fps) > 0.01:
+        venc += ["-r", f"{efps:g}"]
 
     # ---- loudness, two-pass (measured on the stage-A mix, applied while burning captions)
     target = "I=-14:TP=-1.5:LRA=11"
@@ -554,8 +614,7 @@ def _render_stage_b(plan: dict, base_vid: Path, out: Path, fps: float, dur: floa
               f"measured_LRA={m['input_lra']}:measured_thresh={m['input_thresh']}:"
               f"offset={m['target_offset']}:linear=true[aout]") if not silent else "[0:a]anull[aout]"
     run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", *inputs,
-         "-filter_complex", vgraph + ";" + agraph, "-map", "[vout]", "-map", "[aout]",
-         "-c:v", "libx264", "-preset", "medium", "-crf", "18", "-pix_fmt", "yuv420p",
+         "-filter_complex", vgraph + ";" + agraph, "-map", "[vout]", "-map", "[aout]", *venc,
          "-c:a", "aac", "-b:a", "192k", "-ar", "48000", "-movflags", "+faststart", "-t", f"{dur:.3f}", str(out)])
     for p in (ass, ass_b, base / "_mask.mkv"):
         p.unlink(missing_ok=True)

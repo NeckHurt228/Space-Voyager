@@ -61,8 +61,15 @@ is strong in a **hook** or on a **reveal**. Costs legibility, so:
 ```
 - `follow` + `anchor` (`above` | `below` | `center`) + optional `offset: [dx, dy]`; x/y are ignored while following and
   the caption is clamped inside the safe area.
+- `smooth` (seconds, default 0.35) smooths the caption's own path; `follow_amount` (0-1, default 1) makes it copy only part
+  of the subject's motion. **On violent motion (a jolt, a fall, a whip pan) use `smooth: 0.5, follow_amount: 0.6`**: the
+  user called raw tracking "too rippy" (the caption whipped 100px a frame). Pieces are drawn with `\move`, so they glide.
 - `behind: "<mask id>"`: the caption is drawn under the subject cut-out (feathered 3px edge, grown 2px).
   Mask options: `feather`, `grow`.
+- `"export": {"width": 2160, "height": 3840}` = 4K. For 60 fps from a 30 fps source, interpolate the SOURCE first
+  (`ffmpeg -i in.mp4 -vf "minterpolate=fps=60:mi_mode=mci:mc_mode=aobmc:me_mode=bidir:vsbmc=1" -crf 12 out60.mp4`,
+  ~5 min for 14s at 576p), set `"fps": 60` in the plan, and check the fastest motion for ghosting. Interpolating at 1080p
+  inside the render (`export.fps`) works too but is several times slower.
 - `render_edit.py --base-only` renders just the cut/framing (`base.mov`) to pick numbers from; the full render reuses it
   while `source/segments/zooms/bw/shake/sfx/bleeps/style.band_aspect/grade/zoom_center` don't change.
 - After a render, `reports/<clip>/tracks.json` has every track's path and `lost` share.
