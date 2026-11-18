@@ -45,6 +45,9 @@ def main() -> None:
     std = late.std(0).mean(2); tmpl = np.median(late, 0)
 
     m = (std < 9).astype(np.uint8) * 255
+    # white overlay text (TikTok captions) on noisy re-encodes flickers more than std 9 at its edges;
+    # it is still bright in nearly every frame, which footage almost never is
+    m |= (np.percentile(late.mean(3), 8, axis=0) > 170).astype(np.uint8) * 255
     m = cv2.morphologyEx(m, cv2.MORPH_CLOSE, np.ones((5, 5), np.uint8))
     k, lab, stats, _ = cv2.connectedComponentsWithStats(m)
     keep = np.zeros_like(m)
