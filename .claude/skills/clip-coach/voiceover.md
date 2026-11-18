@@ -19,6 +19,10 @@ transformative. Two placements:
 - Put it in a silent stretch where possible (it fixes audio holes too). Never cover the original funny line or the payoff.
 - Caption it in 2–4 word chunks with a `NARRATOR:` tag.
 
+**No vidIQ credits?** `python3 tools/tts_local.py "<line>" reports/<clip>/vo/line1.wav --voice am_onyx --max <slot s>`
+makes the line with a free local voice (Kokoro). Point `vo_plan.json` at it with a per-line `"file"`, and check the
+take with `transcribe.py` since you can't listen to it. The deadpan-narrator voice is `am_onyx`.
+
 ## 1. Pick a persona (one per video)
 
 | Persona | When it fits | Sounds like | vidIQ voice (ElevenLabs) |
