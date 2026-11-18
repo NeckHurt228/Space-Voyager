@@ -18,6 +18,31 @@ For each clip, it:
 6. **Learns from results**: it logs every clip in `reports/history.csv`. After 10+ posted clips with
    views, it tells you which rubric items actually predict *your* views.
 
+## Make the whole video: `/make-short`
+
+```
+/make-short clips/my_clip.mp4  the mortar flips when it fires; handle @myhandle
+```
+
+The agent watches and listens to the clip, gives an honest score, cuts it, frames it 9:16, and writes the captions
+in the competitors' voice. It places each caption beside the person or thing it's about (never on a face), makes captions
+and markers **track** moving soldiers, vehicles or thrown objects, can put one big title **behind** a subject (masking),
+adds B&W, a punch-in and a boom on the payoff, then checks its own render frame by frame before delivering
+`reports/<clip>/final.mp4` with titles and the voiceover line.
+
+Tracking and masking follow the defaults in `.claude/skills/make-short/techniques.md` until the competitors have been
+measured. To measure them (on your own computer, where YouTube works):
+
+```bash
+pip install -U yt-dlp && python3 tools/fetch_references.py @AirHardReal @ArmoredPOVs @combatful
+bash tools/setup_vision.sh
+python3 tools/study_reference.py references/
+```
+
+That studies every video frame by frame (every caption's text, position, size, timing and style, whether it tracks an
+object or sits behind a subject, plus cuts, B&W, flashes, freezes, zooms and shake) and writes
+`references/STYLE_PROFILE.md`, which the agent then follows. See `references/README.md`.
+
 ## Use it
 
 With Claude Code in this folder:
@@ -73,6 +98,9 @@ by 12 dB, and normalises the result to -14 LUFS.
 python3 tools/render_edit.py reports/my_clip/edit_plan.json
 ```
 
+Tracking (`tracks` + `follow`) and masking (`masks` + `behind`) are documented at the top of the script and in
+`.claude/skills/make-short/techniques.md`. `--base-only` renders just the cut and framing so you can pick boxes on it.
+
 It renders a 1080x1920 Short in the competitor style: jump cuts, bleeps, punch-ins and shake, black and white on the payoff,
 ArmoredPOVs-style captions (Montserrat on black boxes, coloured role tags, red italic punchlines), a centre band with blurred bars, a bass-hit SFX, and -14 LUFS loudness. It also mixes in the
 voiceover when one exists.
@@ -87,6 +115,12 @@ voiceover when one exists.
 - `tools/vo_mix.py`: voiceover timing check and mixer
 - `tools/render_edit.py`: renders the finished edit from an edit plan
 - `tools/remove_overlay.py`: removes baked-in emojis, stickers or small text from a clip (needs `opencv-python-headless`)
+- `.claude/skills/make-short/`: the raw-clip-to-finished-video agent (`SKILL.md`) and its tracking/masking rules (`techniques.md`)
+- `tools/vision.py`: object tracking (OpenCV CSRT) and subject masks (MediaPipe); `tools/setup_vision.sh` installs them
+- `tools/scene_probe.py`: lists people, faces and objects with their boxes, plus where a caption fits
+- `tools/qa_sheet.py`: frames from a render at every caption / track / mask / effect, for checking
+- `tools/study_reference.py`: frame-by-frame study of competitor videos → `references/STYLE_PROFILE.md`
+- `tools/fetch_references.py`: downloads a channel's top Shorts into `references/` (run where YouTube is reachable)
 - `assets/fonts/`: Montserrat (captions) and Anton fonts (SIL Open Font License)
 - `tools/transcribe.py` + `tools/setup_asr.sh`: speech-to-text so the agent hears the clip
 - `.claude/skills/clip-coach/caption-voice.md`: the competitors' verbatim captions and the caption-writing rules

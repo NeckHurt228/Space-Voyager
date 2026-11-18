@@ -5,3 +5,10 @@ reports/*
 !reports/.gitkeep
 !reports/history.csv
 __pycache__/
+# competitor videos stay local; the measured text results are shared
+references/*
+!references/README.md
+!references/STYLE_PROFILE.md
+!references/STYLE_PROFILE.json
+!references/_study/
+references/_study/**/*.jpg

@@ -17,17 +17,42 @@ What it does (all driven by the plan):
   * synthesized SFX (bass "boom") at given times
   * loudness normalised to -14 LUFS (two-pass)
   * optional voiceover: runs tools/vo_mix.py with the plan's "vo_plan" afterwards
+  * TRACKING: "tracks" follow an object (OpenCV CSRT) so a caption or marker can ride on it
+  * MASKING: a caption with "behind" is drawn under a subject cut-out (MediaPipe), so a person or
+    object passes in front of the text
 
-All times in "zooms", "bw", "shake", "captions", "header", "sfx" are EDITED-video seconds.
-"segments" and "bleeps" are SOURCE seconds.
+All times in "zooms", "bw", "shake", "captions", "header", "sfx", "tracks", "masks" are EDITED-video
+seconds, and all x/y/box values are OUTPUT pixels (1080x1920). "segments" and "bleeps" are SOURCE seconds.
+
+Two stages: stage A renders the cut, framing, zooms, B&W and sound into reports/<clip>/base.mov (cached:
+it is reused while those fields don't change), stage B tracks/masks on that base and burns the captions.
+`--base-only` stops after stage A, so you can look at the framed video and pick track points / boxes
+in output pixels (tools/scene_probe.py base.mov lists people, faces and objects with their boxes).
+
+Tracking / masking fields:
+  "tracks":   [{"id": "gunner", "at": 1.2, "box": [x, y, w, h]}            # object's box at time `at`
+               {"id": "nade", "at": 2.0, "point": [x, y], "size": 120}]     # or a point (box = size x size)
+  captions:   {"follow": "gunner", "anchor": "above"|"below"|"center", "offset": [dx, dy], ...}
+              x/y are then ignored; the caption rides on the tracked box (clamped inside the safe area)
+  markers:    {"follow": "nade", "start", "end", "r"}                       # red circle + arrow sticks to it
+  "masks":    [{"id": "m1", "subject": "people"}                            # every person in frame
+               {"id": "m2", "subject": "person:gunner"}                     # only the tracked person (cleanest)
+               {"id": "m3", "subject": "track:humvee"}]                     # any tracked object (point segmenter;
+                                                                            # can bleed into similar background)
+  captions:   {"behind": "m1", ...}   text goes BEHIND the masked subject (the "text behind person" look)
 """
 from __future__ import annotations
 
+import hashlib
 import json
 import shutil
 import subprocess
 import sys
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import numpy as np  # noqa: E402
+import vision  # noqa: E402  (tools/vision.py: tracking + masking)
 
 ROOT = Path(__file__).resolve().parent.parent
 FONT_DIR = ROOT / "assets" / "fonts"
@@ -80,10 +105,42 @@ def _ass_header(styles: list[str]) -> list[str]:
             "[Events]", "Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text"]
 
 
-def build_ass(plan: dict, path: Path) -> None:
+def _text_width(text: str, size: float) -> float:
+    """Rough rendered width of a caption line in Montserrat ExtraBold caps (for clamping on screen)."""
+    longest = max((ln for ln in text.split("\n")), key=len, default=text)
+    return 0.68 * size * len(longest)
+
+
+def _follow_positions(c: dict, tr: dict, fps: float, size: float, n_lines: int) -> list[tuple]:
+    """Per-frame (start, end, x, y) for a caption riding on a tracked box."""
+    a, b = c["start"], c["end"]
+    dx, dy = c.get("offset", [0, 0])
+    anchor = c.get("anchor", "above")
+    box_h = n_lines * size * 1.18
+    half_w = _text_width(c["text"], c.get("size", size)) / 2 + 20
+    out = []
+    i0, i1 = int(round(a * fps)), max(int(round(b * fps)), int(round(a * fps)) + 1)
+    for i in range(i0, i1):
+        cx, cy, w, h = vision.position_at(tr, i / fps)
+        if anchor == "above":
+            y = cy - h / 2 - box_h - 24
+        elif anchor == "below":
+            y = cy + h / 2 + 24
+        else:
+            y = cy - box_h / 2
+        x = min(max(cx + dx, half_w + 30), W - half_w - 30)
+        y = min(max(y + dy, 170), 1600 - box_h)
+        out.append((max(a, i / fps), min(b, (i + 1) / fps), int(x), int(y)))
+    return out
+
+
+def build_ass(plan: dict, path: Path, behind_path: Path | None = None, tracks: dict | None = None,
+              fps: float = 30.0) -> bool:
     """ArmoredPOVs-style captions: Montserrat ExtraBold on a solid black box, the ROLE: tag as
     coloured text on its own black box sitting on top, punchlines in red italic with white
-    asterisks, optional small watermark at the bottom centre."""
+    asterisks, optional small watermark at the bottom centre.
+    Captions with "behind" go to `behind_path` (drawn under the subject cut-out); returns True if any did."""
+    tracks = tracks or {}
     st = plan.get("style", {})
     # sizes calibrated against ArmoredPOVs frames (rendered side by side at the same scale)
     size = st.get("size", 88)              # main caption font size (1080-wide canvas)
@@ -109,15 +166,17 @@ def build_ass(plan: dict, path: Path) -> None:
         f"Style: Head,{f_main},{st.get('header_size', 58)},&H00FFFFFF,&H00FFFFFF,&H00070707,&H00070707,0,0,0,0,100,100,6,0,3,{pad},0,8,40,40,0,1",
     ]
     lines = _ass_header(styles)
+    behind_lines = _ass_header(styles)
 
-    def ev(layer, a, b, style, text):
-        lines.append(f"Dialogue: {layer},{ass_time(a)},{ass_time(b)},{style},,0,0,0,,{text}")
+    def ev(layer, a, b, style, text, target=None):
+        (lines if target is None else target).append(
+            f"Dialogue: {layer},{ass_time(a)},{ass_time(b)},{style},,0,0,0,,{text}")
 
     tag_colors = {"green": "&H3BEA3B&", "teal": "&HEAFC37&", "cyan": "&HEAFC37&", "yellow": "&H00E5FF&",
                   "white": "&HFFFFFF&", "red": "&H2020E6&", "orange": "&H0090FF&"}
+    any_behind = False
     for c in plan.get("captions", []):
         a, b = c["start"], c["end"]
-        x, y = c.get("x", 540), c.get("y", y_default)
         text = c["text"].replace("\n", r"\N")
         red = c.get("color") == "red"
         if red:  # red italic, asterisks stay white
@@ -125,10 +184,20 @@ def build_ass(plan: dict, path: Path) -> None:
         elif c.get("color") and c["color"] != "white":
             text = rf"{{\c{tag_colors.get(c['color'], c['color'])}}}" + text
         fs = rf"\fs{c['size']}" if c.get("size") else ""  # per-caption size, e.g. one big punch word
-        ev(2, a, b, "BoxI" if red else "Box", rf"{{\pos({x},{y})\xbord{pad}\ybord{pad_y}{fs}}}{text}")
-        if c.get("tag"):
-            ty = y - pad_y - tag_pad_y - gap - lift
-            ev(3, a, b, "Tag", rf"{{\pos({x},{ty})\xbord{tag_pad}\ybord{tag_pad_y}\c{tag_colors.get(c.get('tag_color', 'green'), c.get('tag_color'))}}}{c['tag']}")
+        if c.get("follow"):
+            if c["follow"] not in tracks:
+                die(f"caption '{c['text']}' follows unknown track '{c['follow']}'")
+            pieces = _follow_positions(c, tracks[c["follow"]], fps, c.get("size", size), c["text"].count("\n") + 1)
+        else:
+            pieces = [(a, b, c.get("x", 540), c.get("y", y_default))]
+        target = None
+        if c.get("behind"):
+            target, any_behind = behind_lines, True
+        for (pa, pb, x, y) in pieces:
+            ev(2, pa, pb, "BoxI" if red else "Box", rf"{{\pos({x},{y})\xbord{pad}\ybord{pad_y}{fs}}}{text}", target)
+            if c.get("tag"):
+                ty = y - pad_y - tag_pad_y - gap - lift
+                ev(3, pa, pb, "Tag", rf"{{\pos({x},{ty})\xbord{tag_pad}\ybord{tag_pad_y}\c{tag_colors.get(c.get('tag_color', 'green'), c.get('tag_color'))}}}{c['tag']}", target)
 
     for h in plan.get("header", []):  # optional progress tracker, in the same box style
         word, filled = h["word"], h["filled"]
@@ -145,13 +214,21 @@ def build_ass(plan: dict, path: Path) -> None:
 
     # red circle + arrow marker: {"start","end","x","y","r"} in output pixels (1080x1920)
     for mk in plan.get("markers", []):
-        r = mk.get("r", 70); x, y = mk["x"], mk["y"]; t = mk.get("thick", 10)
+        r = mk.get("r", 70); x, y = mk.get("x", 540), mk.get("y", 960); t = mk.get("thick", 10)
         k = 0.5523 * r  # bezier ring drawn in a 0..2r box, then placed so its centre lands on (x, y)
         c = r
         circle = (f"m {c + r} {c} b {c + r} {c + k} {c + k} {c + r} {c} {c + r} b {c - k} {c + r} {c - r} {c + k} {c - r} {c} "
                   f"b {c - r} {c - k} {c - k} {c - r} {c} {c - r} b {c + k} {c - r} {c + r} {c - k} {c + r} {c}")
-        # tracking: optional "path": [[t_rel_seconds, x, y], ...] keyframes (piecewise, one event per step)
-        path_pts = mk.get("path") or [[0, x, y], [mk["end"] - mk["start"], x, y]]
+        # tracking: "follow": track id (per-frame path from the tracker), or a manual
+        # "path": [[t_rel_seconds, x, y], ...] keyframes (piecewise, one event per step)
+        if mk.get("follow"):
+            if mk["follow"] not in tracks:
+                die(f"marker follows unknown track '{mk['follow']}'")
+            tr = tracks[mk["follow"]]
+            n_fr = max(1, int(round((mk["end"] - mk["start"]) * fps)))
+            path_pts = [[k / fps, *vision.position_at(tr, mk["start"] + k / fps)[:2]] for k in range(n_fr + 1)]
+        else:
+            path_pts = mk.get("path") or [[0, x, y], [mk["end"] - mk["start"], x, y]]
         shaft = "m 0 14 l 14 0 l 112 98 l 98 112"
         head = "m 150 150 l 84 132 l 132 84"
         tip = 0.72 * r + t
@@ -172,6 +249,9 @@ def build_ass(plan: dict, path: Path) -> None:
            rf"{{\an7\pos(0,0)\bord0\shad0\1c&HFFFFFF&\fad(0,{int(d * 1000)})\p1}}m 0 0 l {W} 0 l {W} {H} l 0 {H}{{\p0}}")
 
     path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    if behind_path is not None:
+        behind_path.write_text("\n".join(behind_lines) + "\n", encoding="utf-8")
+    return any_behind
 
 
 # --------------------------------------------------------------------------
@@ -196,7 +276,106 @@ def shake_expr(shakes: list[dict], axis: str) -> str:
 
 
 # --------------------------------------------------------------------------
-def render(plan_path: Path) -> Path:
+STAGE_A_KEYS = ("source", "segments", "bleeps", "bleep_volume", "fps", "zooms", "bw", "shake", "sfx")
+STAGE_A_STYLE = ("band_aspect", "grade", "zoom_center")
+
+
+def _stage_a_key(plan: dict, src: Path) -> str:
+    st = plan.get("style", {})
+    sig = {k: plan.get(k) for k in STAGE_A_KEYS}
+    sig["style"] = {k: st.get(k) for k in STAGE_A_STYLE}
+    sig["src"] = [src.stat().st_size, int(src.stat().st_mtime)]
+    for s in plan.get("sfx", []):
+        if s.get("path"):
+            fp = Path(s["path"]); fp = fp if fp.is_absolute() else ROOT / fp
+            sig.setdefault("sfx_files", []).append([str(fp), fp.stat().st_size if fp.exists() else 0])
+    return hashlib.sha1(json.dumps(sig, sort_keys=True).encode()).hexdigest()[:16]
+
+
+def _resolve_tracks(plan: dict, base_vid: Path, fps: float) -> dict:
+    """Run the tracker for every track used by a caption / marker / mask, over the span it's needed."""
+    specs = {t["id"]: t for t in plan.get("tracks", [])}
+    if not specs:
+        return {}
+    need: dict[str, list[float]] = {}
+
+    def use(tid, a, b):
+        if tid not in specs:
+            die(f"unknown track '{tid}'")
+        lo, hi = need.get(tid, [a, b])
+        need[tid] = [min(lo, a), max(hi, b)]
+
+    for c in plan.get("captions", []):
+        if c.get("follow"):
+            use(c["follow"], c["start"], c["end"])
+    for mk in plan.get("markers", []):
+        if mk.get("follow"):
+            use(mk["follow"], mk["start"], mk["end"])
+    masks = {m["id"]: m for m in plan.get("masks", [])}
+    for c in plan.get("captions", []):
+        m = masks.get(c.get("behind"))
+        subj = str(m.get("subject", "")) if m else ""
+        if subj.startswith(("track:", "person:")):
+            use(subj.split(":", 1)[1], c["start"], c["end"])
+    out = {}
+    for tid, (a, b) in need.items():
+        t = specs[tid]
+        if "box" in t:
+            box = t["box"]
+        elif "point" in t:
+            sz = t.get("size", 140)
+            box = [t["point"][0] - sz / 2, t["point"][1] - sz / 2, sz, sz]
+        else:
+            die(f"track '{tid}' needs a box or a point")
+        tr = vision.track(base_vid, t["at"], box, a - 0.1, b + 0.1)
+        if tr["lost"] > 0.15:
+            print(f"warning: track '{tid}' lost the object on {tr['lost']:.0%} of frames - "
+                  f"check the follow captions / markers, or pick a bigger, more textured box")
+        out[tid] = tr
+    return out
+
+
+def _render_masks(plan: dict, base_vid: Path, tracks: dict, fps: float, n_frames: int, path: Path) -> None:
+    """Grey mask video (white = subject in front of the 'behind' captions) for the whole edit."""
+    masks = {m["id"]: m for m in plan.get("masks", [])}
+    windows: list[tuple[int, int, dict]] = []
+    for c in plan.get("captions", []):
+        if not c.get("behind"):
+            continue
+        if c["behind"] not in masks:
+            die(f"caption '{c['text']}' uses unknown mask '{c['behind']}'")
+        windows.append((int(c["start"] * fps) - 1, int(c["end"] * fps) + 1, masks[c["behind"]]))
+    vis = vision.Vision()
+    info = vision.video_info(base_vid)
+    wr = vision.GrayWriter(path, info["w"], info["h"], fps)
+    for i, fr in vision.read_frames(base_vid):
+        if i >= n_frames:
+            break
+        act = [m for (i0, i1, m) in windows if i0 <= i <= i1]
+        if not act:
+            wr.write(None)
+            continue
+        acc = np.zeros(fr.shape[:2], np.float32)
+        for m in {id(m): m for m in act}.values():
+            subj = m.get("subject", "people")
+            if subj == "people":
+                acc = np.maximum(acc, vis.people(fr))
+            elif subj.startswith("person:"):
+                acc = np.maximum(acc, vis.person_at(fr, vision.position_at(tracks[subj[7:]], i / fps)))
+            elif subj.startswith("track:"):
+                cx, cy, _, _ = vision.position_at(tracks[subj[6:]], i / fps)
+                acc = np.maximum(acc, vis.thing(fr, cx, cy))
+            else:
+                die(f"unknown mask subject '{subj}' (use 'people', 'person:<track>' or 'track:<track>')")
+        wr.write(vision.clean_mask(acc, feather=m.get("feather", 3), grow=m.get("grow", 2)))
+    # pad if the decoder returned fewer frames than the timeline
+    for _ in range(max(0, n_frames - info["n"])):
+        wr.write(None)
+    wr.close()
+    vis.close()
+
+
+def render(plan_path: Path, base_only: bool = False) -> Path:
     plan = json.loads(plan_path.read_text())
     base = plan_path.parent
     src = Path(plan["source"])
@@ -214,9 +393,22 @@ def render(plan_path: Path) -> Path:
     dur = sum((s["out"] - s["in"]) / s.get("speed", 1.0) for s in segs)
     plan["_duration"] = dur
 
-    ass = base / "_captions.ass"
-    build_ass(plan, ass)
+    out.parent.mkdir(parents=True, exist_ok=True)
+    base_vid = base / "base.mov"
+    key = _stage_a_key(plan, src)
+    key_file = base / "base.key"
+    if base_vid.exists() and key_file.exists() and key_file.read_text().strip() == key:
+        print(f"stage A: reusing {base_vid.relative_to(ROOT) if base_vid.is_relative_to(ROOT) else base_vid}")
+    else:
+        _render_stage_a(plan, src, info, fps, segs, dur, base_vid)
+        key_file.write_text(key)
+    if base_only:
+        print(f"Wrote {base_vid} (framed, cut, no captions) - pick track boxes / points on this, in output pixels")
+        return base_vid
+    return _render_stage_b(plan, base_vid, out, fps, dur)
 
+
+def _render_stage_a(plan: dict, src: Path, info: dict, fps: float, segs: list, dur: float, base_vid: Path) -> None:
     f = []
     # ---- audio: bleeps on the source timeline, then cut
     # bleeps: [a, b] = mute + 1 kHz tone; {"start": a, "end": b, "tone": false} = mute only
@@ -272,8 +464,7 @@ def render(plan_path: Path) -> Path:
              f"y='max(0,min(ih-ih/zoom,ih*{cy}-(ih/zoom/2)+{sy}))'[vz]")
     bw = "+".join(f"between(t,{b['start']},{b['end']})" for b in plan.get("bw", [])) or "0"
     f.append(f"[vz]hue=s=0:enable='{bw}',eq=contrast=1.12:enable='{bw}'[vb]")
-    ass_esc = str(ass).replace("\\", "/").replace(":", r"\:").replace("'", r"\'")
-    f.append(f"[vb]subtitles='{ass_esc}':fontsdir='{FONT_DIR}',format=yuv420p[vout]")
+    f.append("[vb]format=yuv420p[vout]")
 
     # ---- SFX
     # {"type": "boom", "at": 7.3}  - synthesized bass hit
@@ -320,30 +511,57 @@ def render(plan_path: Path) -> Path:
         f.append("[ac]anull[amix]")
 
     graph = ";".join(f)
-    tmp = out.with_name(out.stem + "_pre.mp4")
-    out.parent.mkdir(parents=True, exist_ok=True)
+    tmp = base_vid.with_name("_base_tmp.mov")
     run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-i", str(src), *extra_inputs,
          "-filter_complex", graph,
-         "-map", "[vout]", "-map", "[amix]", "-c:v", "libx264", "-preset", "medium", "-crf", "18",
-         "-pix_fmt", "yuv420p", "-c:a", "pcm_s16le", "-t", f"{dur:.3f}", str(tmp.with_suffix(".mov"))])
-    tmp = tmp.with_suffix(".mov")
+         "-map", "[vout]", "-map", "[amix]", "-c:v", "libx264", "-preset", "fast", "-crf", "10",
+         "-pix_fmt", "yuv420p", "-c:a", "pcm_s16le", "-t", f"{dur:.3f}", str(tmp)])
+    tmp.replace(base_vid)
 
-    # ---- loudness, two-pass
+
+def _ff_path(p: Path) -> str:
+    return str(p).replace("\\", "/").replace(":", r"\:").replace("'", r"\'")
+
+
+def _render_stage_b(plan: dict, base_vid: Path, out: Path, fps: float, dur: float) -> Path:
+    base = out.parent
+    n_frames = int(round(dur * fps))
+    tracks = _resolve_tracks(plan, base_vid, fps)
+    ass, ass_b = base / "_captions.ass", base / "_captions_behind.ass"
+    any_behind = build_ass(plan, ass, ass_b, tracks, fps)
+    sub = f"subtitles='{_ff_path(ass)}':fontsdir='{_ff_path(FONT_DIR)}'"
+    inputs = ["-i", str(base_vid)]
+    if any_behind:
+        mask_vid = base / "_mask.mkv"
+        _render_masks(plan, base_vid, tracks, fps, n_frames, mask_vid)
+        inputs += ["-i", str(mask_vid)]
+        vgraph = (f"[0:v]split[va][vb];[va]subtitles='{_ff_path(ass_b)}':fontsdir='{_ff_path(FONT_DIR)}'[vt];"
+                  f"[1:v]format=gray[m];[vb][m]alphamerge[cut];[vt][cut]overlay=0:0:format=auto[vc];"
+                  f"[vc]{sub},format=yuv420p[vout]")
+    else:
+        vgraph = f"[0:v]{sub},format=yuv420p[vout]"
+
+    # ---- loudness, two-pass (measured on the stage-A mix, applied while burning captions)
     target = "I=-14:TP=-1.5:LRA=11"
-    meas = run(["ffmpeg", "-hide_banner", "-nostats", "-i", str(tmp), "-af",
+    meas = run(["ffmpeg", "-hide_banner", "-nostats", "-i", str(base_vid), "-af",
                 f"loudnorm={target}:print_format=json", "-f", "null", "-"])
     m = json.loads(meas[meas.rfind("{"): meas.rfind("}") + 1])
     try:
         silent = float(m["input_i"]) < -70
     except ValueError:  # "-inf" for pure silence
         silent = True
-    af = ["-af", f"loudnorm={target}:measured_I={m['input_i']}:measured_TP={m['input_tp']}:"
-                 f"measured_LRA={m['input_lra']}:measured_thresh={m['input_thresh']}:"
-                 f"offset={m['target_offset']}:linear=true"] if not silent else []
-    run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-i", str(tmp), *af,
-         "-c:v", "copy", "-c:a", "aac", "-b:a", "192k", "-movflags", "+faststart", str(out)])
-    tmp.unlink(missing_ok=True)
-    ass.unlink(missing_ok=True)
+    agraph = (f"[0:a]loudnorm={target}:measured_I={m['input_i']}:measured_TP={m['input_tp']}:"
+              f"measured_LRA={m['input_lra']}:measured_thresh={m['input_thresh']}:"
+              f"offset={m['target_offset']}:linear=true[aout]") if not silent else "[0:a]anull[aout]"
+    run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", *inputs,
+         "-filter_complex", vgraph + ";" + agraph, "-map", "[vout]", "-map", "[aout]",
+         "-c:v", "libx264", "-preset", "medium", "-crf", "18", "-pix_fmt", "yuv420p",
+         "-c:a", "aac", "-b:a", "192k", "-ar", "48000", "-movflags", "+faststart", "-t", f"{dur:.3f}", str(out)])
+    for p in (ass, ass_b, base / "_mask.mkv"):
+        p.unlink(missing_ok=True)
+    (base / "tracks.json").write_text(json.dumps(
+        {k: {"lost": v["lost"], "fps": v["fps"], "path": {str(i): xy for i, xy in list(v["frames"].items())[::3]}}
+         for k, v in tracks.items()}))
 
     # ---- optional voiceover
     if plan.get("vo_plan"):
@@ -362,12 +580,13 @@ def render(plan_path: Path) -> Path:
 
 
 def main() -> None:
-    if len(sys.argv) != 2:
-        die("usage: render_edit.py <edit_plan.json>")
+    args = [a for a in sys.argv[1:] if not a.startswith("--")]
+    if len(args) != 1:
+        die("usage: render_edit.py <edit_plan.json> [--base-only]")
     for t in ("ffmpeg", "ffprobe"):
         if not shutil.which(t):
             die(f"{t} not found on PATH")
-    render(Path(sys.argv[1]).resolve())
+    render(Path(args[0]).resolve(), base_only="--base-only" in sys.argv)
 
 
 if __name__ == "__main__":

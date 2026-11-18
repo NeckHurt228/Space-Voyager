@@ -46,6 +46,8 @@ the 70% literal / 30% attitude rule, and the banned "copywriter" vocabulary. Thi
 - **Endings:** trail off with `..` on the last caption (`*ENEMY IS COOKED..*`, `DAMN..`).
 - **Header:** rare at ArmoredPOVs; Combatful uses one for story clips (`*AT GRADUATION CEREMONY*`). Use the same black-box style.
 - **Framing:** a sharp centre band (about 0.74 width:height), with a blurred copy of the same frame filling the top and bottom. Captions appear and disappear on hard cuts, with no pop-in animation.
+- **Tracking / masking:** a caption can follow a moving subject, and one big title per video can sit behind a subject.
+  When to use each (and the measured rates, once `references/STYLE_PROFILE.md` exists) is in `.claude/skills/make-short/techniques.md`.
 - **Watermark:** `@yourhandle`, Montserrat SemiBold, white with a soft shadow, about 50px, at the bottom centre (y≈1785 of 1920), all the way through.
 - These are the defaults in `tools/render_edit.py`. They were calibrated by rendering competitor captions side by side with their real frames (via `vidiq_get_images`, which is free).
 

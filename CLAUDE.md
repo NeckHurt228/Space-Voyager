@@ -4,6 +4,11 @@ This repo is an editing assistant for military / airsoft POV clip Shorts.
 
 - When the user shares a clip (file in `clips/` or a URL) or asks about hooks, titles, pacing or
   whether a clip is worth posting, use the `clip-coach` skill (`.claude/skills/clip-coach/`).
+- When the user sends a raw clip and wants the **full video made**, use the `make-short` skill
+  (`.claude/skills/make-short/`): it renders the finished Short with tracked captions and masking, and checks its own
+  render frame by frame. Otherwise the user's default applies (clean cut + step-by-step edit guide).
+- `references/STYLE_PROFILE.md` (when present) is measured from the competitors' own videos by
+  `tools/study_reference.py`. Its numbers beat the written defaults on caption position, size, timing, tracking and masking.
 - Measure clips with `python3 tools/clip_analyzer.py <clip> --mode raw|edited --out reports`
   and always look at the contact sheets it writes before judging content.
 - Always transcribe the audio too: `python3 tools/transcribe.py <clip> --out reports`
