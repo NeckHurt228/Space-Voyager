@@ -184,7 +184,7 @@ def build_ass(plan: dict, path: Path, behind_path: Path | None = None, tracks: d
         # UrgentPOVs look (measured from their Short covers at 720x1280, scaled to 1080 wide): sentence-case
         # Open Sans on translucent dark boxes, coloured speaker tag on its own box, italic *action* lines,
         # small italic note line under a caption, red Narrator tag, orange Context tag
-        for k, v in {"size": 84, "tag_size": 47, "pad": 10, "pad_y": 0, "tag_pad": 7, "tag_pad_y": 0, "tag_gap": 0,
+        for k, v in {"size": 84, "tag_size": 42, "pad": 10, "pad_y": 0, "tag_pad": 7, "tag_pad_y": 0, "tag_gap": 0,
                      "font": "Open Sans", "font_italic": "Open Sans", "font_tag": "Open Sans",
                      "font_watermark": "Open Sans SemiBold", "caption_y": 900}.items():
             st.setdefault(k, v)
@@ -205,7 +205,7 @@ def build_ass(plan: dict, path: Path, behind_path: Path | None = None, tracks: d
     f_mark = st.get("font_watermark", "MontserratSB")
     box = st.get("box_color", "&H58141414" if urgent else "&H00070707")   # AABBGGRR, AA 00 = opaque
     ital_col, ital_flag = ("&H00FFFFFF", -1) if urgent else ("&H002020E6", 0)
-    note_size = st.get("note_size", int(size * (0.43 if urgent else 0.6)))
+    note_size = st.get("note_size", int(size * (0.5 if urgent else 0.6)))
     styles = [
         f"Style: Box,{f_main},{size},&H00FFFFFF,&H00FFFFFF,{box},{box},0,0,0,0,100,100,0,0,3,{pad},0,8,40,40,0,1",
         f"Style: BoxI,{f_ital},{size},{ital_col},{ital_col},{box},{box},0,{ital_flag},0,0,100,100,0,0,3,{pad},0,8,40,40,0,1",
@@ -226,8 +226,11 @@ def build_ass(plan: dict, path: Path, behind_path: Path | None = None, tracks: d
     tag_colors = {"green": "&H3BEA3B&", "teal": "&HEAFC37&", "cyan": "&HEAFC37&", "yellow": "&H00E5FF&",
                   "white": "&HFFFFFF&", "red": "&H2020E6&", "orange": "&H0090FF&"}
     if urgent:  # UrgentPOVs palette: narrator red, context orange, one colour per speaker
-        tag_colors.update({"red": "&H2F2FD3&", "orange": "&H3BA9F2&", "blue": "&HF2A63E&", "green": "&H64D94C&",
-                           "yellow": "&H3ED2F7&", "white": "&HFFFFFF&", "lime": "&H5AE6E6&"})
+        # measured from their frames (RGB): blue 82,149,212 · green 84,149,73 · yellow 223,208,121 ·
+        # context orange 211,149,88 · purple 161,147,191 · aside pale yellow 250,247,160
+        tag_colors.update({"red": "&H2F2FD3&", "orange": "&H5895D3&", "blue": "&HD49552&", "green": "&H499554&",
+                           "yellow": "&H79D0DF&", "purple": "&HBF93A1&", "white": "&HFFFFFF&",
+                           "lime": "&HA0F7FA&", "aside": "&HA0F7FA&"})
     any_behind = False
     for c in plan.get("captions", []):
         a, b = c["start"], c["end"]
@@ -270,7 +273,7 @@ def build_ass(plan: dict, path: Path, behind_path: Path | None = None, tracks: d
                 n_lines = c["text"].count("\n") + 1
                 dny = int(n_lines * c.get("size", size) * (1.04 if urgent else 1.2)) + pad_y
                 nplace = rf"\pos({x},{y + dny})" if (x, y) == (x2, y2) else rf"\move({x},{y + dny},{x2},{y2 + dny},0,{ms})"
-                ncol = tag_colors.get(c.get("note_color", "lime"), c.get("note_color", "lime"))
+                ncol = tag_colors.get(c.get("note_color", "aside"), c.get("note_color", "aside"))
                 ev(2, pa, pb, "Note", rf"{{{nplace}\xbord{pad}\ybord{pad_y}\c{ncol}}}{c['note']}", target)
 
     for h in plan.get("header", []):  # optional progress tracker, in the same box style

@@ -28,6 +28,17 @@ or `Uploader: (What do you think?)`. Effects (plan fields):
   flash out. **Freeze on a SHARP frame** (check source frames first; motion blur ruins the cut-out) and click 3 points
   (head, torso, legs) for close/blurry people: the `people` model misses dark camo against dark backgrounds.
   The label names the irony or the stakes in 1-2 words, not what we see.
+- **Emotion aside under a big line** (`"note"`; 15/20 videos; pale yellow italic, about half the line's height, its own
+  small box right under it). Two kinds: `(Emotion / subtext)` in brackets: `(Really mad)`, `(Annoyed)`, `(Not impressed)`,
+  `(Last thing you wanna hear)`, `(Frustrated with it)`; or `*action while speaking*`: `*Repeats*`, `*Yells*`, `*Mocking*`,
+  `*First to land*`. Put it on the lines where the feeling IS the joke or can't be seen (face small, turned away, masked,
+  deadpan voice): usually 2-4 lines per video, the key line and the reaction, not every line. 1-4 words. An aside
+  says the subtext, never repeats the line.
+- **Context as its own caption** (`Context:` orange tag, italic, brackets, same size as speech, in its OWN spot away from
+  the speech line, often lower-middle). Use it at the exact moment a civilian would ask "why / what?": the jargon or rule
+  as it happens (`(Gets called when an NCO walks in)` on the yell), a fact that sets the stakes (`(Only about 20 B-2s
+  exist)`), right under the narrator line to explain it, a location, or as the closing line (`*P320 Banned from his range*`).
+  1-2 per video, never on top of a speech caption. Only facts you're sure of (or say so with `(?)`, like their `Navy Seal (?):`).
 - **Spotlight** (dim + glowing ring on something small): `"spotlights": [{"start","end","x","y","r"}]`.
 - **Pointer** (red ▼ that pops in, optional tiny stat label, can follow a track): `"pointers": [{"start","end","x","y"|"follow","label"}]`.
 - Stat callout: a red italic caption (`"color": "red"`) like `*~4,000 lbs recoiling*` just before the action.
