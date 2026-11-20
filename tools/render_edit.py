@@ -57,6 +57,7 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+import cv2  # noqa: E402
 import numpy as np  # noqa: E402
 import vision  # noqa: E402  (tools/vision.py: tracking + masking)
 
@@ -315,8 +316,68 @@ def build_ass(plan: dict, path: Path, behind_path: Path | None = None, tracks: d
             ev(4, a_, b_, "Draw",
                rf"{{\an7{mv(-tip - 150, -tip - 150)}\bord0\shad0\1c&H2020E6&\1a&H00&\p1}}{shaft} {head}{{\p0}}")
 
+    full = f"m 0 0 l {W} 0 l {W} {H} l 0 {H}"
+
+    def circle_path(cx, cy, r):
+        k = 0.5523 * r
+        return (f"m {cx + r} {cy} b {cx + r} {cy + k} {cx + k} {cy + r} {cx} {cy + r} b {cx - k} {cy + r} {cx - r} {cy + k} "
+                f"{cx - r} {cy} b {cx - r} {cy - k} {cx - k} {cy - r} {cx} {cy - r} b {cx + k} {cy - r} {cx + r} {cy - k} {cx + r} {cy}")
+
+    # UrgentPOVs freeze callout: {"start","end","subject": "person:<track>"|"people"|{"points": [[x,y],..]}|null,"label": "*VERY STRICT*",
+    #  "label_x": 90, "label_y": 330, "dim": 0.55, "glow": true, "type_dur": 0.35, "flash": true}
+    # (pair it with a {"freeze": src_t, "dur": ...} segment and a {"type": "whoosh"} sfx for the full effect)
+    flashes = list(plan.get("flashes", []))
+    for co in plan.get("callouts", []):
+        a, b = co["start"], co["end"]
+        dim_a = format(int(255 * (1 - co.get("dim", 0.55))), "02X")
+        dim_target = behind_lines if co.get("subject") else None
+        if co.get("subject"):
+            any_behind = True
+        ev(1, a, b, "Draw", rf"{{\an7\pos(0,0)\bord0\shad0\1c&H000000&\1a&H{dim_a}&\p1}}{full}{{\p0}}", dim_target)
+        if co.get("label"):
+            lab = co["label"]
+            n = len(lab)
+            td = co.get("type_dur", 0.35)
+            lx, ly = co.get("label_x", 90), co.get("label_y", 330)
+            lsize = co.get("label_size", int(size * 0.95))
+            for k in range(1, n + 1):  # typewriter: one more character per step
+                ta = a + td * (k - 1) / n
+                tb = b if k == n else a + td * k / n
+                ev(6, ta, tb, "Box", rf"{{\an7\pos({lx},{ly})\xbord{pad}\ybord{pad_y}\fs{lsize}\i1\c&H2020E6&}}{lab[:k]}")
+        if co.get("flash", True):
+            flashes.append({"at": max(0.0, a - 0.12), "dur": 0.25})
+            flashes.append({"at": b - 0.04, "dur": 0.25})
+    # spotlight: dim everything except a soft circle, white glowing ring {"start","end","x","y","r"}
+    for sp in plan.get("spotlights", []):
+        a, b, x, y, r = sp["start"], sp["end"], sp["x"], sp["y"], sp.get("r", 150)
+        dim_a = format(int(255 * (1 - sp.get("dim", 0.55))), "02X")
+        ev(1, a, b, "Draw", rf"{{\an7\pos(0,0)\bord0\shad0\1c&H000000&\1a&H{dim_a}&\iclip(1,{circle_path(x, y, r)})\p1}}{full}{{\p0}}")
+        ev(1, a, b, "Draw", rf"{{\an7\pos(0,0)\bord{sp.get('ring', 7)}\blur9\shad0\1a&HFF&\3c&HFFFFFF&\3a&H30&\p1}}{circle_path(x, y, r)}{{\p0}}")
+    # pointer: red down-triangle that pops in above a thing, optional tiny label {"start","end","x","y"|"follow","label"}
+    for po in plan.get("pointers", []):
+        a, b = po["start"], po["end"]
+        sz = po.get("size", 46)
+        tri = f"m 0 0 l {2 * sz} 0 l {sz} {int(1.15 * sz)}"
+        if po.get("follow"):
+            tr = tracks[po["follow"]]
+            n_fr = max(1, int(round((b - a) * fps)))
+            pts = []
+            for k in range(n_fr + 1):
+                cx, cy, w, h = vision.position_at(tr, a + k / fps)
+                pts.append([k / fps, cx, cy - h / 2 - 12])
+        else:
+            pts = [[0, po["x"], po["y"]], [b - a, po["x"], po["y"]]]
+        for j, ((t0, xa, ya), (t1, xb, yb)) in enumerate(zip(pts, pts[1:])):
+            ta, tb = a + t0, a + t1
+            ms = max(1, int((t1 - t0) * 1000))
+            pop = r"\fscx35\fscy35\t(0,140,\fscx100\fscy100)" if j == 0 else ""
+            ev(4, ta, tb, "Draw", rf"{{\an2\move({int(xa)},{int(ya)},{int(xb)},{int(yb)},0,{ms}){pop}\bord0\shad0\1c&H2020E6&\p1}}{tri}{{\p0}}")
+            if po.get("label"):
+                ly_a, ly_b = int(ya - 1.15 * sz - 8), int(yb - 1.15 * sz - 8)
+                ev(4, ta, tb, "Note", rf"{{\an2\move({int(xa)},{ly_a},{int(xb)},{ly_b},0,{ms})\xbord8\ybord0\c&HFFFFFF&}}{po['label']}")
+
     # full-screen white flash: {"at": seconds, "dur": 0.3}
-    for fl in plan.get("flashes", []):
+    for fl in flashes:
         a = fl["at"]; d = fl.get("dur", 0.3)
         ev(5, a, a + d, "Draw",
            rf"{{\an7\pos(0,0)\bord0\shad0\1c&HFFFFFF&\fad(0,{int(d * 1000)})\p1}}m 0 0 l {W} 0 l {W} {H} l 0 {H}{{\p0}}")
@@ -349,6 +410,13 @@ def shake_expr(shakes: list[dict], axis: str) -> str:
 
 
 # --------------------------------------------------------------------------
+def seg_dur(s: dict) -> float:
+    """Edited length of a segment: {"in","out"[,"speed"]} or a freeze {"freeze": src_t, "dur": d}."""
+    if "freeze" in s:
+        return float(s["dur"])
+    return (s["out"] - s["in"]) / s.get("speed", 1.0)
+
+
 STAGE_A_KEYS = ("source", "segments", "bleeps", "bleep_volume", "fps", "zooms", "bw", "shake", "sfx")
 STAGE_A_STYLE = ("band_aspect", "grade", "zoom_center")
 
@@ -381,9 +449,13 @@ def _resolve_tracks(plan: dict, base_vid: Path, fps: float) -> dict:
     for c in plan.get("captions", []):
         if c.get("follow"):
             use(c["follow"], c["start"], c["end"])
-    for mk in plan.get("markers", []):
+    for mk in plan.get("markers", []) + plan.get("pointers", []):
         if mk.get("follow"):
             use(mk["follow"], mk["start"], mk["end"])
+    for co in plan.get("callouts", []):
+        subj = co.get("subject") if isinstance(co.get("subject"), str) else ""
+        if subj.startswith(("track:", "person:")):
+            use(subj.split(":", 1)[1], co["start"], co["end"])
     masks = {m["id"]: m for m in plan.get("masks", [])}
     for c in plan.get("captions", []):
         m = masks.get(c.get("behind"))
@@ -418,19 +490,33 @@ def _render_masks(plan: dict, base_vid: Path, tracks: dict, fps: float, n_frames
         if c["behind"] not in masks:
             die(f"caption '{c['text']}' uses unknown mask '{c['behind']}'")
         windows.append((int(c["start"] * fps) - 1, int(c["end"] * fps) + 1, masks[c["behind"]]))
+    glow_windows = []
+    for co in plan.get("callouts", []):
+        if co.get("subject"):
+            m = {"subject": co["subject"], "feather": 2, "grow": 2}
+            w = (int(co["start"] * fps) - 1, int(co["end"] * fps) + 1, m)
+            windows.append(w)
+            if co.get("glow", True):
+                glow_windows.append(w)
     vis = vision.Vision()
     info = vision.video_info(base_vid)
     wr = vision.GrayWriter(path, info["w"], info["h"], fps)
+    gw = vision.GrayWriter(path.with_name("_glow.mkv"), info["w"], info["h"], fps) if glow_windows else None
     for i, fr in vision.read_frames(base_vid):
         if i >= n_frames:
             break
         act = [m for (i0, i1, m) in windows if i0 <= i <= i1]
         if not act:
             wr.write(None)
+            if gw:
+                gw.write(None)
             continue
         acc = np.zeros(fr.shape[:2], np.float32)
         for m in {id(m): m for m in act}.values():
             subj = m.get("subject", "people")
+            if isinstance(subj, dict) and "points" in subj:  # several clicks on one subject (best for close, blurry people)
+                acc = np.maximum(acc, np.max([vis.thing(fr, x, y) for x, y in subj["points"]], axis=0))
+                continue
             if subj == "people":
                 acc = np.maximum(acc, vis.people(fr))
             elif subj.startswith("person:"):
@@ -440,10 +526,23 @@ def _render_masks(plan: dict, base_vid: Path, tracks: dict, fps: float, n_frames
                 acc = np.maximum(acc, vis.thing(fr, cx, cy))
             else:
                 die(f"unknown mask subject '{subj}' (use 'people', 'person:<track>' or 'track:<track>')")
-        wr.write(vision.clean_mask(acc, feather=m.get("feather", 3), grow=m.get("grow", 2)))
+        cm = vision.clean_mask(acc, feather=m.get("feather", 3), grow=m.get("grow", 2))
+        wr.write(cm)
+        if gw:
+            if any(i0 <= i <= i1 for (i0, i1, _) in glow_windows):
+                # white outer glow: grown + blurred silhouette (sits under the cut-out, shows as a halo)
+                g = cv2.dilate(cm, cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (31, 31)))
+                g = cv2.GaussianBlur(g, (0, 0), 14)
+                gw.write(np.clip(g.astype(np.float32) * 1.4, 0, 255).astype(np.uint8))
+            else:
+                gw.write(None)
     # pad if the decoder returned fewer frames than the timeline
     for _ in range(max(0, n_frames - info["n"])):
         wr.write(None)
+        if gw:
+            gw.write(None)
+    if gw:
+        gw.close()
     wr.close()
     vis.close()
 
@@ -463,7 +562,7 @@ def render(plan_path: Path, base_only: bool = False) -> Path:
     fps = plan.get("fps", info["fps"])
     segs = plan["segments"]
     # a segment may carry "speed" (0.5 = half-speed slow motion; audio is pitch-kept with atempo)
-    dur = sum((s["out"] - s["in"]) / s.get("speed", 1.0) for s in segs)
+    dur = sum(seg_dur(s) for s in segs)
     plan["_duration"] = dur
 
     out.parent.mkdir(parents=True, exist_ok=True)
@@ -493,7 +592,7 @@ def _render_stage_a(plan: dict, src: Path, info: dict, fps: float, segs: list, d
     if info["has_audio"]:
         f.append(f"[0:a]aformat=sample_rates=48000:channel_layouts=stereo,volume=enable='{bexpr}':volume=0[o]")
     else:
-        f.append(f"anullsrc=r=48000:cl=stereo,atrim=0:{max(s['out'] for s in segs) + 1}[o]")
+        f.append(f"anullsrc=r=48000:cl=stereo,atrim=0:{max(s.get('out', s.get('freeze', 0)) for s in segs) + 1}[o]")
     f.append(f"sine=f=1000:r=48000,aformat=sample_rates=48000:channel_layouts=stereo,"
              f"volume={plan.get('bleep_volume', 0.25)},volume=enable='not({texpr})':volume=0[bl]")
     f.append("[o][bl]amix=inputs=2:normalize=0:duration=first[asrc]")
@@ -504,6 +603,13 @@ def _render_stage_a(plan: dict, src: Path, info: dict, fps: float, segs: list, d
     cat = ""
     for i, s in enumerate(segs):
         sp = float(s.get("speed", 1.0))
+        if "freeze" in s:  # hold one frame (UrgentPOVs callout freeze); its audio is silence
+            ft, fd = float(s["freeze"]), float(s["dur"])
+            f.append(f"[vs{i}]trim=start={ft}:end={ft + 0.05},setpts=PTS-STARTPTS,"
+                     f"tpad=stop_mode=clone:stop_duration={fd + 0.1},trim=duration={fd},setpts=PTS-STARTPTS[v{i}]")
+            f.append(f"[as{i}]atrim=start={ft}:end={ft + 0.01},asetpts=PTS-STARTPTS,volume=0,apad=whole_dur={fd}[a{i}]")
+            cat += f"[v{i}][a{i}]"
+            continue
         f.append(f"[vs{i}]trim={s['in']}:{s['out']},setpts=(PTS-STARTPTS)/{sp}[v{i}]")
         atempo = ""
         if sp != 1.0:
@@ -556,6 +662,11 @@ def _render_stage_a(plan: dict, src: Path, info: dict, fps: float, segs: list, d
             gen = (f"aevalsrc='0.3*(0.5*sin(2*PI*110*t)+sin(2*PI*220*t)+0.6*sin(2*PI*329.6*t)+0.25*sin(2*PI*441*t))"
                    f"*(0.75+0.25*sin(2*PI*1.6*t))':s=48000:d={d},"
                    f"afade=t=in:d=0.4,afade=t=out:st={max(0.0, d - 0.12):.3f}:d=0.12,"
+                   "aformat=sample_rates=48000:channel_layouts=stereo")
+        elif kind == "whoosh":  # filtered pink-noise swell (no pitched tones), for freezes / flashes
+            d = s.get("dur", 0.45)
+            gen = (f"anoisesrc=d={d}:c=pink:a=0.7,highpass=f=700,lowpass=f=9000,"
+                   f"afade=t=in:d={0.65 * d:.3f}:curve=exp,afade=t=out:st={0.65 * d:.3f}:d={0.35 * d:.3f},"
                    "aformat=sample_rates=48000:channel_layouts=stereo")
         elif kind == "boom":
             gen = ("aevalsrc='0.9*sin(2*PI*(42+70*exp(-9*t))*t)*exp(-3.2*t)':s=48000:d=1.2,"
@@ -622,9 +733,18 @@ def _render_stage_b(plan: dict, base_vid: Path, out: Path, fps: float, dur: floa
         mask_vid = base / "_mask.mkv"
         _render_masks(plan, base_vid, tracks, fps, n_frames, mask_vid)
         inputs += ["-i", str(mask_vid)]
-        vgraph = (f"[0:v]{pre},split[va][vb];[va]subtitles='{_ff_path(ass_b)}':fontsdir='{_ff_path(FONT_DIR)}'[vt];"
-                  f"[1:v]fps={efps},scale={ew}:{eh},format=gray[m];[vb][m]alphamerge[cut];[vt][cut]overlay=0:0:format=auto[vc];"
-                  f"[vc]{sub},format=yuv420p[vout]")
+        glow_vid = base / "_glow.mkv"
+        if glow_vid.exists():  # callouts: white halo under the cut-out subject
+            inputs += ["-i", str(glow_vid)]
+            vgraph = (f"[0:v]{pre},split[va][vb];[va]subtitles='{_ff_path(ass_b)}':fontsdir='{_ff_path(FONT_DIR)}'[vt];"
+                      f"[2:v]fps={efps},scale={ew}:{eh},format=gray[g];color=c=white:s={ew}x{eh}:r={efps}[wh];"
+                      f"[wh][g]alphamerge[glow];[vt][glow]overlay=0:0:shortest=1[vtg];"
+                      f"[1:v]fps={efps},scale={ew}:{eh},format=gray[m];[vb][m]alphamerge[cut];[vtg][cut]overlay=0:0:format=auto[vc];"
+                      f"[vc]{sub},format=yuv420p[vout]")
+        else:
+            vgraph = (f"[0:v]{pre},split[va][vb];[va]subtitles='{_ff_path(ass_b)}':fontsdir='{_ff_path(FONT_DIR)}'[vt];"
+                      f"[1:v]fps={efps},scale={ew}:{eh},format=gray[m];[vb][m]alphamerge[cut];[vt][cut]overlay=0:0:format=auto[vc];"
+                      f"[vc]{sub},format=yuv420p[vout]")
     else:
         vgraph = f"[0:v]{pre},{sub},format=yuv420p[vout]"
     venc = ["-c:v", "libx264", "-preset", "medium", "-crf", "18", "-pix_fmt", "yuv420p"]
@@ -649,7 +769,7 @@ def _render_stage_b(plan: dict, base_vid: Path, out: Path, fps: float, dur: floa
     run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", *inputs,
          "-filter_complex", vgraph + ";" + agraph, "-map", "[vout]", "-map", "[aout]", *venc,
          "-c:a", "aac", "-b:a", "192k", "-ar", "48000", "-movflags", "+faststart", "-t", f"{dur:.3f}", str(out)])
-    for p in (ass, ass_b, base / "_mask.mkv"):
+    for p in (ass, ass_b, base / "_mask.mkv", base / "_glow.mkv"):
         p.unlink(missing_ok=True)
     (base / "tracks.json").write_text(json.dumps(
         {k: {"lost": v["lost"], "fps": v["fps"], "path": {str(i): xy for i, xy in list(v["frames"].items())[::3]}}

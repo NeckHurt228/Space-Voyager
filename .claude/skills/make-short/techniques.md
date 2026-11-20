@@ -16,6 +16,22 @@ channel tracks or masks, where in the video, at what size and height. Update thi
   verbatim, with `..` / `-` / `x2`. Narrator and context mid-frame; a speaker's line beside that speaker.
   Titles in their format: `[Subject] [VERB IN CAPS]! 😂` (+ `(TT: @source)` when you know the source).
 
+### UrgentPOVs formula (measured from their 20 videos, see `references/UrgentPOVs/NOTES.md`)
+Every spoken word under a speaker tag (2-4 words a card, a new card every 0.25-0.6 s), every action as an italic label,
+ONE voiced narrator line (red `Narrator:`) that frames or teases ("Little did he know..") right before the payoff, lime
+`note` asides for the emotion, `Context:` lines for facts, counters (`*Fires* x2 … x9`). End on a hard cut, a Context line
+or `Uploader: (What do you think?)`. Effects (plan fields):
+- **Freeze callout** (6/20 videos, at 45-68% of runtime, on the moment the stakes/antagonist appear): add a freeze segment
+  `{"freeze": <src s>, "dur": 0.6}`, a `{"type": "whoosh", "at": <freeze start - 0.05>}` sfx, and
+  `"callouts": [{"start", "end", "subject": {"points": [[x,y],[x,y],[x,y]]} | "person:<track>" | "people", "label": "*VERY STRICT*",
+  "label_x", "label_y"}]` → white flash in, background dims, subject cut out with a white glow, red italic CAPS label types on,
+  flash out. **Freeze on a SHARP frame** (check source frames first; motion blur ruins the cut-out) and click 3 points
+  (head, torso, legs) for close/blurry people: the `people` model misses dark camo against dark backgrounds.
+  The label names the irony or the stakes in 1-2 words, not what we see.
+- **Spotlight** (dim + glowing ring on something small): `"spotlights": [{"start","end","x","y","r"}]`.
+- **Pointer** (red ▼ that pops in, optional tiny stat label, can follow a track): `"pointers": [{"start","end","x","y"|"follow","label"}]`.
+- Stat callout: a red italic caption (`"color": "red"`) like `*~4,000 lbs recoiling*` just before the action.
+
 ## 1. Placement (measured / calibrated)
 - Captions sit **next to whoever is speaking or acting**, several on screen at once if several people talk.
   Default: just below the subject's head/chest; action/context captions near the top of the band.
