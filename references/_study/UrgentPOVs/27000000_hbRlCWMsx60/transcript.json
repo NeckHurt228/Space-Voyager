@@ -1,0 +1,140 @@
+{
+  "clip": "references/UrgentPOVs/27000000_hbRlCWMsx60.mp4",
+  "duration": 9.5,
+  "model": "whisper-small int8",
+  "has_speech": true,
+  "lines": [
+    {
+      "start": 2.72,
+      "end": 4.34,
+      "text": "He? wasn't meant to throw yet."
+    },
+    {
+      "start": 5.46,
+      "end": 8.74,
+      "text": "Sorry,? I didn't tell? you to throw, did I? No sir,? sorry."
+    }
+  ],
+  "lines_windowed": [
+    {
+      "start": 2.32,
+      "end": 4.26,
+      "text": "He wasn't meant to throw yet."
+    },
+    {
+      "start": 5.06,
+      "end": 8.7,
+      "text": "All? right, I didn't tend? to fucking? throw, did I? No, sir. Sorry."
+    }
+  ],
+  "words": [
+    {
+      "word": "He",
+      "start": 2.72,
+      "end": 3.12,
+      "p": 0.3
+    },
+    {
+      "word": "wasn't",
+      "start": 3.12,
+      "end": 3.52,
+      "p": 0.99
+    },
+    {
+      "word": "meant",
+      "start": 3.52,
+      "end": 3.62,
+      "p": 1.0
+    },
+    {
+      "word": "to",
+      "start": 3.62,
+      "end": 3.8,
+      "p": 1.0
+    },
+    {
+      "word": "throw",
+      "start": 3.8,
+      "end": 4.02,
+      "p": 0.99
+    },
+    {
+      "word": "yet.",
+      "start": 4.02,
+      "end": 4.34,
+      "p": 0.84
+    },
+    {
+      "word": "Sorry,",
+      "start": 5.46,
+      "end": 5.8,
+      "p": 0.26
+    },
+    {
+      "word": "I",
+      "start": 5.94,
+      "end": 5.98,
+      "p": 0.94
+    },
+    {
+      "word": "didn't",
+      "start": 5.98,
+      "end": 6.1,
+      "p": 0.98
+    },
+    {
+      "word": "tell",
+      "start": 6.1,
+      "end": 6.24,
+      "p": 0.43
+    },
+    {
+      "word": "you",
+      "start": 6.24,
+      "end": 6.38,
+      "p": 0.97
+    },
+    {
+      "word": "to",
+      "start": 6.38,
+      "end": 6.48,
+      "p": 0.69
+    },
+    {
+      "word": "throw,",
+      "start": 6.48,
+      "end": 6.94,
+      "p": 0.72
+    },
+    {
+      "word": "did",
+      "start": 7.04,
+      "end": 7.14,
+      "p": 0.96
+    },
+    {
+      "word": "I?",
+      "start": 7.14,
+      "end": 7.3,
+      "p": 0.99
+    },
+    {
+      "word": "No",
+      "start": 7.7,
+      "end": 7.9,
+      "p": 0.95
+    },
+    {
+      "word": "sir,",
+      "start": 7.9,
+      "end": 8.18,
+      "p": 0.42
+    },
+    {
+      "word": "sorry.",
+      "start": 8.38,
+      "end": 8.74,
+      "p": 0.97
+    }
+  ]
+}

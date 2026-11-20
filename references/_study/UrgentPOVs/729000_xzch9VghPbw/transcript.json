@@ -1,0 +1,88 @@
+{
+  "clip": "references/UrgentPOVs/729000_xzch9VghPbw.mp4",
+  "duration": 10.91,
+  "model": "whisper-small int8",
+  "has_speech": true,
+  "lines": [
+    {
+      "start": 2.62,
+      "end": 8.18,
+      "text": "This is what a CRAM, Intercepting and Incoming drone looks like."
+    }
+  ],
+  "lines_windowed": [
+    {
+      "start": 2.22,
+      "end": 6.32,
+      "text": "This is what a CRAM, intercepting and incoming drone looks like."
+    }
+  ],
+  "words": [
+    {
+      "word": "This",
+      "start": 2.62,
+      "end": 3.26,
+      "p": 0.53
+    },
+    {
+      "word": "is",
+      "start": 3.26,
+      "end": 3.46,
+      "p": 0.99
+    },
+    {
+      "word": "what",
+      "start": 3.46,
+      "end": 3.62,
+      "p": 1.0
+    },
+    {
+      "word": "a",
+      "start": 3.62,
+      "end": 3.74,
+      "p": 0.99
+    },
+    {
+      "word": "CRAM,",
+      "start": 3.74,
+      "end": 4.24,
+      "p": 0.75
+    },
+    {
+      "word": "Intercepting",
+      "start": 4.4,
+      "end": 4.98,
+      "p": 0.77
+    },
+    {
+      "word": "and",
+      "start": 4.98,
+      "end": 5.08,
+      "p": 0.65
+    },
+    {
+      "word": "Incoming",
+      "start": 5.08,
+      "end": 5.42,
+      "p": 0.78
+    },
+    {
+      "word": "drone",
+      "start": 5.42,
+      "end": 5.76,
+      "p": 0.57
+    },
+    {
+      "word": "looks",
+      "start": 5.76,
+      "end": 6.06,
+      "p": 0.97
+    },
+    {
+      "word": "like.",
+      "start": 6.06,
+      "end": 8.18,
+      "p": 1.0
+    }
+  ]
+}

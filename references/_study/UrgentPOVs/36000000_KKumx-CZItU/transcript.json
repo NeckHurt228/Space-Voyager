@@ -1,0 +1,100 @@
+{
+  "clip": "references/UrgentPOVs/36000000_KKumx-CZItU.mp4",
+  "duration": 15.72,
+  "model": "whisper-small int8",
+  "has_speech": true,
+  "lines": [
+    {
+      "start": 10.16,
+      "end": 13.66,
+      "text": "And? for the next round, the Chief decided to finger pop it himself."
+    }
+  ],
+  "lines_windowed": [
+    {
+      "start": 10.48,
+      "end": 13.64,
+      "text": "And for the next round the Chief decided to finger pop it himself."
+    }
+  ],
+  "words": [
+    {
+      "word": "And",
+      "start": 10.16,
+      "end": 10.6,
+      "p": 0.42
+    },
+    {
+      "word": "for",
+      "start": 10.6,
+      "end": 11.04,
+      "p": 0.98
+    },
+    {
+      "word": "the",
+      "start": 11.04,
+      "end": 11.14,
+      "p": 1.0
+    },
+    {
+      "word": "next",
+      "start": 11.14,
+      "end": 11.34,
+      "p": 1.0
+    },
+    {
+      "word": "round,",
+      "start": 11.34,
+      "end": 11.64,
+      "p": 1.0
+    },
+    {
+      "word": "the",
+      "start": 11.72,
+      "end": 11.84,
+      "p": 0.98
+    },
+    {
+      "word": "Chief",
+      "start": 11.84,
+      "end": 12.02,
+      "p": 0.67
+    },
+    {
+      "word": "decided",
+      "start": 12.02,
+      "end": 12.54,
+      "p": 0.99
+    },
+    {
+      "word": "to",
+      "start": 12.54,
+      "end": 12.76,
+      "p": 0.98
+    },
+    {
+      "word": "finger",
+      "start": 12.76,
+      "end": 12.98,
+      "p": 0.93
+    },
+    {
+      "word": "pop",
+      "start": 12.98,
+      "end": 13.32,
+      "p": 0.81
+    },
+    {
+      "word": "it",
+      "start": 13.32,
+      "end": 13.46,
+      "p": 0.54
+    },
+    {
+      "word": "himself.",
+      "start": 13.46,
+      "end": 13.66,
+      "p": 0.9
+    }
+  ]
+}

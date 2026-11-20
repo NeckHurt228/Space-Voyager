@@ -1,0 +1,9 @@
+# Transcript: 40000000_0mKOd94KYFg.mp4 (9.5s)   '?' = low confidence, verify
+## Main pass
+   0.00- 1.00  I want you guys!
+   1.76- 3.72  The instructor immediately knew what happened.
+   6.44- 9.20  Get this gun off? my? range. Don't bring it back on the range.
+## Windowed pass (second opinion)
+   0.00- 3.78  I WANT YOU GUYS! The instructor immediately knew what happened.
+   6.70- 9.18  Get? this gun off? my range. Don't bring it back on the run.
+Saved references/_study/UrgentPOVs/40000000_0mKOd94KYFg/transcript.json

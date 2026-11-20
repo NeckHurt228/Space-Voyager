@@ -1,0 +1,359 @@
+{
+  "clip": "references/UrgentPOVs/29000000_R8xibhyoSSY.mp4",
+  "duration": 36.27,
+  "model": "whisper-small int8",
+  "has_speech": true,
+  "lines": [
+    {
+      "start": 3.04,
+      "end": 13.22,
+      "text": "Wow,? big! Watch this US Marine train a South Korean Marine. Like this? Right? back? Very, very, very hard. Pull back. Forward. During this grenade launcher exercise. Yeah,? pull back."
+    },
+    {
+      "start": 14.86,
+      "end": 17.12,
+      "text": "Here? we go. Full? trigger. Boom."
+    },
+    {
+      "start": 29.76,
+      "end": 30.74,
+      "text": "One,?"
+    },
+    {
+      "start": 31.58,
+      "end": 36.24,
+      "text": "two, three,? four,? five, six, five,? six,? five, six,? five, six, five, six, five, six,"
+    }
+  ],
+  "lines_windowed": [
+    {
+      "start": 3.1,
+      "end": 13.22,
+      "text": "Wow!? Big! Watch this US Marine train a South Korean Marine. Like this? Right? back? Very, very, very hard. Pull back. Forward. During this grenade launcher exercise. Yeah,? pull back."
+    },
+    {
+      "start": 14.46,
+      "end": 17.08,
+      "text": "Boom,? here? we go. Boom, trigger. Boom."
+    },
+    {
+      "start": 29.36,
+      "end": 32.84,
+      "text": "Fifteen seconds, okay, ready? Okay. One,? two, 15.?"
+    }
+  ],
+  "words": [
+    {
+      "word": "Wow,",
+      "start": 3.04,
+      "end": 3.52,
+      "p": 0.13
+    },
+    {
+      "word": "big!",
+      "start": 3.78,
+      "end": 4.04,
+      "p": 0.92
+    },
+    {
+      "word": "Watch",
+      "start": 4.28,
+      "end": 4.4,
+      "p": 0.94
+    },
+    {
+      "word": "this",
+      "start": 4.4,
+      "end": 4.72,
+      "p": 0.98
+    },
+    {
+      "word": "US",
+      "start": 4.72,
+      "end": 5.04,
+      "p": 0.69
+    },
+    {
+      "word": "Marine",
+      "start": 5.04,
+      "end": 5.46,
+      "p": 0.89
+    },
+    {
+      "word": "train",
+      "start": 5.46,
+      "end": 5.78,
+      "p": 0.78
+    },
+    {
+      "word": "a",
+      "start": 5.78,
+      "end": 5.94,
+      "p": 0.74
+    },
+    {
+      "word": "South",
+      "start": 5.94,
+      "end": 6.16,
+      "p": 0.96
+    },
+    {
+      "word": "Korean",
+      "start": 6.16,
+      "end": 6.52,
+      "p": 0.99
+    },
+    {
+      "word": "Marine.",
+      "start": 6.52,
+      "end": 6.88,
+      "p": 0.96
+    },
+    {
+      "word": "Like",
+      "start": 6.98,
+      "end": 7.0,
+      "p": 0.69
+    },
+    {
+      "word": "this?",
+      "start": 7.0,
+      "end": 7.18,
+      "p": 1.0
+    },
+    {
+      "word": "Right",
+      "start": 7.5,
+      "end": 7.62,
+      "p": 0.23
+    },
+    {
+      "word": "back?",
+      "start": 7.62,
+      "end": 7.84,
+      "p": 0.87
+    },
+    {
+      "word": "Very,",
+      "start": 8.08,
+      "end": 8.26,
+      "p": 0.98
+    },
+    {
+      "word": "very,",
+      "start": 8.34,
+      "end": 8.44,
+      "p": 0.99
+    },
+    {
+      "word": "very",
+      "start": 8.44,
+      "end": 8.6,
+      "p": 1.0
+    },
+    {
+      "word": "hard.",
+      "start": 8.6,
+      "end": 8.78,
+      "p": 0.99
+    },
+    {
+      "word": "Pull",
+      "start": 9.16,
+      "end": 9.34,
+      "p": 0.92
+    },
+    {
+      "word": "back.",
+      "start": 9.34,
+      "end": 9.54,
+      "p": 0.97
+    },
+    {
+      "word": "Forward.",
+      "start": 10.0,
+      "end": 10.28,
+      "p": 0.85
+    },
+    {
+      "word": "During",
+      "start": 10.56,
+      "end": 10.82,
+      "p": 0.96
+    },
+    {
+      "word": "this",
+      "start": 10.82,
+      "end": 11.04,
+      "p": 0.99
+    },
+    {
+      "word": "grenade",
+      "start": 11.04,
+      "end": 11.34,
+      "p": 0.88
+    },
+    {
+      "word": "launcher",
+      "start": 11.34,
+      "end": 11.9,
+      "p": 0.98
+    },
+    {
+      "word": "exercise.",
+      "start": 11.9,
+      "end": 12.58,
+      "p": 0.89
+    },
+    {
+      "word": "Yeah,",
+      "start": 12.84,
+      "end": 12.84,
+      "p": 0.23
+    },
+    {
+      "word": "pull",
+      "start": 12.88,
+      "end": 13.06,
+      "p": 0.97
+    },
+    {
+      "word": "back.",
+      "start": 13.06,
+      "end": 13.22,
+      "p": 0.97
+    },
+    {
+      "word": "Here",
+      "start": 14.86,
+      "end": 15.34,
+      "p": 0.12
+    },
+    {
+      "word": "we",
+      "start": 15.34,
+      "end": 15.52,
+      "p": 0.82
+    },
+    {
+      "word": "go.",
+      "start": 15.52,
+      "end": 15.68,
+      "p": 1.0
+    },
+    {
+      "word": "Full",
+      "start": 16.06,
+      "end": 16.18,
+      "p": 0.17
+    },
+    {
+      "word": "trigger.",
+      "start": 16.18,
+      "end": 16.38,
+      "p": 0.99
+    },
+    {
+      "word": "Boom.",
+      "start": 16.9,
+      "end": 17.12,
+      "p": 0.82
+    },
+    {
+      "word": "One,",
+      "start": 29.76,
+      "end": 30.74,
+      "p": 0.02
+    },
+    {
+      "word": "two,",
+      "start": 31.58,
+      "end": 32.12,
+      "p": 0.88
+    },
+    {
+      "word": "three,",
+      "start": 32.4,
+      "end": 32.76,
+      "p": 0.08
+    },
+    {
+      "word": "four,",
+      "start": 32.86,
+      "end": 35.8,
+      "p": 0.25
+    },
+    {
+      "word": "five,",
+      "start": 35.8,
+      "end": 36.24,
+      "p": 0.67
+    },
+    {
+      "word": "six,",
+      "start": 36.24,
+      "end": 36.24,
+      "p": 0.69
+    },
+    {
+      "word": "five,",
+      "start": 36.24,
+      "end": 36.24,
+      "p": 0.15
+    },
+    {
+      "word": "six,",
+      "start": 36.24,
+      "end": 36.24,
+      "p": 0.4
+    },
+    {
+      "word": "five,",
+      "start": 36.24,
+      "end": 36.24,
+      "p": 0.59
+    },
+    {
+      "word": "six,",
+      "start": 36.24,
+      "end": 36.24,
+      "p": 0.46
+    },
+    {
+      "word": "five,",
+      "start": 36.24,
+      "end": 36.24,
+      "p": 0.69
+    },
+    {
+      "word": "six,",
+      "start": 36.24,
+      "end": 36.24,
+      "p": 0.58
+    },
+    {
+      "word": "five,",
+      "start": 36.24,
+      "end": 36.24,
+      "p": 0.74
+    },
+    {
+      "word": "six,",
+      "start": 36.24,
+      "end": 36.24,
+      "p": 0.64
+    },
+    {
+      "word": "five,",
+      "start": 36.24,
+      "end": 36.24,
+      "p": 0.77
+    },
+    {
+      "word": "six,",
+      "start": 36.24,
+      "end": 36.24,
+      "p": 0.69
+    }
+  ]
+}

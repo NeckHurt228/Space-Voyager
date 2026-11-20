@@ -1,0 +1,3032 @@
+{
+ "video": "/home/user/Space-Voyager/references/UrgentPOVs/94000000_Sc3n3oXwfQs.mp4",
+ "duration": 9.7,
+ "fps": 30.0,
+ "w": 1080,
+ "h": 1920,
+ "layout": {
+  "band_layout": true,
+  "band_top_pct": 23.1,
+  "band_bottom_pct": 77.5,
+  "band_aspect": 1.03
+ },
+ "effects": {
+  "cuts": [
+   2.167,
+   2.2,
+   6.133,
+   7.0,
+   7.033,
+   7.833,
+   9.067,
+   9.1,
+   9.133,
+   9.167,
+   9.2
+  ],
+  "bw": [],
+  "flashes": [
+   7.0
+  ],
+  "freezes": [],
+  "punch_ins": [
+   {
+    "t": 3.3,
+    "scale": 1.093
+   }
+  ],
+  "push_ins": [
+   {
+    "start": 4.867,
+    "end": 5.667,
+    "total": 1.052
+   },
+   {
+    "start": 5.667,
+    "end": 6.467,
+    "total": 1.091
+   },
+   {
+    "start": 6.933,
+    "end": 7.733,
+    "total": 0.918
+   }
+  ],
+  "shake": [
+   [
+    9.0,
+    9.3
+   ]
+  ]
+ },
+ "captions": [
+  {
+   "id": 0,
+   "kind": "scene",
+   "text": "Shooter.",
+   "start": 0.0,
+   "end": 1.3,
+   "dur": 1.3,
+   "x_pct": 49.8,
+   "y_pct": 48.3,
+   "w_pct": 12.6,
+   "text_h_px": 40,
+   "style": "plain",
+   "box_color": null,
+   "text_color": "yellow",
+   "motion": "static",
+   "moved_pct": 0.4,
+   "scale_anim": true,
+   "bg_moving": false,
+   "masked": false,
+   "samples": [
+    {
+     "t": 0.0,
+     "box": [
+      476,
+      912,
+      128,
+      34
+     ],
+     "text": "Shooter"
+    },
+    {
+     "t": 0.1,
+     "box": [
+      486,
+      918,
+      112,
+      24
+     ],
+     "text": "shooter"
+    },
+    {
+     "t": 0.2,
+     "box": [
+      476,
+      912,
+      122,
+      34
+     ],
+     "text": "Shooter"
+    },
+    {
+     "t": 0.3,
+     "box": [
+      474,
+      912,
+      124,
+      34
+     ],
+     "text": "Shooter"
+    },
+    {
+     "t": 0.4,
+     "box": [
+      472,
+      908,
+      128,
+      40
+     ],
+     "text": "Shooter"
+    },
+    {
+     "t": 0.5,
+     "box": [
+      474,
+      910,
+      126,
+      38
+     ],
+     "text": "Shooter"
+    },
+    {
+     "t": 0.6,
+     "box": [
+      470,
+      908,
+      136,
+      40
+     ],
+     "text": "Shooter."
+    },
+    {
+     "t": 0.7,
+     "box": [
+      472,
+      908,
+      128,
+      40
+     ],
+     "text": "Shooter"
+    },
+    {
+     "t": 0.8,
+     "box": [
+      474,
+      912,
+      124,
+      34
+     ],
+     "text": "Shooter"
+    },
+    {
+     "t": 0.9,
+     "box": [
+      476,
+      912,
+      128,
+      34
+     ],
+     "text": "Shooter"
+    },
+    {
+     "t": 1.0,
+     "box": [
+      476,
+      914,
+      128,
+      28
+     ],
+     "text": "Shooter:"
+    },
+    {
+     "t": 1.1,
+     "box": [
+      472,
+      910,
+      136,
+      36
+     ],
+     "text": "Shooter:"
+    },
+    {
+     "t": 1.2,
+     "box": [
+      472,
+      910,
+      134,
+      36
+     ],
+     "text": "Shooter:"
+    }
+   ]
+  },
+  {
+   "id": 1,
+   "kind": "caption",
+   "text": "*Unloading entire mag*",
+   "start": 0.0,
+   "end": 1.3,
+   "dur": 1.3,
+   "x_pct": 49.8,
+   "y_pct": 51.0,
+   "w_pct": 61.1,
+   "text_h_px": 74,
+   "style": "outline",
+   "box_color": null,
+   "text_color": "white",
+   "motion": "static",
+   "moved_pct": 0.0,
+   "scale_anim": false,
+   "bg_moving": false,
+   "masked": false,
+   "masked_samples": [],
+   "max_covered": 0.0,
+   "samples": [
+    {
+     "t": 0.0,
+     "box": [
+      208,
+      946,
+      660,
+      68
+     ],
+     "text": "*Unloading entire mag*"
+    },
+    {
+     "t": 0.1,
+     "box": [
+      212,
+      946,
+      656,
+      68
+     ],
+     "text": "*Unloading entire mag*"
+    },
+    {
+     "t": 0.2,
+     "box": [
+      210,
+      946,
+      658,
+      68
+     ],
+     "text": "*Unloading entire mag*"
+    },
+    {
+     "t": 0.3,
+     "box": [
+      210,
+      946,
+      658,
+      68
+     ],
+     "text": "*Unloading entire mag*"
+    },
+    {
+     "t": 0.4,
+     "box": [
+      210,
+      946,
+      658,
+      68
+     ],
+     "text": "*Unloading entire mag*"
+    },
+    {
+     "t": 0.5,
+     "box": [
+      210,
+      946,
+      658,
+      68
+     ],
+     "text": "*Unloading entire mag*"
+    },
+    {
+     "t": 0.6,
+     "box": [
+      210,
+      946,
+      658,
+      68
+     ],
+     "text": "*Unloading entire mag*"
+    },
+    {
+     "t": 0.7,
+     "box": [
+      208,
+      942,
+      660,
+      74
+     ],
+     "text": "*Unloading entire mag*"
+    },
+    {
+     "t": 0.8,
+     "box": [
+      208,
+      942,
+      660,
+      74
+     ],
+     "text": "*Unloading entire mag*"
+    },
+    {
+     "t": 0.9,
+     "box": [
+      208,
+      942,
+      660,
+      74
+     ],
+     "text": "*Unloading entire mag*"
+    },
+    {
+     "t": 1.0,
+     "box": [
+      210,
+      946,
+      658,
+      68
+     ],
+     "text": "*Unloading entire mag*"
+    },
+    {
+     "t": 1.1,
+     "box": [
+      212,
+      946,
+      656,
+      68
+     ],
+     "text": "*Unloading entire mag*"
+    },
+    {
+     "t": 1.2,
+     "box": [
+      208,
+      946,
+      660,
+      68
+     ],
+     "text": "*Unloading entire mag*"
+    }
+   ]
+  },
+  {
+   "id": 2,
+   "kind": "scene",
+   "text": "*Fires* x7",
+   "start": 1.3,
+   "end": 3.3,
+   "dur": 2.0,
+   "x_pct": 48.5,
+   "y_pct": 34.6,
+   "w_pct": 27.4,
+   "text_h_px": 60,
+   "style": "plain",
+   "box_color": null,
+   "text_color": "white",
+   "motion": "tracked",
+   "moved_pct": 1.6,
+   "flow_agree": 0.93,
+   "scale_anim": false,
+   "masked": false,
+   "samples": [
+    {
+     "t": 1.3,
+     "box": [
+      408,
+      640,
+      268,
+      54
+     ],
+     "text": "*Fires*x7"
+    },
+    {
+     "t": 1.4,
+     "box": [
+      410,
+      634,
+      268,
+      60
+     ],
+     "text": "*Fires* x7"
+    },
+    {
+     "t": 1.5,
+     "box": [
+      414,
+      634,
+      262,
+      60
+     ],
+     "text": "*Fires* x8"
+    },
+    {
+     "t": 1.6,
+     "box": [
+      402,
+      632,
+      264,
+      60
+     ],
+     "text": "*Fires* x8"
+    },
+    {
+     "t": 1.7,
+     "box": [
+      396,
+      634,
+      264,
+      60
+     ],
+     "text": "*Fires* x9"
+    },
+    {
+     "t": 1.8,
+     "box": [
+      398,
+      636,
+      264,
+      60
+     ],
+     "text": "*Fires* x9"
+    },
+    {
+     "t": 1.9,
+     "box": [
+      396,
+      634,
+      264,
+      60
+     ],
+     "text": "*Fires* x9"
+    },
+    {
+     "t": 2.0,
+     "box": [
+      376,
+      634,
+      296,
+      60
+     ],
+     "text": "*Fires* \u00d710"
+    },
+    {
+     "t": 2.1,
+     "box": [
+      382,
+      632,
+      294,
+      60
+     ],
+     "text": "*Fires* \u00d711"
+    },
+    {
+     "t": 2.2,
+     "box": [
+      400,
+      650,
+      202,
+      60
+     ],
+     "text": "*Stops*"
+    },
+    {
+     "t": 2.3,
+     "box": [
+      398,
+      650,
+      204,
+      64
+     ],
+     "text": "*Stops*"
+    },
+    {
+     "t": 2.4,
+     "box": [
+      398,
+      648,
+      202,
+      66
+     ],
+     "text": "*Stops*"
+    },
+    {
+     "t": 2.5,
+     "box": [
+      398,
+      644,
+      202,
+      66
+     ],
+     "text": "*Stops*"
+    },
+    {
+     "t": 2.6,
+     "box": [
+      398,
+      644,
+      202,
+      64
+     ],
+     "text": "*Stops*"
+    },
+    {
+     "t": 2.7,
+     "box": [
+      402,
+      646,
+      200,
+      60
+     ],
+     "text": "*Stops*"
+    },
+    {
+     "t": 2.8,
+     "box": [
+      406,
+      646,
+      200,
+      60
+     ],
+     "text": "*Stops*"
+    },
+    {
+     "t": 2.9,
+     "box": [
+      406,
+      646,
+      202,
+      60
+     ],
+     "text": "*Stops*"
+    },
+    {
+     "t": 3.0,
+     "box": [
+      404,
+      642,
+      200,
+      64
+     ],
+     "text": "*Stops*"
+    },
+    {
+     "t": 3.1,
+     "box": [
+      402,
+      644,
+      196,
+      62
+     ],
+     "text": "*Stops*"
+    },
+    {
+     "t": 3.2,
+     "box": [
+      392,
+      640,
+      202,
+      66
+     ],
+     "text": "*Stops*"
+    }
+   ]
+  },
+  {
+   "id": 3,
+   "kind": "caption",
+   "text": "Shooter:",
+   "start": 1.4,
+   "end": 2.2,
+   "dur": 0.8,
+   "x_pct": 48.8,
+   "y_pct": 31.9,
+   "w_pct": 14.6,
+   "text_h_px": 46,
+   "style": "outline",
+   "box_color": "black",
+   "text_color": "yellow",
+   "motion": "tracked",
+   "moved_pct": 1.6,
+   "flow_agree": 1.0,
+   "scale_anim": false,
+   "masked": false,
+   "samples": [
+    {
+     "t": 1.4,
+     "box": [
+      468,
+      598,
+      152,
+      36
+     ],
+     "text": "Shooter:"
+    },
+    {
+     "t": 1.5,
+     "box": [
+      468,
+      592,
+      156,
+      44
+     ],
+     "text": "Shooter:"
+    },
+    {
+     "t": 1.6,
+     "box": [
+      458,
+      592,
+      154,
+      40
+     ],
+     "text": "Shooter:"
+    },
+    {
+     "t": 1.7,
+     "box": [
+      454,
+      594,
+      150,
+      40
+     ],
+     "text": "Shooter:"
+    },
+    {
+     "t": 1.8,
+     "box": [
+      454,
+      596,
+      154,
+      42
+     ],
+     "text": "Shooter:"
+    },
+    {
+     "t": 1.9,
+     "box": [
+      450,
+      592,
+      156,
+      44
+     ],
+     "text": "Shooter:"
+    },
+    {
+     "t": 2.0,
+     "box": [
+      448,
+      592,
+      156,
+      42
+     ],
+     "text": "Shooter:"
+    },
+    {
+     "t": 2.1,
+     "box": [
+      448,
+      590,
+      158,
+      46
+     ],
+     "text": "Shooter:"
+    }
+   ]
+  },
+  {
+   "id": 4,
+   "kind": "scene",
+   "text": "Shooter:",
+   "start": 2.2,
+   "end": 3.3,
+   "dur": 1.1,
+   "x_pct": 46.1,
+   "y_pct": 33.1,
+   "w_pct": 13.7,
+   "text_h_px": 46,
+   "style": "plain",
+   "box_color": null,
+   "text_color": "yellow",
+   "motion": "static",
+   "moved_pct": 1.0,
+   "scale_anim": true,
+   "bg_moving": false,
+   "masked": false,
+   "samples": [
+    {
+     "t": 2.2,
+     "box": [
+      428,
+      614,
+      142,
+      38
+     ],
+     "text": "Shooter:"
+    },
+    {
+     "t": 2.3,
+     "box": [
+      426,
+      612,
+      146,
+      46
+     ],
+     "text": "Shooter:"
+    },
+    {
+     "t": 2.4,
+     "box": [
+      424,
+      612,
+      148,
+      46
+     ],
+     "text": "Shooter:"
+    },
+    {
+     "t": 2.5,
+     "box": [
+      426,
+      612,
+      138,
+      38
+     ],
+     "text": "Shooter"
+    },
+    {
+     "t": 2.6,
+     "box": [
+      428,
+      610,
+      142,
+      38
+     ],
+     "text": "Shooter:"
+    },
+    {
+     "t": 2.7,
+     "box": [
+      430,
+      612,
+      142,
+      34
+     ],
+     "text": "Shooter:"
+    },
+    {
+     "t": 2.8,
+     "box": [
+      432,
+      610,
+      144,
+      40
+     ],
+     "text": "Shooter:"
+    },
+    {
+     "t": 2.9,
+     "box": [
+      434,
+      608,
+      142,
+      40
+     ],
+     "text": "Shooter:"
+    },
+    {
+     "t": 3.0,
+     "box": [
+      432,
+      608,
+      142,
+      40
+     ],
+     "text": "Shooter:"
+    },
+    {
+     "t": 3.1,
+     "box": [
+      430,
+      610,
+      134,
+      36
+     ],
+     "text": "Shooter"
+    },
+    {
+     "t": 3.2,
+     "box": [
+      424,
+      612,
+      124,
+      30
+     ],
+     "text": "Shooter"
+    }
+   ]
+  },
+  {
+   "id": 5,
+   "kind": "scene",
+   "text": "Older Brother:",
+   "start": 2.7,
+   "end": 5.5,
+   "dur": 2.8,
+   "x_pct": 49.2,
+   "y_pct": 48.2,
+   "w_pct": 21.7,
+   "text_h_px": 56,
+   "style": "outline",
+   "box_color": "black",
+   "text_color": "blue",
+   "motion": "static",
+   "moved_pct": 1.0,
+   "scale_anim": true,
+   "bg_moving": false,
+   "masked": false,
+   "samples": [
+    {
+     "t": 2.7,
+     "box": [
+      426,
+      904,
+      214,
+      46
+     ],
+     "text": "Older Brother"
+    },
+    {
+     "t": 2.8,
+     "box": [
+      428,
+      902,
+      202,
+      50
+     ],
+     "text": "Older Brothe"
+    },
+    {
+     "t": 2.9,
+     "box": [
+      426,
+      902,
+      200,
+      50
+     ],
+     "text": "Ofder Brothe"
+    },
+    {
+     "t": 3.0,
+     "box": [
+      428,
+      904,
+      198,
+      44
+     ],
+     "text": "Older Brothe"
+    },
+    {
+     "t": 3.1,
+     "box": [
+      426,
+      904,
+      200,
+      46
+     ],
+     "text": "Oider Brothe"
+    },
+    {
+     "t": 3.2,
+     "box": [
+      426,
+      906,
+      196,
+      42
+     ],
+     "text": "Older Brothe"
+    },
+    {
+     "t": 3.3,
+     "box": [
+      414,
+      898,
+      234,
+      56
+     ],
+     "text": "Older Brother"
+    },
+    {
+     "t": 3.4,
+     "box": [
+      420,
+      904,
+      232,
+      46
+     ],
+     "text": "OlderBrother"
+    },
+    {
+     "t": 3.5,
+     "box": [
+      424,
+      902,
+      216,
+      48
+     ],
+     "text": "Older Brother"
+    },
+    {
+     "t": 3.6,
+     "box": [
+      428,
+      908,
+      216,
+      40
+     ],
+     "text": "OlderBrother"
+    },
+    {
+     "t": 3.7,
+     "box": [
+      428,
+      908,
+      216,
+      40
+     ],
+     "text": "Older Brother"
+    },
+    {
+     "t": 3.8,
+     "box": [
+      428,
+      908,
+      216,
+      40
+     ],
+     "text": "Older Brother"
+    },
+    {
+     "t": 3.9,
+     "box": [
+      428,
+      908,
+      220,
+      38
+     ],
+     "text": "Older Brother"
+    },
+    {
+     "t": 4.0,
+     "box": [
+      428,
+      908,
+      216,
+      40
+     ],
+     "text": "Older Brother"
+    },
+    {
+     "t": 4.1,
+     "box": [
+      428,
+      908,
+      220,
+      38
+     ],
+     "text": "Older Brother"
+    },
+    {
+     "t": 4.2,
+     "box": [
+      428,
+      908,
+      220,
+      38
+     ],
+     "text": "Older Brother"
+    },
+    {
+     "t": 4.3,
+     "box": [
+      428,
+      908,
+      224,
+      38
+     ],
+     "text": "Older Brother:"
+    },
+    {
+     "t": 4.4,
+     "box": [
+      476,
+      914,
+      134,
+      30
+     ],
+     "text": "Narrator:"
+    },
+    {
+     "t": 4.5,
+     "box": [
+      470,
+      912,
+      134,
+      34
+     ],
+     "text": "Narrator"
+    },
+    {
+     "t": 4.6,
+     "box": [
+      466,
+      912,
+      144,
+      34
+     ],
+     "text": "Narrator."
+    },
+    {
+     "t": 4.7,
+     "box": [
+      464,
+      910,
+      140,
+      38
+     ],
+     "text": "Narrator"
+    },
+    {
+     "t": 4.8,
+     "box": [
+      466,
+      912,
+      138,
+      34
+     ],
+     "text": "Narrator"
+    },
+    {
+     "t": 4.9,
+     "box": [
+      512,
+      914,
+      94,
+      32
+     ],
+     "text": "rrator"
+    },
+    {
+     "t": 5.0,
+     "box": [
+      510,
+      916,
+      94,
+      30
+     ],
+     "text": "rrator"
+    },
+    {
+     "t": 5.1,
+     "box": [
+      502,
+      914,
+      100,
+      32
+     ],
+     "text": "arrator"
+    },
+    {
+     "t": 5.2,
+     "box": [
+      514,
+      914,
+      88,
+      32
+     ],
+     "text": "rrator"
+    },
+    {
+     "t": 5.3,
+     "box": [
+      514,
+      914,
+      88,
+      32
+     ],
+     "text": "rrator"
+    },
+    {
+     "t": 5.4,
+     "box": [
+      490,
+      914,
+      114,
+      32
+     ],
+     "text": "larrator"
+    }
+   ]
+  },
+  {
+   "id": 6,
+   "kind": "scene",
+   "text": "iHO",
+   "start": 2.7,
+   "end": 3.3,
+   "dur": 0.6,
+   "x_pct": 48.8,
+   "y_pct": 51.0,
+   "w_pct": 13.1,
+   "text_h_px": 62,
+   "style": "plain",
+   "box_color": null,
+   "text_color": "white",
+   "motion": "static",
+   "moved_pct": 0.0,
+   "scale_anim": false,
+   "bg_moving": false,
+   "masked": false,
+   "samples": [
+    {
+     "t": 2.7,
+     "box": [
+      466,
+      950,
+      132,
+      56
+     ],
+     "text": "iHO"
+    },
+    {
+     "t": 2.8,
+     "box": [
+      458,
+      950,
+      140,
+      56
+     ],
+     "text": "iHo"
+    },
+    {
+     "t": 2.9,
+     "box": [
+      458,
+      950,
+      140,
+      56
+     ],
+     "text": "iHO"
+    },
+    {
+     "t": 3.0,
+     "box": [
+      456,
+      948,
+      142,
+      62
+     ],
+     "text": "iHo"
+    },
+    {
+     "t": 3.1,
+     "box": [
+      458,
+      948,
+      140,
+      62
+     ],
+     "text": "iHO"
+    },
+    {
+     "t": 3.2,
+     "box": [
+      452,
+      950,
+      146,
+      56
+     ],
+     "text": "iHO"
+    }
+   ]
+  },
+  {
+   "id": 7,
+   "kind": "caption",
+   "text": "*IMPRESSED*",
+   "start": 3.3,
+   "end": 4.4,
+   "dur": 1.1,
+   "x_pct": 49.8,
+   "y_pct": 50.8,
+   "w_pct": 35.6,
+   "text_h_px": 60,
+   "style": "outline",
+   "box_color": null,
+   "text_color": "white",
+   "motion": "static",
+   "moved_pct": 0.0,
+   "scale_anim": false,
+   "bg_moving": false,
+   "masked": false,
+   "masked_samples": [],
+   "max_covered": 0.0,
+   "samples": [
+    {
+     "t": 3.3,
+     "box": [
+      346,
+      946,
+      384,
+      60
+     ],
+     "text": "*IMPRESSED*"
+    },
+    {
+     "t": 3.4,
+     "box": [
+      346,
+      946,
+      384,
+      60
+     ],
+     "text": "*IMPRESSED*"
+    },
+    {
+     "t": 3.5,
+     "box": [
+      348,
+      946,
+      382,
+      58
+     ],
+     "text": "*IMPRESSED*"
+    },
+    {
+     "t": 3.6,
+     "box": [
+      348,
+      946,
+      382,
+      58
+     ],
+     "text": "*IMPRESSED*"
+    },
+    {
+     "t": 3.7,
+     "box": [
+      348,
+      946,
+      382,
+      60
+     ],
+     "text": "*IMPRESSED*"
+    },
+    {
+     "t": 3.8,
+     "box": [
+      348,
+      946,
+      382,
+      60
+     ],
+     "text": "*IMPRESSED*"
+    },
+    {
+     "t": 3.9,
+     "box": [
+      348,
+      946,
+      382,
+      60
+     ],
+     "text": "*IMPRESSED*"
+    },
+    {
+     "t": 4.0,
+     "box": [
+      350,
+      950,
+      378,
+      54
+     ],
+     "text": "*IMPRESSED*"
+    },
+    {
+     "t": 4.1,
+     "box": [
+      350,
+      950,
+      378,
+      54
+     ],
+     "text": "*IMPRESSED*"
+    },
+    {
+     "t": 4.2,
+     "box": [
+      350,
+      950,
+      378,
+      54
+     ],
+     "text": "*IMPRESSED*"
+    },
+    {
+     "t": 4.3,
+     "box": [
+      350,
+      950,
+      378,
+      54
+     ],
+     "text": "*IMPRESSED*"
+    }
+   ]
+  },
+  {
+   "id": 8,
+   "kind": "caption",
+   "text": "Range Owner:",
+   "start": 4.1,
+   "end": 4.7,
+   "dur": 0.6,
+   "x_pct": 49.9,
+   "y_pct": 31.9,
+   "w_pct": 21.7,
+   "text_h_px": 46,
+   "style": "plain",
+   "box_color": null,
+   "text_color": "green",
+   "motion": "static",
+   "moved_pct": 0.0,
+   "scale_anim": true,
+   "bg_moving": true,
+   "masked": true,
+   "masked_samples": [
+    {
+     "t": 4.6,
+     "covered": 0.18,
+     "side": "right",
+     "from_below": false
+    }
+   ],
+   "max_covered": 0.18,
+   "samples": [
+    {
+     "t": 4.1,
+     "box": [
+      422,
+      590,
+      232,
+      46
+     ],
+     "text": "Range Owner:"
+    },
+    {
+     "t": 4.2,
+     "box": [
+      422,
+      590,
+      234,
+      46
+     ],
+     "text": "Range Owner:"
+    },
+    {
+     "t": 4.3,
+     "box": [
+      422,
+      590,
+      234,
+      46
+     ],
+     "text": "Range Owner:"
+    },
+    {
+     "t": 4.4,
+     "box": [
+      422,
+      590,
+      234,
+      46
+     ],
+     "text": "Range Owner."
+    },
+    {
+     "t": 4.5,
+     "box": [
+      422,
+      590,
+      234,
+      46
+     ],
+     "text": "Range Owner."
+    },
+    {
+     "t": 4.6,
+     "box": [
+      438,
+      598,
+      216,
+      32
+     ],
+     "text": "RangeOwner:"
+    }
+   ],
+   "is_tag_for": 9
+  },
+  {
+   "id": 9,
+   "kind": "caption",
+   "text": "HEY!",
+   "start": 4.1,
+   "end": 4.7,
+   "dur": 0.6,
+   "x_pct": 50.1,
+   "y_pct": 34.5,
+   "w_pct": 13.1,
+   "text_h_px": 62,
+   "style": "plain",
+   "box_color": null,
+   "text_color": "white",
+   "motion": "static",
+   "moved_pct": 0.3,
+   "scale_anim": false,
+   "bg_moving": true,
+   "masked": true,
+   "masked_samples": [
+    {
+     "t": 4.6,
+     "covered": 0.45,
+     "side": "right",
+     "from_below": false
+    }
+   ],
+   "max_covered": 0.45,
+   "samples": [
+    {
+     "t": 4.1,
+     "box": [
+      472,
+      636,
+      142,
+      60
+     ],
+     "text": "HEY!"
+    },
+    {
+     "t": 4.2,
+     "box": [
+      472,
+      636,
+      140,
+      60
+     ],
+     "text": "HEY!"
+    },
+    {
+     "t": 4.3,
+     "box": [
+      470,
+      632,
+      142,
+      62
+     ],
+     "text": "HEY!"
+    },
+    {
+     "t": 4.4,
+     "box": [
+      470,
+      632,
+      142,
+      62
+     ],
+     "text": "HEY!"
+    },
+    {
+     "t": 4.5,
+     "box": [
+      470,
+      632,
+      140,
+      62
+     ],
+     "text": "HEY!"
+    },
+    {
+     "t": 4.6,
+     "box": [
+      468,
+      632,
+      142,
+      62
+     ],
+     "text": "HEY!"
+    }
+   ],
+   "tag": "Range Owner:"
+  },
+  {
+   "id": 10,
+   "kind": "caption",
+   "text": "But-",
+   "start": 4.4,
+   "end": 4.7,
+   "dur": 0.3,
+   "x_pct": 49.4,
+   "y_pct": 51.0,
+   "w_pct": 12.6,
+   "text_h_px": 74,
+   "style": "outline",
+   "box_color": null,
+   "text_color": "white",
+   "motion": "static",
+   "moved_pct": 0.0,
+   "scale_anim": false,
+   "bg_moving": true,
+   "masked": true,
+   "masked_samples": [
+    {
+     "t": 4.5,
+     "covered": 0.13,
+     "side": "left",
+     "from_below": false
+    }
+   ],
+   "max_covered": 0.13,
+   "samples": [
+    {
+     "t": 4.4,
+     "box": [
+      466,
+      942,
+      136,
+      74
+     ],
+     "text": "But-"
+    },
+    {
+     "t": 4.5,
+     "box": [
+      474,
+      946,
+      122,
+      66
+     ],
+     "text": "But-"
+    },
+    {
+     "t": 4.6,
+     "box": [
+      474,
+      946,
+      126,
+      66
+     ],
+     "text": "But-"
+    }
+   ]
+  },
+  {
+   "id": 11,
+   "kind": "caption",
+   "text": "little did",
+   "start": 4.7,
+   "end": 5.5,
+   "dur": 0.8,
+   "x_pct": 49.5,
+   "y_pct": 51.0,
+   "w_pct": 24.3,
+   "text_h_px": 60,
+   "style": "outline",
+   "box_color": null,
+   "text_color": "white",
+   "motion": "static",
+   "moved_pct": 0.3,
+   "scale_anim": false,
+   "bg_moving": false,
+   "masked": false,
+   "masked_samples": [],
+   "max_covered": 0.0,
+   "samples": [
+    {
+     "t": 4.7,
+     "box": [
+      432,
+      950,
+      220,
+      56
+     ],
+     "text": "little did"
+    },
+    {
+     "t": 4.8,
+     "box": [
+      432,
+      950,
+      220,
+      56
+     ],
+     "text": "little did"
+    },
+    {
+     "t": 4.9,
+     "box": [
+      428,
+      950,
+      222,
+      56
+     ],
+     "text": "little did"
+    },
+    {
+     "t": 5.0,
+     "box": [
+      428,
+      950,
+      224,
+      56
+     ],
+     "text": "little did"
+    },
+    {
+     "t": 5.1,
+     "box": [
+      428,
+      950,
+      224,
+      56
+     ],
+     "text": "little did"
+    },
+    {
+     "t": 5.2,
+     "box": [
+      410,
+      950,
+      244,
+      58
+     ],
+     "text": "he know."
+    },
+    {
+     "t": 5.3,
+     "box": [
+      410,
+      950,
+      244,
+      58
+     ],
+     "text": "he know."
+    },
+    {
+     "t": 5.4,
+     "box": [
+      404,
+      950,
+      262,
+      60
+     ],
+     "text": "he know.."
+    }
+   ]
+  },
+  {
+   "id": 12,
+   "kind": "scene",
+   "text": "Shooter:",
+   "start": 4.8,
+   "end": 5.6,
+   "dur": 0.8,
+   "x_pct": 45.5,
+   "y_pct": 30.9,
+   "w_pct": 14.3,
+   "text_h_px": 48,
+   "style": "plain",
+   "box_color": null,
+   "text_color": "yellow",
+   "motion": "tracked",
+   "moved_pct": 4.6,
+   "flow_agree": 1.0,
+   "scale_anim": false,
+   "masked": false,
+   "samples": [
+    {
+     "t": 4.8,
+     "box": [
+      436,
+      570,
+      142,
+      40
+     ],
+     "text": "Shooter"
+    },
+    {
+     "t": 4.9,
+     "box": [
+      426,
+      568,
+      152,
+      46
+     ],
+     "text": "Shooter:"
+    },
+    {
+     "t": 5.0,
+     "box": [
+      414,
+      572,
+      154,
+      44
+     ],
+     "text": "Shooter:"
+    },
+    {
+     "t": 5.1,
+     "box": [
+      414,
+      570,
+      154,
+      48
+     ],
+     "text": "Shooter:"
+    },
+    {
+     "t": 5.2,
+     "box": [
+      416,
+      572,
+      152,
+      44
+     ],
+     "text": "Shooter:"
+    },
+    {
+     "t": 5.3,
+     "box": [
+      418,
+      570,
+      154,
+      46
+     ],
+     "text": "Shooter:"
+    },
+    {
+     "t": 5.4,
+     "box": [
+      408,
+      566,
+      154,
+      48
+     ],
+     "text": "Shooter:"
+    },
+    {
+     "t": 5.5,
+     "box": [
+      466,
+      572,
+      154,
+      44
+     ],
+     "text": "Shooter:"
+    }
+   ]
+  },
+  {
+   "id": 13,
+   "kind": "scene",
+   "text": "*Broke the rules*",
+   "start": 4.8,
+   "end": 6.2,
+   "dur": 1.4,
+   "x_pct": 70.2,
+   "y_pct": 33.0,
+   "w_pct": 42.2,
+   "text_h_px": 62,
+   "style": "plain",
+   "box_color": "white",
+   "text_color": "white",
+   "motion": "tracked",
+   "moved_pct": 30.5,
+   "flow_agree": 0.6,
+   "scale_anim": true,
+   "masked": false,
+   "samples": [
+    {
+     "t": 4.8,
+     "box": [
+      294,
+      612,
+      438,
+      54
+     ],
+     "text": "*Broke the rules*"
+    },
+    {
+     "t": 4.9,
+     "box": [
+      286,
+      614,
+      438,
+      54
+     ],
+     "text": "*Broke the rules*"
+    },
+    {
+     "t": 5.0,
+     "box": [
+      276,
+      614,
+      438,
+      54
+     ],
+     "text": "*Broke the rules*"
+    },
+    {
+     "t": 5.1,
+     "box": [
+      274,
+      614,
+      440,
+      54
+     ],
+     "text": "*Broke the rules*"
+    },
+    {
+     "t": 5.2,
+     "box": [
+      274,
+      614,
+      440,
+      54
+     ],
+     "text": "*Broke the rules*"
+    },
+    {
+     "t": 5.3,
+     "box": [
+      274,
+      612,
+      442,
+      58
+     ],
+     "text": "*Broke the rules*"
+    },
+    {
+     "t": 5.4,
+     "box": [
+      266,
+      608,
+      442,
+      62
+     ],
+     "text": "*Broke the rules*"
+    },
+    {
+     "t": 5.5,
+     "box": [
+      328,
+      616,
+      438,
+      54
+     ],
+     "text": "*Broke the rules*"
+    },
+    {
+     "t": 5.6,
+     "box": [
+      432,
+      612,
+      440,
+      54
+     ],
+     "text": "*Broke the rules*"
+    },
+    {
+     "t": 5.7,
+     "box": [
+      530,
+      602,
+      456,
+      62
+     ],
+     "text": "*Broke the rules*"
+    },
+    {
+     "t": 5.8,
+     "box": [
+      636,
+      596,
+      440,
+      58
+     ],
+     "text": "*Broke the rules*"
+    },
+    {
+     "t": 5.9,
+     "box": [
+      738,
+      584,
+      340,
+      64
+     ],
+     "text": "*Broke the ru"
+    },
+    {
+     "t": 6.0,
+     "box": [
+      840,
+      574,
+      238,
+      66
+     ],
+     "text": "*Broke t"
+    },
+    {
+     "t": 6.1,
+     "box": [
+      940,
+      560,
+      138,
+      74
+     ],
+     "text": "*Bro"
+    }
+   ]
+  },
+  {
+   "id": 14,
+   "kind": "scene",
+   "text": "Shooter:",
+   "start": 5.6,
+   "end": 5.7,
+   "dur": 0.1,
+   "x_pct": 60.1,
+   "y_pct": 30.7,
+   "w_pct": 14.3,
+   "text_h_px": 46,
+   "style": "plain",
+   "box_color": null,
+   "text_color": "yellow",
+   "motion": "static",
+   "moved_pct": 0.0,
+   "masked": false,
+   "samples": [
+    {
+     "t": 5.6,
+     "box": [
+      572,
+      566,
+      154,
+      46
+     ],
+     "text": "Shooter:"
+    }
+   ]
+  },
+  {
+   "id": 15,
+   "kind": "scene",
+   "text": "Shooter:",
+   "start": 5.7,
+   "end": 5.8,
+   "dur": 0.1,
+   "x_pct": 70.1,
+   "y_pct": 30.4,
+   "w_pct": 14.6,
+   "text_h_px": 48,
+   "style": "plain",
+   "box_color": null,
+   "text_color": "yellow",
+   "motion": "static",
+   "moved_pct": 0.0,
+   "masked": false,
+   "samples": [
+    {
+     "t": 5.7,
+     "box": [
+      678,
+      560,
+      158,
+      48
+     ],
+     "text": "Shooter:"
+    }
+   ]
+  },
+  {
+   "id": 16,
+   "kind": "scene",
+   "text": "Shooter:",
+   "start": 5.8,
+   "end": 5.9,
+   "dur": 0.1,
+   "x_pct": 79.9,
+   "y_pct": 29.8,
+   "w_pct": 14.6,
+   "text_h_px": 44,
+   "style": "plain",
+   "box_color": null,
+   "text_color": "yellow",
+   "motion": "static",
+   "moved_pct": 0.0,
+   "masked": false,
+   "samples": [
+    {
+     "t": 5.8,
+     "box": [
+      784,
+      550,
+      158,
+      44
+     ],
+     "text": "Shooter:"
+    }
+   ]
+  },
+  {
+   "id": 17,
+   "kind": "scene",
+   "text": "Shooter:",
+   "start": 5.9,
+   "end": 6.0,
+   "dur": 0.1,
+   "x_pct": 89.6,
+   "y_pct": 29.3,
+   "w_pct": 14.8,
+   "text_h_px": 50,
+   "style": "plain",
+   "box_color": null,
+   "text_color": "yellow",
+   "motion": "static",
+   "moved_pct": 0.0,
+   "masked": false,
+   "samples": [
+    {
+     "t": 5.9,
+     "box": [
+      888,
+      538,
+      160,
+      50
+     ],
+     "text": "Shooter:"
+    }
+   ]
+  },
+  {
+   "id": 18,
+   "kind": "scene",
+   "text": "Sho",
+   "start": 6.0,
+   "end": 6.1,
+   "dur": 0.1,
+   "x_pct": 95.8,
+   "y_pct": 28.8,
+   "w_pct": 8.0,
+   "text_h_px": 50,
+   "style": "plain",
+   "box_color": null,
+   "text_color": "yellow",
+   "motion": "static",
+   "moved_pct": 0.0,
+   "masked": false,
+   "samples": [
+    {
+     "t": 6.0,
+     "box": [
+      992,
+      528,
+      86,
+      50
+     ],
+     "text": "Sho"
+    }
+   ]
+  },
+  {
+   "id": 19,
+   "kind": "caption",
+   "text": "*VERY STRICT*",
+   "start": 6.2,
+   "end": 7.0,
+   "dur": 0.8,
+   "x_pct": 35.4,
+   "y_pct": 25.5,
+   "w_pct": 57.0,
+   "text_h_px": 86,
+   "style": "box",
+   "box_color": "black",
+   "text_color": "red",
+   "motion": "static",
+   "moved_pct": 0.3,
+   "scale_anim": false,
+   "bg_moving": false,
+   "masked": true,
+   "masked_samples": [
+    {
+     "t": 6.3,
+     "covered": 0.33,
+     "side": "?",
+     "evidence": "box edge cut"
+    },
+    {
+     "t": 6.4,
+     "covered": 0.44,
+     "side": "?",
+     "evidence": "box edge cut"
+    },
+    {
+     "t": 6.5,
+     "covered": 0.67,
+     "side": "?",
+     "evidence": "box edge cut"
+    },
+    {
+     "t": 6.6,
+     "covered": 0.66,
+     "side": "?",
+     "evidence": "box edge cut"
+    },
+    {
+     "t": 6.7,
+     "covered": 0.17,
+     "side": "?",
+     "evidence": "box edge cut"
+    },
+    {
+     "t": 6.8,
+     "covered": 0.17,
+     "side": "?",
+     "evidence": "box edge cut"
+    },
+    {
+     "t": 6.9,
+     "covered": 0.18,
+     "side": "?",
+     "evidence": "box edge cut"
+    }
+   ],
+   "max_covered": 0.67,
+   "samples": [
+    {
+     "t": 6.2,
+     "box": [
+      64,
+      446,
+      132,
+      94
+     ],
+     "text": "*V"
+    },
+    {
+     "t": 6.3,
+     "box": [
+      72,
+      452,
+      268,
+      90
+     ],
+     "text": "*VERY"
+    },
+    {
+     "t": 6.4,
+     "box": [
+      76,
+      452,
+      382,
+      88
+     ],
+     "text": "*VERY ST"
+    },
+    {
+     "t": 6.5,
+     "box": [
+      74,
+      452,
+      568,
+      86
+     ],
+     "text": "*VERY STRICT"
+    },
+    {
+     "t": 6.6,
+     "box": [
+      74,
+      450,
+      610,
+      84
+     ],
+     "text": "*VERY STRICT*"
+    },
+    {
+     "t": 6.7,
+     "box": [
+      74,
+      448,
+      614,
+      86
+     ],
+     "text": "*VERY STRICT*"
+    },
+    {
+     "t": 6.8,
+     "box": [
+      74,
+      446,
+      614,
+      86
+     ],
+     "text": "*VERY STRICT*"
+    },
+    {
+     "t": 6.9,
+     "box": [
+      74,
+      446,
+      616,
+      86
+     ],
+     "text": "*VERY STRICT*"
+    }
+   ]
+  },
+  {
+   "id": 20,
+   "kind": "scene",
+   "text": "Range Owner:",
+   "start": 7.1,
+   "end": 7.9,
+   "dur": 0.8,
+   "x_pct": 49.5,
+   "y_pct": 48.4,
+   "w_pct": 20.9,
+   "text_h_px": 48,
+   "style": "plain",
+   "box_color": null,
+   "text_color": "green",
+   "motion": "static",
+   "moved_pct": 0.0,
+   "scale_anim": false,
+   "bg_moving": false,
+   "masked": false,
+   "samples": [
+    {
+     "t": 7.1,
+     "box": [
+      426,
+      906,
+      218,
+      48
+     ],
+     "text": "Range Owner"
+    },
+    {
+     "t": 7.2,
+     "box": [
+      426,
+      908,
+      224,
+      40
+     ],
+     "text": "Range Owner"
+    },
+    {
+     "t": 7.3,
+     "box": [
+      430,
+      912,
+      210,
+      34
+     ],
+     "text": "Range Owner"
+    },
+    {
+     "t": 7.4,
+     "box": [
+      422,
+      906,
+      226,
+      48
+     ],
+     "text": "Range Owner:"
+    },
+    {
+     "t": 7.5,
+     "box": [
+      426,
+      908,
+      222,
+      44
+     ],
+     "text": "Range Owner:"
+    },
+    {
+     "t": 7.6,
+     "box": [
+      426,
+      906,
+      218,
+      48
+     ],
+     "text": "RangeOwner"
+    },
+    {
+     "t": 7.7,
+     "box": [
+      426,
+      910,
+      216,
+      38
+     ],
+     "text": "Range Owner"
+    },
+    {
+     "t": 7.8,
+     "box": [
+      426,
+      910,
+      214,
+      38
+     ],
+     "text": "Range Owner"
+    }
+   ]
+  },
+  {
+   "id": 21,
+   "kind": "scene",
+   "text": "no rapid fire",
+   "start": 7.1,
+   "end": 7.9,
+   "dur": 0.8,
+   "x_pct": 49.8,
+   "y_pct": 51.0,
+   "w_pct": 31.9,
+   "text_h_px": 64,
+   "style": "plain",
+   "box_color": null,
+   "text_color": "white",
+   "motion": "static",
+   "moved_pct": 0.0,
+   "scale_anim": false,
+   "bg_moving": false,
+   "masked": false,
+   "samples": [
+    {
+     "t": 7.1,
+     "box": [
+      368,
+      950,
+      340,
+      62
+     ],
+     "text": "no rapid fire"
+    },
+    {
+     "t": 7.2,
+     "box": [
+      366,
+      948,
+      344,
+      64
+     ],
+     "text": "no rapid fire"
+    },
+    {
+     "t": 7.3,
+     "box": [
+      370,
+      954,
+      338,
+      54
+     ],
+     "text": "no rapid fire"
+    },
+    {
+     "t": 7.4,
+     "box": [
+      368,
+      950,
+      344,
+      62
+     ],
+     "text": "no rapid fire"
+    },
+    {
+     "t": 7.5,
+     "box": [
+      368,
+      950,
+      344,
+      62
+     ],
+     "text": "no rapid fire"
+    },
+    {
+     "t": 7.6,
+     "box": [
+      370,
+      950,
+      340,
+      62
+     ],
+     "text": "no rapid fire"
+    },
+    {
+     "t": 7.7,
+     "box": [
+      368,
+      950,
+      342,
+      62
+     ],
+     "text": "no rapid fire"
+    },
+    {
+     "t": 7.8,
+     "box": [
+      368,
+      950,
+      342,
+      62
+     ],
+     "text": "no rapid fire"
+    }
+   ]
+  },
+  {
+   "id": 22,
+   "kind": "scene",
+   "text": "*Annoyed*",
+   "start": 7.1,
+   "end": 7.9,
+   "dur": 0.8,
+   "x_pct": 49.8,
+   "y_pct": 53.7,
+   "w_pct": 13.7,
+   "text_h_px": 34,
+   "style": "plain",
+   "box_color": null,
+   "text_color": "yellow",
+   "motion": "static",
+   "moved_pct": 0.2,
+   "scale_anim": false,
+   "bg_moving": false,
+   "masked": false,
+   "samples": [
+    {
+     "t": 7.1,
+     "box": [
+      464,
+      1014,
+      146,
+      34
+     ],
+     "text": "*Annoyed*"
+    },
+    {
+     "t": 7.2,
+     "box": [
+      468,
+      1014,
+      140,
+      34
+     ],
+     "text": "*Annoyed*"
+    },
+    {
+     "t": 7.3,
+     "box": [
+      468,
+      1014,
+      142,
+      34
+     ],
+     "text": "*Annoyed*"
+    },
+    {
+     "t": 7.4,
+     "box": [
+      468,
+      1014,
+      144,
+      34
+     ],
+     "text": "*Annoyed*"
+    },
+    {
+     "t": 7.5,
+     "box": [
+      466,
+      1014,
+      146,
+      34
+     ],
+     "text": "*Annoyed*"
+    },
+    {
+     "t": 7.6,
+     "box": [
+      464,
+      1014,
+      148,
+      34
+     ],
+     "text": "*Annoyed*"
+    },
+    {
+     "t": 7.7,
+     "box": [
+      466,
+      1014,
+      148,
+      34
+     ],
+     "text": "*Annoyed*"
+    },
+    {
+     "t": 7.8,
+     "box": [
+      466,
+      1014,
+      148,
+      34
+     ],
+     "text": "*Annoyed*"
+    }
+   ]
+  },
+  {
+   "id": 23,
+   "kind": "scene",
+   "text": "Range Owner:",
+   "start": 7.9,
+   "end": 9.1,
+   "dur": 1.2,
+   "x_pct": 27.6,
+   "y_pct": 44.0,
+   "w_pct": 31.1,
+   "text_h_px": 60,
+   "style": "plain",
+   "box_color": null,
+   "text_color": "green",
+   "motion": "static",
+   "moved_pct": 0.6,
+   "scale_anim": false,
+   "bg_moving": false,
+   "masked": false,
+   "samples": [
+    {
+     "t": 7.9,
+     "box": [
+      144,
+      816,
+      332,
+      54
+     ],
+     "text": "Range Owner:"
+    },
+    {
+     "t": 8.0,
+     "box": [
+      140,
+      814,
+      338,
+      56
+     ],
+     "text": "Range Owner:"
+    },
+    {
+     "t": 8.1,
+     "box": [
+      134,
+      814,
+      336,
+      58
+     ],
+     "text": "Range Owner:"
+    },
+    {
+     "t": 8.2,
+     "box": [
+      132,
+      816,
+      330,
+      54
+     ],
+     "text": "Range Owner"
+    },
+    {
+     "t": 8.3,
+     "box": [
+      132,
+      814,
+      334,
+      60
+     ],
+     "text": "Range Owner:"
+    },
+    {
+     "t": 8.4,
+     "box": [
+      130,
+      814,
+      336,
+      60
+     ],
+     "text": "Range Owner:"
+    },
+    {
+     "t": 8.5,
+     "box": [
+      130,
+      814,
+      336,
+      60
+     ],
+     "text": "Range Owner:"
+    },
+    {
+     "t": 8.6,
+     "box": [
+      134,
+      816,
+      326,
+      56
+     ],
+     "text": "Range Owner"
+    },
+    {
+     "t": 8.7,
+     "box": [
+      136,
+      816,
+      334,
+      60
+     ],
+     "text": "Range Owner:"
+    },
+    {
+     "t": 8.8,
+     "box": [
+      138,
+      816,
+      332,
+      60
+     ],
+     "text": "Range Owner:"
+    },
+    {
+     "t": 8.9,
+     "box": [
+      136,
+      816,
+      336,
+      60
+     ],
+     "text": "Range Owner:"
+    },
+    {
+     "t": 9.0,
+     "box": [
+      140,
+      820,
+      330,
+      50
+     ],
+     "text": "Range Owner:"
+    }
+   ]
+  },
+  {
+   "id": 24,
+   "kind": "scene",
+   "text": "One round",
+   "start": 7.9,
+   "end": 8.3,
+   "dur": 0.4,
+   "x_pct": 28.9,
+   "y_pct": 47.5,
+   "w_pct": 33.7,
+   "text_h_px": 64,
+   "style": "plain",
+   "box_color": null,
+   "text_color": "white",
+   "motion": "static",
+   "moved_pct": 0.3,
+   "scale_anim": false,
+   "bg_moving": false,
+   "masked": false,
+   "samples": [
+    {
+     "t": 7.9,
+     "box": [
+      130,
+      880,
+      364,
+      64
+     ],
+     "text": "One round"
+    },
+    {
+     "t": 8.0,
+     "box": [
+      130,
+      880,
+      362,
+      62
+     ],
+     "text": "One round"
+    },
+    {
+     "t": 8.1,
+     "box": [
+      126,
+      878,
+      358,
+      62
+     ],
+     "text": "One round"
+    },
+    {
+     "t": 8.2,
+     "box": [
+      124,
+      880,
+      360,
+      64
+     ],
+     "text": "One round"
+    }
+   ]
+  },
+  {
+   "id": 25,
+   "kind": "scene",
+   "text": "every-",
+   "start": 8.3,
+   "end": 8.6,
+   "dur": 0.3,
+   "x_pct": 27.9,
+   "y_pct": 47.8,
+   "w_pct": 19.8,
+   "text_h_px": 68,
+   "style": "plain",
+   "box_color": null,
+   "text_color": "white",
+   "motion": "static",
+   "moved_pct": 0.3,
+   "scale_anim": false,
+   "bg_moving": false,
+   "masked": false,
+   "samples": [
+    {
+     "t": 8.3,
+     "box": [
+      194,
+      884,
+      214,
+      68
+     ],
+     "text": "every-"
+    },
+    {
+     "t": 8.4,
+     "box": [
+      194,
+      888,
+      214,
+      64
+     ],
+     "text": "every-"
+    },
+    {
+     "t": 8.5,
+     "box": [
+      190,
+      886,
+      216,
+      66
+     ],
+     "text": "every-"
+    }
+   ]
+  },
+  {
+   "id": 26,
+   "kind": "scene",
+   "text": "two seconds",
+   "start": 8.6,
+   "end": 9.1,
+   "dur": 0.5,
+   "x_pct": 28.0,
+   "y_pct": 47.6,
+   "w_pct": 38.5,
+   "text_h_px": 68,
+   "style": "plain",
+   "box_color": null,
+   "text_color": "white",
+   "motion": "static",
+   "moved_pct": 0.7,
+   "scale_anim": false,
+   "bg_moving": false,
+   "masked": false,
+   "samples": [
+    {
+     "t": 8.6,
+     "box": [
+      90,
+      882,
+      416,
+      66
+     ],
+     "text": "two seconds"
+    },
+    {
+     "t": 8.7,
+     "box": [
+      94,
+      880,
+      416,
+      68
+     ],
+     "text": "two seconds"
+    },
+    {
+     "t": 8.8,
+     "box": [
+      98,
+      882,
+      416,
+      66
+     ],
+     "text": "two seconds"
+    },
+    {
+     "t": 8.9,
+     "box": [
+      98,
+      884,
+      416,
+      64
+     ],
+     "text": "two seconds"
+    },
+    {
+     "t": 9.0,
+     "box": [
+      100,
+      886,
+      416,
+      64
+     ],
+     "text": "two seconds"
+    }
+   ]
+  },
+  {
+   "id": 27,
+   "kind": "scene",
+   "text": "Shooter:",
+   "start": 9.2,
+   "end": 9.7,
+   "dur": 0.5,
+   "x_pct": 48.3,
+   "y_pct": 20.6,
+   "w_pct": 20.4,
+   "text_h_px": 62,
+   "style": "plain",
+   "box_color": null,
+   "text_color": "yellow",
+   "motion": "static",
+   "moved_pct": 0.6,
+   "scale_anim": false,
+   "bg_moving": false,
+   "masked": false,
+   "samples": [
+    {
+     "t": 9.2,
+     "box": [
+      424,
+      364,
+      214,
+      60
+     ],
+     "text": "Shooter:"
+    },
+    {
+     "t": 9.3,
+     "box": [
+      416,
+      366,
+      216,
+      58
+     ],
+     "text": "Shooter:"
+    },
+    {
+     "t": 9.4,
+     "box": [
+      412,
+      364,
+      220,
+      62
+     ],
+     "text": "Shooter:"
+    },
+    {
+     "t": 9.5,
+     "box": [
+      414,
+      364,
+      218,
+      60
+     ],
+     "text": "Shooter:"
+    },
+    {
+     "t": 9.6,
+     "box": [
+      412,
+      362,
+      218,
+      58
+     ],
+     "text": "Shooter:"
+    }
+   ]
+  },
+  {
+   "id": 28,
+   "kind": "scene",
+   "text": "*Really?*",
+   "start": 9.2,
+   "end": 9.7,
+   "dur": 0.5,
+   "x_pct": 48.2,
+   "y_pct": 24.2,
+   "w_pct": 30.9,
+   "text_h_px": 88,
+   "style": "plain",
+   "box_color": null,
+   "text_color": "white",
+   "motion": "static",
+   "moved_pct": 0.8,
+   "scale_anim": false,
+   "bg_moving": false,
+   "masked": false,
+   "samples": [
+    {
+     "t": 9.2,
+     "box": [
+      364,
+      422,
+      336,
+      86
+     ],
+     "text": "*Really?*"
+    },
+    {
+     "t": 9.3,
+     "box": [
+      356,
+      424,
+      334,
+      86
+     ],
+     "text": "*Really?*"
+    },
+    {
+     "t": 9.4,
+     "box": [
+      356,
+      424,
+      334,
+      86
+     ],
+     "text": "*Really?*"
+    },
+    {
+     "t": 9.5,
+     "box": [
+      356,
+      422,
+      332,
+      86
+     ],
+     "text": "*Really?*"
+    },
+    {
+     "t": 9.6,
+     "box": [
+      354,
+      420,
+      334,
+      88
+     ],
+     "text": "*Really?*"
+    }
+   ]
+  }
+ ]
+}

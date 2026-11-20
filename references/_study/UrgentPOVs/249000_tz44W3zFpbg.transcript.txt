@@ -1,0 +1,8 @@
+# Transcript: 249000_tz44W3zFpbg.mp4 (6.9s)   '?' = low confidence, verify
+## Main pass
+   0.00- 3.50  This.? Look at this. Go airborne, they said.
+   4.56- 6.66  I don't think they're going back. Not? doing it again.
+## Windowed pass (second opinion)
+   0.00- 3.48  What's? this? Look at this. Go airborne, they said.
+   4.16- 5.74  Don't think they're going back
+Saved references/_study/UrgentPOVs/249000_tz44W3zFpbg/transcript.json

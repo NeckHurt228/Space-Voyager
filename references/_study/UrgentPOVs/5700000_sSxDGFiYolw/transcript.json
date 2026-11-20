@@ -1,0 +1,380 @@
+{
+  "clip": "references/UrgentPOVs/5700000_sSxDGFiYolw.mp4",
+  "duration": 16.6,
+  "model": "whisper-small int8",
+  "has_speech": true,
+  "lines": [
+    {
+      "start": 0.0,
+      "end": 11.12,
+      "text": "Now? you'll cook. What's happening? This? is exactly what the fuck is happening right now. I'm trying to fucking sleep. And no, I go outside and take a fucking piss. Here? comes first, sorry? coming? in here. Hey, we're getting fucking pistoled? again."
+    },
+    {
+      "start": 12.04,
+      "end": 15.74,
+      "text": "This is gonna fucking help. They're way too chill for what's happening. I can? die."
+    }
+  ],
+  "lines_windowed": [
+    {
+      "start": 0.0,
+      "end": 11.1,
+      "text": "Now? you'll cook. What's happening? This is exactly what the fuck is happening right now. Trying to fucking sleep. And no, I go outside and take a fucking piss. Here? comes first,? sorry,? coming in here. Hey, we're getting fucking piss? on? again."
+    },
+    {
+      "start": 12.98,
+      "end": 15.16,
+      "text": "They're way too chill for what's happening"
+    }
+  ],
+  "words": [
+    {
+      "word": "Now",
+      "start": 0.0,
+      "end": 0.32,
+      "p": 0.1
+    },
+    {
+      "word": "you'll",
+      "start": 0.32,
+      "end": 0.54,
+      "p": 0.79
+    },
+    {
+      "word": "cook.",
+      "start": 0.54,
+      "end": 0.76,
+      "p": 0.92
+    },
+    {
+      "word": "What's",
+      "start": 1.04,
+      "end": 1.2,
+      "p": 0.99
+    },
+    {
+      "word": "happening?",
+      "start": 1.2,
+      "end": 1.48,
+      "p": 0.99
+    },
+    {
+      "word": "This",
+      "start": 1.72,
+      "end": 1.82,
+      "p": 0.37
+    },
+    {
+      "word": "is",
+      "start": 1.82,
+      "end": 1.94,
+      "p": 0.99
+    },
+    {
+      "word": "exactly",
+      "start": 1.94,
+      "end": 2.32,
+      "p": 0.97
+    },
+    {
+      "word": "what",
+      "start": 2.32,
+      "end": 2.6,
+      "p": 0.98
+    },
+    {
+      "word": "the",
+      "start": 2.6,
+      "end": 2.74,
+      "p": 0.68
+    },
+    {
+      "word": "fuck",
+      "start": 2.74,
+      "end": 2.92,
+      "p": 0.85
+    },
+    {
+      "word": "is",
+      "start": 2.92,
+      "end": 3.1,
+      "p": 0.95
+    },
+    {
+      "word": "happening",
+      "start": 3.1,
+      "end": 3.38,
+      "p": 0.99
+    },
+    {
+      "word": "right",
+      "start": 3.38,
+      "end": 3.6,
+      "p": 0.91
+    },
+    {
+      "word": "now.",
+      "start": 3.6,
+      "end": 3.76,
+      "p": 1.0
+    },
+    {
+      "word": "I'm",
+      "start": 3.86,
+      "end": 3.88,
+      "p": 0.64
+    },
+    {
+      "word": "trying",
+      "start": 3.88,
+      "end": 3.96,
+      "p": 0.97
+    },
+    {
+      "word": "to",
+      "start": 3.96,
+      "end": 4.12,
+      "p": 1.0
+    },
+    {
+      "word": "fucking",
+      "start": 4.12,
+      "end": 4.32,
+      "p": 0.95
+    },
+    {
+      "word": "sleep.",
+      "start": 4.32,
+      "end": 4.74,
+      "p": 0.95
+    },
+    {
+      "word": "And",
+      "start": 5.02,
+      "end": 5.08,
+      "p": 0.8
+    },
+    {
+      "word": "no,",
+      "start": 5.08,
+      "end": 5.34,
+      "p": 0.84
+    },
+    {
+      "word": "I",
+      "start": 5.5,
+      "end": 5.56,
+      "p": 0.86
+    },
+    {
+      "word": "go",
+      "start": 5.56,
+      "end": 5.68,
+      "p": 0.75
+    },
+    {
+      "word": "outside",
+      "start": 5.68,
+      "end": 5.86,
+      "p": 0.96
+    },
+    {
+      "word": "and",
+      "start": 5.86,
+      "end": 6.1,
+      "p": 0.68
+    },
+    {
+      "word": "take",
+      "start": 6.1,
+      "end": 6.28,
+      "p": 0.96
+    },
+    {
+      "word": "a",
+      "start": 6.28,
+      "end": 6.46,
+      "p": 1.0
+    },
+    {
+      "word": "fucking",
+      "start": 6.46,
+      "end": 6.72,
+      "p": 0.98
+    },
+    {
+      "word": "piss.",
+      "start": 6.72,
+      "end": 7.1,
+      "p": 0.99
+    },
+    {
+      "word": "Here",
+      "start": 7.28,
+      "end": 7.36,
+      "p": 0.27
+    },
+    {
+      "word": "comes",
+      "start": 7.36,
+      "end": 7.58,
+      "p": 0.91
+    },
+    {
+      "word": "first,",
+      "start": 7.58,
+      "end": 7.86,
+      "p": 0.51
+    },
+    {
+      "word": "sorry",
+      "start": 7.98,
+      "end": 8.14,
+      "p": 0.42
+    },
+    {
+      "word": "coming",
+      "start": 8.14,
+      "end": 8.38,
+      "p": 0.41
+    },
+    {
+      "word": "in",
+      "start": 8.38,
+      "end": 8.62,
+      "p": 0.99
+    },
+    {
+      "word": "here.",
+      "start": 8.62,
+      "end": 8.8,
+      "p": 0.98
+    },
+    {
+      "word": "Hey,",
+      "start": 8.92,
+      "end": 9.06,
+      "p": 0.84
+    },
+    {
+      "word": "we're",
+      "start": 9.26,
+      "end": 9.36,
+      "p": 1.0
+    },
+    {
+      "word": "getting",
+      "start": 9.36,
+      "end": 9.58,
+      "p": 0.95
+    },
+    {
+      "word": "fucking",
+      "start": 9.58,
+      "end": 10.1,
+      "p": 0.9
+    },
+    {
+      "word": "pistoled",
+      "start": 10.1,
+      "end": 10.9,
+      "p": 0.18
+    },
+    {
+      "word": "again.",
+      "start": 10.9,
+      "end": 11.12,
+      "p": 0.99
+    },
+    {
+      "word": "This",
+      "start": 12.04,
+      "end": 12.36,
+      "p": 0.57
+    },
+    {
+      "word": "is",
+      "start": 12.36,
+      "end": 12.56,
+      "p": 1.0
+    },
+    {
+      "word": "gonna",
+      "start": 12.56,
+      "end": 12.7,
+      "p": 0.86
+    },
+    {
+      "word": "fucking",
+      "start": 12.7,
+      "end": 13.02,
+      "p": 0.96
+    },
+    {
+      "word": "help.",
+      "start": 13.02,
+      "end": 13.26,
+      "p": 0.87
+    },
+    {
+      "word": "They're",
+      "start": 13.36,
+      "end": 13.54,
+      "p": 0.96
+    },
+    {
+      "word": "way",
+      "start": 13.54,
+      "end": 13.82,
+      "p": 0.98
+    },
+    {
+      "word": "too",
+      "start": 13.82,
+      "end": 14.06,
+      "p": 0.95
+    },
+    {
+      "word": "chill",
+      "start": 14.06,
+      "end": 14.4,
+      "p": 1.0
+    },
+    {
+      "word": "for",
+      "start": 14.4,
+      "end": 14.58,
+      "p": 0.99
+    },
+    {
+      "word": "what's",
+      "start": 14.58,
+      "end": 14.88,
+      "p": 0.99
+    },
+    {
+      "word": "happening.",
+      "start": 14.88,
+      "end": 15.14,
+      "p": 0.99
+    },
+    {
+      "word": "I",
+      "start": 15.24,
+      "end": 15.24,
+      "p": 0.52
+    },
+    {
+      "word": "can",
+      "start": 15.24,
+      "end": 15.42,
+      "p": 0.48
+    },
+    {
+      "word": "die.",
+      "start": 15.42,
+      "end": 15.74,
+      "p": 0.99
+    }
+  ]
+}

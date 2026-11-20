@@ -1,0 +1,10 @@
+# Transcript: 25000000_U1PKkWMIPcY.mp4 (15.9s)   '?' = low confidence, verify
+## Main pass
+   0.00- 3.78  Can? I get a stick, sir? Thank? you. Good? morning. Y? 'all doing OK?? Yes, ma 'am.
+   4.38- 7.08  This is what they serve to soldiers before heading into combat.
+   8.30-14.20  There you go. Thank? you, sir. Thank? you. Good morning. Thank you, son.? Good morning. Always? a protein bar. You can't just in time, brother.
+  15.00-15.54  Yes, son.
+## Windowed pass (second opinion)
+   0.00- 7.10  Can? I get a stick, sir? Have? you? Good? morning. Do? I? do it okay? Yes, ma 'am. This is what they serve? to soldiers before heading into combat.
+   7.90-15.54  there? you go sir thank you thank? you son? good morning oh? it's a protein bar you can't just in time brother Yes, sir.
+Saved references/_study/UrgentPOVs/25000000_U1PKkWMIPcY/transcript.json

@@ -1,0 +1,8 @@
+# Transcript: 9500000_JCJkBFmGj2Q.mp4 (14.7s)   '?' = low confidence, verify
+## Main pass
+   0.00- 6.12  Hey,? sorry, I can't record if? you jump out of airplane? anymore. Look at this. I gotta hurry up. I gotta go fight the bad guys. I don't know what I'm doing.
+   7.04-11.54  He's way too happy for where he is. Oh,? the boys are dropping! Let's go!
+  12.46-14.40  Let's go! It's time for battle!
+## Windowed pass (second opinion)
+   0.00-14.40  Hey,? sorry. I can't record you? jump out of airplane anymore. Look at this. I gotta hurry up. I gotta go fight the bad guys I? don't know what I'm doing He's way too happy for where he is. Oh,? the bars? are dropping!? Let's go! Let's go! It's time for battle!
+Saved references/_study/UrgentPOVs/9500000_JCJkBFmGj2Q/transcript.json

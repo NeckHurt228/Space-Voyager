@@ -1,0 +1,8 @@
+# Transcript: 27000000_hbRlCWMsx60.mp4 (9.5s)   '?' = low confidence, verify
+## Main pass
+   2.72- 4.34  He? wasn't meant to throw yet.
+   5.46- 8.74  Sorry,? I didn't tell? you to throw, did I? No sir,? sorry.
+## Windowed pass (second opinion)
+   2.32- 4.26  He wasn't meant to throw yet.
+   5.06- 8.70  All? right, I didn't tend? to fucking? throw, did I? No, sir. Sorry.
+Saved references/_study/UrgentPOVs/27000000_hbRlCWMsx60/transcript.json

@@ -1,0 +1,86 @@
+{
+  "clip": "references/UrgentPOVs/94000000_Sc3n3oXwfQs.mp4",
+  "duration": 9.75,
+  "model": "whisper-small int8",
+  "has_speech": true,
+  "lines": [
+    {
+      "start": 4.22,
+      "end": 5.5,
+      "text": "Little? did he know."
+    },
+    {
+      "start": 7.0,
+      "end": 8.96,
+      "text": "One? round every two seconds."
+    }
+  ],
+  "lines_windowed": [
+    {
+      "start": 3.82,
+      "end": 5.46,
+      "text": "Little did he know."
+    },
+    {
+      "start": 6.6,
+      "end": 8.94,
+      "text": "No? rapid fire. One round every two seconds."
+    }
+  ],
+  "words": [
+    {
+      "word": "Little",
+      "start": 4.22,
+      "end": 4.82,
+      "p": 0.47
+    },
+    {
+      "word": "did",
+      "start": 4.82,
+      "end": 5.1,
+      "p": 0.8
+    },
+    {
+      "word": "he",
+      "start": 5.1,
+      "end": 5.22,
+      "p": 0.97
+    },
+    {
+      "word": "know.",
+      "start": 5.22,
+      "end": 5.5,
+      "p": 0.99
+    },
+    {
+      "word": "One",
+      "start": 7.0,
+      "end": 7.6,
+      "p": 0.07
+    },
+    {
+      "word": "round",
+      "start": 7.6,
+      "end": 8.2,
+      "p": 0.99
+    },
+    {
+      "word": "every",
+      "start": 8.2,
+      "end": 8.5,
+      "p": 0.82
+    },
+    {
+      "word": "two",
+      "start": 8.5,
+      "end": 8.72,
+      "p": 0.71
+    },
+    {
+      "word": "seconds.",
+      "start": 8.72,
+      "end": 8.96,
+      "p": 0.97
+    }
+  ]
+}

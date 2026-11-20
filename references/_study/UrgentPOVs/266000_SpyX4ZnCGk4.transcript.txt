@@ -1,0 +1,10 @@
+# Transcript: 266000_SpyX4ZnCGk4.mp4 (13.1s)   '?' = low confidence, verify
+## Main pass
+   0.00- 1.02  I'm? ready. Stand? by!
+   5.62- 7.90  He was about to shock everybody.
+  10.44-13.02  16 -8? -0! 1? -6 -8 -0!
+## Windowed pass (second opinion)
+   0.00- 0.98  I'm ready. Thereby!?
+   6.02- 7.88  He was about to shock everybody.
+  10.78-13.02  16, 8, 0, 1, 6, 8, 0.
+Saved references/_study/UrgentPOVs/266000_SpyX4ZnCGk4/transcript.json

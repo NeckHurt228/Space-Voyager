@@ -1,0 +1,350 @@
+{
+  "clip": "references/UrgentPOVs/9500000_JCJkBFmGj2Q.mp4",
+  "duration": 14.7,
+  "model": "whisper-small int8",
+  "has_speech": true,
+  "lines": [
+    {
+      "start": 0.0,
+      "end": 6.12,
+      "text": "Hey,? sorry, I can't record if? you jump out of airplane? anymore. Look at this. I gotta hurry up. I gotta go fight the bad guys. I don't know what I'm doing."
+    },
+    {
+      "start": 7.04,
+      "end": 11.54,
+      "text": "He's way too happy for where he is. Oh,? the boys are dropping! Let's go!"
+    },
+    {
+      "start": 12.46,
+      "end": 14.4,
+      "text": "Let's go! It's time for battle!"
+    }
+  ],
+  "lines_windowed": [
+    {
+      "start": 0.0,
+      "end": 14.4,
+      "text": "Hey,? sorry. I can't record you? jump out of airplane anymore. Look at this. I gotta hurry up. I gotta go fight the bad guys I? don't know what I'm doing He's way too happy for where he is. Oh,? the bars? are dropping!? Let's go! Let's go! It's time for battle!"
+    }
+  ],
+  "words": [
+    {
+      "word": "Hey,",
+      "start": 0.0,
+      "end": 0.24,
+      "p": 0.38
+    },
+    {
+      "word": "sorry,",
+      "start": 0.26,
+      "end": 0.58,
+      "p": 0.96
+    },
+    {
+      "word": "I",
+      "start": 0.82,
+      "end": 0.9,
+      "p": 0.98
+    },
+    {
+      "word": "can't",
+      "start": 0.9,
+      "end": 1.26,
+      "p": 0.99
+    },
+    {
+      "word": "record",
+      "start": 1.26,
+      "end": 1.7,
+      "p": 0.99
+    },
+    {
+      "word": "if",
+      "start": 1.7,
+      "end": 1.88,
+      "p": 0.25
+    },
+    {
+      "word": "you",
+      "start": 1.88,
+      "end": 1.9,
+      "p": 0.95
+    },
+    {
+      "word": "jump",
+      "start": 1.9,
+      "end": 2.1,
+      "p": 0.98
+    },
+    {
+      "word": "out",
+      "start": 2.1,
+      "end": 2.28,
+      "p": 0.96
+    },
+    {
+      "word": "of",
+      "start": 2.28,
+      "end": 2.34,
+      "p": 0.95
+    },
+    {
+      "word": "airplane",
+      "start": 2.34,
+      "end": 2.62,
+      "p": 0.43
+    },
+    {
+      "word": "anymore.",
+      "start": 2.62,
+      "end": 2.86,
+      "p": 0.83
+    },
+    {
+      "word": "Look",
+      "start": 3.16,
+      "end": 3.26,
+      "p": 0.95
+    },
+    {
+      "word": "at",
+      "start": 3.26,
+      "end": 3.34,
+      "p": 0.98
+    },
+    {
+      "word": "this.",
+      "start": 3.34,
+      "end": 3.5,
+      "p": 0.99
+    },
+    {
+      "word": "I",
+      "start": 3.56,
+      "end": 3.64,
+      "p": 0.95
+    },
+    {
+      "word": "gotta",
+      "start": 3.64,
+      "end": 3.78,
+      "p": 0.83
+    },
+    {
+      "word": "hurry",
+      "start": 3.78,
+      "end": 4.02,
+      "p": 1.0
+    },
+    {
+      "word": "up.",
+      "start": 4.02,
+      "end": 4.2,
+      "p": 0.99
+    },
+    {
+      "word": "I",
+      "start": 4.3,
+      "end": 4.34,
+      "p": 0.87
+    },
+    {
+      "word": "gotta",
+      "start": 4.34,
+      "end": 4.44,
+      "p": 0.96
+    },
+    {
+      "word": "go",
+      "start": 4.44,
+      "end": 4.6,
+      "p": 0.96
+    },
+    {
+      "word": "fight",
+      "start": 4.6,
+      "end": 4.82,
+      "p": 0.91
+    },
+    {
+      "word": "the",
+      "start": 4.82,
+      "end": 4.92,
+      "p": 0.97
+    },
+    {
+      "word": "bad",
+      "start": 4.92,
+      "end": 5.08,
+      "p": 0.99
+    },
+    {
+      "word": "guys.",
+      "start": 5.08,
+      "end": 5.3,
+      "p": 0.97
+    },
+    {
+      "word": "I",
+      "start": 5.5,
+      "end": 5.6,
+      "p": 0.99
+    },
+    {
+      "word": "don't",
+      "start": 5.6,
+      "end": 5.76,
+      "p": 0.99
+    },
+    {
+      "word": "know",
+      "start": 5.76,
+      "end": 5.78,
+      "p": 1.0
+    },
+    {
+      "word": "what",
+      "start": 5.78,
+      "end": 5.88,
+      "p": 0.99
+    },
+    {
+      "word": "I'm",
+      "start": 5.88,
+      "end": 5.96,
+      "p": 0.99
+    },
+    {
+      "word": "doing.",
+      "start": 5.96,
+      "end": 6.12,
+      "p": 0.96
+    },
+    {
+      "word": "He's",
+      "start": 7.04,
+      "end": 7.44,
+      "p": 0.71
+    },
+    {
+      "word": "way",
+      "start": 7.44,
+      "end": 7.68,
+      "p": 0.98
+    },
+    {
+      "word": "too",
+      "start": 7.68,
+      "end": 7.92,
+      "p": 0.96
+    },
+    {
+      "word": "happy",
+      "start": 7.92,
+      "end": 8.22,
+      "p": 1.0
+    },
+    {
+      "word": "for",
+      "start": 8.22,
+      "end": 8.48,
+      "p": 1.0
+    },
+    {
+      "word": "where",
+      "start": 8.48,
+      "end": 8.68,
+      "p": 1.0
+    },
+    {
+      "word": "he",
+      "start": 8.68,
+      "end": 8.86,
+      "p": 0.97
+    },
+    {
+      "word": "is.",
+      "start": 8.86,
+      "end": 9.02,
+      "p": 0.98
+    },
+    {
+      "word": "Oh,",
+      "start": 9.1,
+      "end": 9.48,
+      "p": 0.38
+    },
+    {
+      "word": "the",
+      "start": 9.62,
+      "end": 9.72,
+      "p": 0.98
+    },
+    {
+      "word": "boys",
+      "start": 9.72,
+      "end": 10.02,
+      "p": 0.71
+    },
+    {
+      "word": "are",
+      "start": 10.02,
+      "end": 10.24,
+      "p": 1.0
+    },
+    {
+      "word": "dropping!",
+      "start": 10.24,
+      "end": 10.56,
+      "p": 0.56
+    },
+    {
+      "word": "Let's",
+      "start": 10.86,
+      "end": 11.24,
+      "p": 0.98
+    },
+    {
+      "word": "go!",
+      "start": 11.24,
+      "end": 11.54,
+      "p": 0.99
+    },
+    {
+      "word": "Let's",
+      "start": 12.46,
+      "end": 12.86,
+      "p": 0.79
+    },
+    {
+      "word": "go!",
+      "start": 12.86,
+      "end": 13.08,
+      "p": 1.0
+    },
+    {
+      "word": "It's",
+      "start": 13.42,
+      "end": 13.62,
+      "p": 0.99
+    },
+    {
+      "word": "time",
+      "start": 13.62,
+      "end": 13.86,
+      "p": 0.99
+    },
+    {
+      "word": "for",
+      "start": 13.86,
+      "end": 14.02,
+      "p": 0.99
+    },
+    {
+      "word": "battle!",
+      "start": 14.02,
+      "end": 14.4,
+      "p": 0.89
+    }
+  ]
+}

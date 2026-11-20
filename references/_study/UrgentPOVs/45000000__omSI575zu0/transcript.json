@@ -1,0 +1,88 @@
+{
+  "clip": "references/UrgentPOVs/45000000__omSI575zu0.mp4",
+  "duration": 24.57,
+  "model": "whisper-small int8",
+  "has_speech": true,
+  "lines": [
+    {
+      "start": 3.52,
+      "end": 6.62,
+      "text": "This tank commander thought his loader was ready for live round."
+    }
+  ],
+  "lines_windowed": [
+    {
+      "start": 3.12,
+      "end": 6.64,
+      "text": "This tank commander thought his loader was ready for live round."
+    }
+  ],
+  "words": [
+    {
+      "word": "This",
+      "start": 3.52,
+      "end": 4.04,
+      "p": 0.59
+    },
+    {
+      "word": "tank",
+      "start": 4.04,
+      "end": 4.28,
+      "p": 0.96
+    },
+    {
+      "word": "commander",
+      "start": 4.28,
+      "end": 4.68,
+      "p": 0.99
+    },
+    {
+      "word": "thought",
+      "start": 4.68,
+      "end": 4.9,
+      "p": 0.99
+    },
+    {
+      "word": "his",
+      "start": 4.9,
+      "end": 5.1,
+      "p": 0.99
+    },
+    {
+      "word": "loader",
+      "start": 5.1,
+      "end": 5.46,
+      "p": 0.98
+    },
+    {
+      "word": "was",
+      "start": 5.46,
+      "end": 5.64,
+      "p": 1.0
+    },
+    {
+      "word": "ready",
+      "start": 5.64,
+      "end": 5.86,
+      "p": 1.0
+    },
+    {
+      "word": "for",
+      "start": 5.86,
+      "end": 6.04,
+      "p": 1.0
+    },
+    {
+      "word": "live",
+      "start": 6.04,
+      "end": 6.32,
+      "p": 0.81
+    },
+    {
+      "word": "round.",
+      "start": 6.32,
+      "end": 6.62,
+      "p": 0.82
+    }
+  ]
+}

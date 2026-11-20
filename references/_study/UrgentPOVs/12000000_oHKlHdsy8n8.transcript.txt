@@ -1,0 +1,9 @@
+# Transcript: 12000000_oHKlHdsy8n8.mp4 (16.8s)   '?' = low confidence, verify
+## Main pass
+   0.00-15.42  Can? you tell me you're a Navy SEAL, full of? purple? heart, Navy Cross,? Silver Star, Bronze Star, Afghanistan,? Iraq, one tour each,? and? then...? This? veteran just completely sussed him out. Mark Jost.? You're re? -rattling for the CIA Special Operations? Yes,? Special Operations.
+  16.16-16.62  Thanks, sir.
+## Windowed pass (second opinion)
+   0.00- 8.32  Can? you tell me you're a Navy SEAL, full of purple? heart, Navy Cross,? Silver Star, Bronze Star, Afghanistan,? Iraq, one tour, each,? and? then? eight.?
+   8.98-15.38  This veteran just completely sussed him out. Mark Jost.? You're re? -rattin' for? the CIA Special Operations? Yes,? Special Operations.
+  16.22-16.62  Thanks,? sir.
+Saved references/_study/UrgentPOVs/12000000_oHKlHdsy8n8/transcript.json

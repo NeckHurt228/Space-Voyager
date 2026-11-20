@@ -1,0 +1,144 @@
+{
+  "clip": "references/UrgentPOVs/266000_SpyX4ZnCGk4.mp4",
+  "duration": 13.12,
+  "model": "whisper-small int8",
+  "has_speech": true,
+  "lines": [
+    {
+      "start": 0.0,
+      "end": 1.02,
+      "text": "I'm? ready. Stand? by!"
+    },
+    {
+      "start": 5.62,
+      "end": 7.9,
+      "text": "He was about to shock everybody."
+    },
+    {
+      "start": 10.44,
+      "end": 13.02,
+      "text": "16 -8? -0! 1? -6 -8 -0!"
+    }
+  ],
+  "lines_windowed": [
+    {
+      "start": 0.0,
+      "end": 0.98,
+      "text": "I'm ready. Thereby!?"
+    },
+    {
+      "start": 6.02,
+      "end": 7.88,
+      "text": "He was about to shock everybody."
+    },
+    {
+      "start": 10.78,
+      "end": 13.02,
+      "text": "16, 8, 0, 1, 6, 8, 0."
+    }
+  ],
+  "words": [
+    {
+      "word": "I'm",
+      "start": 0.0,
+      "end": 0.22,
+      "p": 0.47
+    },
+    {
+      "word": "ready.",
+      "start": 0.22,
+      "end": 0.4,
+      "p": 0.82
+    },
+    {
+      "word": "Stand",
+      "start": 0.56,
+      "end": 0.72,
+      "p": 0.13
+    },
+    {
+      "word": "by!",
+      "start": 0.72,
+      "end": 1.02,
+      "p": 0.87
+    },
+    {
+      "word": "He",
+      "start": 5.62,
+      "end": 6.16,
+      "p": 0.82
+    },
+    {
+      "word": "was",
+      "start": 6.16,
+      "end": 6.7,
+      "p": 0.99
+    },
+    {
+      "word": "about",
+      "start": 6.7,
+      "end": 6.94,
+      "p": 1.0
+    },
+    {
+      "word": "to",
+      "start": 6.94,
+      "end": 7.16,
+      "p": 0.99
+    },
+    {
+      "word": "shock",
+      "start": 7.16,
+      "end": 7.44,
+      "p": 0.87
+    },
+    {
+      "word": "everybody.",
+      "start": 7.44,
+      "end": 7.9,
+      "p": 0.68
+    },
+    {
+      "word": "16",
+      "start": 10.44,
+      "end": 10.98,
+      "p": 0.56
+    },
+    {
+      "word": "-8",
+      "start": 10.98,
+      "end": 11.52,
+      "p": 0.45
+    },
+    {
+      "word": "-0!",
+      "start": 11.52,
+      "end": 11.94,
+      "p": 0.87
+    },
+    {
+      "word": "1",
+      "start": 12.1,
+      "end": 12.24,
+      "p": 0.36
+    },
+    {
+      "word": "-6",
+      "start": 12.24,
+      "end": 12.5,
+      "p": 0.87
+    },
+    {
+      "word": "-8",
+      "start": 12.5,
+      "end": 12.74,
+      "p": 0.99
+    },
+    {
+      "word": "-0!",
+      "start": 12.74,
+      "end": 13.02,
+      "p": 0.99
+    }
+  ]
+}

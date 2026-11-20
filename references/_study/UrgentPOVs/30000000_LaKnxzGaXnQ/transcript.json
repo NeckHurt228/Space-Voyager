@@ -1,0 +1,236 @@
+{
+  "clip": "references/UrgentPOVs/30000000_LaKnxzGaXnQ.mp4",
+  "duration": 16.95,
+  "model": "whisper-small int8",
+  "has_speech": true,
+  "lines": [
+    {
+      "start": 3.26,
+      "end": 4.36,
+      "text": "Go,? go, go, go, go, go!"
+    },
+    {
+      "start": 8.46,
+      "end": 13.8,
+      "text": "This Marine didn't think anyone could drop it. I? was just getting out of the way so? you? don't have? to turn? over some ice mace? and? shit."
+    }
+  ],
+  "lines_windowed": [
+    {
+      "start": 3.38,
+      "end": 4.28,
+      "text": "Go,? go, go, go, go, go!"
+    },
+    {
+      "start": 8.06,
+      "end": 10.7,
+      "text": "This marine didn't think anyone could drop it."
+    }
+  ],
+  "words": [
+    {
+      "word": "Go,",
+      "start": 3.26,
+      "end": 3.58,
+      "p": 0.1
+    },
+    {
+      "word": "go,",
+      "start": 3.76,
+      "end": 3.76,
+      "p": 0.98
+    },
+    {
+      "word": "go,",
+      "start": 3.84,
+      "end": 4.0,
+      "p": 0.98
+    },
+    {
+      "word": "go,",
+      "start": 4.02,
+      "end": 4.12,
+      "p": 0.96
+    },
+    {
+      "word": "go,",
+      "start": 4.12,
+      "end": 4.24,
+      "p": 0.98
+    },
+    {
+      "word": "go!",
+      "start": 4.24,
+      "end": 4.36,
+      "p": 0.98
+    },
+    {
+      "word": "This",
+      "start": 8.46,
+      "end": 8.78,
+      "p": 0.67
+    },
+    {
+      "word": "Marine",
+      "start": 8.78,
+      "end": 9.08,
+      "p": 0.66
+    },
+    {
+      "word": "didn't",
+      "start": 9.08,
+      "end": 9.46,
+      "p": 0.99
+    },
+    {
+      "word": "think",
+      "start": 9.46,
+      "end": 9.68,
+      "p": 1.0
+    },
+    {
+      "word": "anyone",
+      "start": 9.68,
+      "end": 10.08,
+      "p": 0.98
+    },
+    {
+      "word": "could",
+      "start": 10.08,
+      "end": 10.32,
+      "p": 0.98
+    },
+    {
+      "word": "drop",
+      "start": 10.32,
+      "end": 10.6,
+      "p": 0.99
+    },
+    {
+      "word": "it.",
+      "start": 10.6,
+      "end": 10.72,
+      "p": 0.76
+    },
+    {
+      "word": "I",
+      "start": 10.72,
+      "end": 10.8,
+      "p": 0.42
+    },
+    {
+      "word": "was",
+      "start": 10.8,
+      "end": 10.92,
+      "p": 0.94
+    },
+    {
+      "word": "just",
+      "start": 10.92,
+      "end": 11.04,
+      "p": 0.87
+    },
+    {
+      "word": "getting",
+      "start": 11.04,
+      "end": 11.16,
+      "p": 0.92
+    },
+    {
+      "word": "out",
+      "start": 11.16,
+      "end": 11.38,
+      "p": 0.9
+    },
+    {
+      "word": "of",
+      "start": 11.38,
+      "end": 11.46,
+      "p": 0.97
+    },
+    {
+      "word": "the",
+      "start": 11.46,
+      "end": 11.52,
+      "p": 1.0
+    },
+    {
+      "word": "way",
+      "start": 11.52,
+      "end": 11.66,
+      "p": 0.88
+    },
+    {
+      "word": "so",
+      "start": 11.66,
+      "end": 11.82,
+      "p": 0.27
+    },
+    {
+      "word": "you",
+      "start": 11.82,
+      "end": 11.96,
+      "p": 0.49
+    },
+    {
+      "word": "don't",
+      "start": 11.96,
+      "end": 12.04,
+      "p": 0.93
+    },
+    {
+      "word": "have",
+      "start": 12.04,
+      "end": 12.14,
+      "p": 0.44
+    },
+    {
+      "word": "to",
+      "start": 12.14,
+      "end": 12.32,
+      "p": 0.96
+    },
+    {
+      "word": "turn",
+      "start": 12.32,
+      "end": 12.54,
+      "p": 0.24
+    },
+    {
+      "word": "over",
+      "start": 12.54,
+      "end": 12.72,
+      "p": 0.81
+    },
+    {
+      "word": "some",
+      "start": 12.72,
+      "end": 12.86,
+      "p": 0.84
+    },
+    {
+      "word": "ice",
+      "start": 12.86,
+      "end": 13.16,
+      "p": 0.97
+    },
+    {
+      "word": "mace",
+      "start": 13.16,
+      "end": 13.48,
+      "p": 0.19
+    },
+    {
+      "word": "and",
+      "start": 13.48,
+      "end": 13.62,
+      "p": 0.47
+    },
+    {
+      "word": "shit.",
+      "start": 13.62,
+      "end": 13.8,
+      "p": 0.97
+    }
+  ]
+}

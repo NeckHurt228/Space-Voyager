@@ -1,0 +1,319 @@
+{
+  "clip": "references/UrgentPOVs/12000000_oHKlHdsy8n8.mp4",
+  "duration": 16.79,
+  "model": "whisper-small int8",
+  "has_speech": true,
+  "lines": [
+    {
+      "start": 0.0,
+      "end": 15.42,
+      "text": "Can? you tell me you're a Navy SEAL, full of? purple? heart, Navy Cross,? Silver Star, Bronze Star, Afghanistan,? Iraq, one tour each,? and? then...? This? veteran just completely sussed him out. Mark Jost.? You're re? -rattling for the CIA Special Operations? Yes,? Special Operations."
+    },
+    {
+      "start": 16.16,
+      "end": 16.62,
+      "text": "Thanks, sir."
+    }
+  ],
+  "lines_windowed": [
+    {
+      "start": 0.0,
+      "end": 8.32,
+      "text": "Can? you tell me you're a Navy SEAL, full of purple? heart, Navy Cross,? Silver Star, Bronze Star, Afghanistan,? Iraq, one tour, each,? and? then? eight.?"
+    },
+    {
+      "start": 8.98,
+      "end": 15.38,
+      "text": "This veteran just completely sussed him out. Mark Jost.? You're re? -rattin' for? the CIA Special Operations? Yes,? Special Operations."
+    },
+    {
+      "start": 16.22,
+      "end": 16.62,
+      "text": "Thanks,? sir."
+    }
+  ],
+  "words": [
+    {
+      "word": "Can",
+      "start": 0.0,
+      "end": 0.32,
+      "p": 0.12
+    },
+    {
+      "word": "you",
+      "start": 0.32,
+      "end": 0.5,
+      "p": 0.98
+    },
+    {
+      "word": "tell",
+      "start": 0.5,
+      "end": 0.6,
+      "p": 0.99
+    },
+    {
+      "word": "me",
+      "start": 0.6,
+      "end": 0.74,
+      "p": 0.99
+    },
+    {
+      "word": "you're",
+      "start": 0.74,
+      "end": 0.92,
+      "p": 0.67
+    },
+    {
+      "word": "a",
+      "start": 0.92,
+      "end": 1.0,
+      "p": 0.92
+    },
+    {
+      "word": "Navy",
+      "start": 1.0,
+      "end": 1.22,
+      "p": 0.97
+    },
+    {
+      "word": "SEAL,",
+      "start": 1.22,
+      "end": 1.68,
+      "p": 0.82
+    },
+    {
+      "word": "full",
+      "start": 1.78,
+      "end": 1.98,
+      "p": 0.68
+    },
+    {
+      "word": "of",
+      "start": 1.98,
+      "end": 2.14,
+      "p": 0.47
+    },
+    {
+      "word": "purple",
+      "start": 2.14,
+      "end": 2.32,
+      "p": 0.47
+    },
+    {
+      "word": "heart,",
+      "start": 2.32,
+      "end": 2.66,
+      "p": 0.72
+    },
+    {
+      "word": "Navy",
+      "start": 2.9,
+      "end": 3.16,
+      "p": 0.89
+    },
+    {
+      "word": "Cross,",
+      "start": 3.16,
+      "end": 3.52,
+      "p": 0.24
+    },
+    {
+      "word": "Silver",
+      "start": 3.82,
+      "end": 4.06,
+      "p": 0.97
+    },
+    {
+      "word": "Star,",
+      "start": 4.06,
+      "end": 4.44,
+      "p": 0.84
+    },
+    {
+      "word": "Bronze",
+      "start": 4.58,
+      "end": 4.82,
+      "p": 0.53
+    },
+    {
+      "word": "Star,",
+      "start": 4.82,
+      "end": 5.14,
+      "p": 0.99
+    },
+    {
+      "word": "Afghanistan,",
+      "start": 5.54,
+      "end": 5.92,
+      "p": 0.15
+    },
+    {
+      "word": "Iraq,",
+      "start": 6.18,
+      "end": 6.34,
+      "p": 0.92
+    },
+    {
+      "word": "one",
+      "start": 6.46,
+      "end": 6.58,
+      "p": 0.57
+    },
+    {
+      "word": "tour",
+      "start": 6.58,
+      "end": 6.9,
+      "p": 0.96
+    },
+    {
+      "word": "each,",
+      "start": 6.9,
+      "end": 7.3,
+      "p": 0.28
+    },
+    {
+      "word": "and",
+      "start": 7.68,
+      "end": 7.88,
+      "p": 0.33
+    },
+    {
+      "word": "then...",
+      "start": 7.88,
+      "end": 8.42,
+      "p": 0.18
+    },
+    {
+      "word": "This",
+      "start": 8.92,
+      "end": 9.16,
+      "p": 0.34
+    },
+    {
+      "word": "veteran",
+      "start": 9.16,
+      "end": 9.58,
+      "p": 0.9
+    },
+    {
+      "word": "just",
+      "start": 9.58,
+      "end": 9.8,
+      "p": 0.8
+    },
+    {
+      "word": "completely",
+      "start": 9.8,
+      "end": 10.3,
+      "p": 0.99
+    },
+    {
+      "word": "sussed",
+      "start": 10.3,
+      "end": 10.86,
+      "p": 0.77
+    },
+    {
+      "word": "him",
+      "start": 10.86,
+      "end": 10.96,
+      "p": 0.98
+    },
+    {
+      "word": "out.",
+      "start": 10.96,
+      "end": 11.12,
+      "p": 1.0
+    },
+    {
+      "word": "Mark",
+      "start": 11.22,
+      "end": 11.38,
+      "p": 0.89
+    },
+    {
+      "word": "Jost.",
+      "start": 11.38,
+      "end": 11.78,
+      "p": 0.45
+    },
+    {
+      "word": "You're",
+      "start": 11.9,
+      "end": 12.12,
+      "p": 0.92
+    },
+    {
+      "word": "re",
+      "start": 12.12,
+      "end": 12.24,
+      "p": 0.39
+    },
+    {
+      "word": "-rattling",
+      "start": 12.24,
+      "end": 12.52,
+      "p": 0.6
+    },
+    {
+      "word": "for",
+      "start": 12.52,
+      "end": 12.74,
+      "p": 0.5
+    },
+    {
+      "word": "the",
+      "start": 12.74,
+      "end": 12.88,
+      "p": 0.98
+    },
+    {
+      "word": "CIA",
+      "start": 12.88,
+      "end": 13.24,
+      "p": 0.95
+    },
+    {
+      "word": "Special",
+      "start": 13.24,
+      "end": 13.68,
+      "p": 0.69
+    },
+    {
+      "word": "Operations?",
+      "start": 13.68,
+      "end": 14.22,
+      "p": 0.76
+    },
+    {
+      "word": "Yes,",
+      "start": 14.42,
+      "end": 14.6,
+      "p": 0.3
+    },
+    {
+      "word": "Special",
+      "start": 15.02,
+      "end": 15.02,
+      "p": 0.89
+    },
+    {
+      "word": "Operations.",
+      "start": 15.02,
+      "end": 15.42,
+      "p": 0.96
+    },
+    {
+      "word": "Thanks,",
+      "start": 16.16,
+      "end": 16.44,
+      "p": 0.62
+    },
+    {
+      "word": "sir.",
+      "start": 16.56,
+      "end": 16.62,
+      "p": 0.94
+    }
+  ]
+}

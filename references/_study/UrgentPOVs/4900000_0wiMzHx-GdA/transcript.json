@@ -1,0 +1,154 @@
+{
+  "clip": "references/UrgentPOVs/4900000_0wiMzHx-GdA.mp4",
+  "duration": 11.89,
+  "model": "whisper-small int8",
+  "has_speech": true,
+  "lines": [
+    {
+      "start": 2.14,
+      "end": 8.86,
+      "text": "Look? at that UFO! Look at that airplane! Look at it! They were witnessing one of the rarest flyers. Wow, that's crazy!"
+    }
+  ],
+  "lines_windowed": [
+    {
+      "start": 2.58,
+      "end": 8.8,
+      "text": "Look at that UFO! Look at that airplane! Look at it! They were witnessing one of the rarest flyers. Wow! That's crazy!"
+    }
+  ],
+  "words": [
+    {
+      "word": "Look",
+      "start": 2.14,
+      "end": 2.6,
+      "p": 0.21
+    },
+    {
+      "word": "at",
+      "start": 2.6,
+      "end": 3.06,
+      "p": 0.99
+    },
+    {
+      "word": "that",
+      "start": 3.06,
+      "end": 3.18,
+      "p": 0.98
+    },
+    {
+      "word": "UFO!",
+      "start": 3.18,
+      "end": 3.36,
+      "p": 0.98
+    },
+    {
+      "word": "Look",
+      "start": 3.9,
+      "end": 3.96,
+      "p": 0.95
+    },
+    {
+      "word": "at",
+      "start": 3.96,
+      "end": 4.06,
+      "p": 1.0
+    },
+    {
+      "word": "that",
+      "start": 4.06,
+      "end": 4.16,
+      "p": 0.96
+    },
+    {
+      "word": "airplane!",
+      "start": 4.16,
+      "end": 4.36,
+      "p": 0.6
+    },
+    {
+      "word": "Look",
+      "start": 4.74,
+      "end": 4.78,
+      "p": 0.52
+    },
+    {
+      "word": "at",
+      "start": 4.78,
+      "end": 4.92,
+      "p": 0.98
+    },
+    {
+      "word": "it!",
+      "start": 4.92,
+      "end": 5.02,
+      "p": 0.98
+    },
+    {
+      "word": "They",
+      "start": 5.06,
+      "end": 5.14,
+      "p": 0.86
+    },
+    {
+      "word": "were",
+      "start": 5.14,
+      "end": 5.26,
+      "p": 0.99
+    },
+    {
+      "word": "witnessing",
+      "start": 5.26,
+      "end": 5.66,
+      "p": 0.99
+    },
+    {
+      "word": "one",
+      "start": 5.66,
+      "end": 5.98,
+      "p": 0.99
+    },
+    {
+      "word": "of",
+      "start": 5.98,
+      "end": 6.08,
+      "p": 1.0
+    },
+    {
+      "word": "the",
+      "start": 6.08,
+      "end": 6.18,
+      "p": 1.0
+    },
+    {
+      "word": "rarest",
+      "start": 6.18,
+      "end": 6.72,
+      "p": 0.99
+    },
+    {
+      "word": "flyers.",
+      "start": 6.72,
+      "end": 7.18,
+      "p": 0.78
+    },
+    {
+      "word": "Wow,",
+      "start": 7.46,
+      "end": 7.78,
+      "p": 0.79
+    },
+    {
+      "word": "that's",
+      "start": 8.04,
+      "end": 8.32,
+      "p": 0.97
+    },
+    {
+      "word": "crazy!",
+      "start": 8.32,
+      "end": 8.86,
+      "p": 0.98
+    }
+  ]
+}

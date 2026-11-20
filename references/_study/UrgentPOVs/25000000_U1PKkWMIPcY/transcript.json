@@ -1,0 +1,372 @@
+{
+  "clip": "references/UrgentPOVs/25000000_U1PKkWMIPcY.mp4",
+  "duration": 15.93,
+  "model": "whisper-small int8",
+  "has_speech": true,
+  "lines": [
+    {
+      "start": 0.0,
+      "end": 3.78,
+      "text": "Can? I get a stick, sir? Thank? you. Good? morning. Y? 'all doing OK?? Yes, ma 'am."
+    },
+    {
+      "start": 4.38,
+      "end": 7.08,
+      "text": "This is what they serve to soldiers before heading into combat."
+    },
+    {
+      "start": 8.3,
+      "end": 14.2,
+      "text": "There you go. Thank? you, sir. Thank? you. Good morning. Thank you, son.? Good morning. Always? a protein bar. You can't just in time, brother."
+    },
+    {
+      "start": 15.0,
+      "end": 15.54,
+      "text": "Yes, son."
+    }
+  ],
+  "lines_windowed": [
+    {
+      "start": 0.0,
+      "end": 7.1,
+      "text": "Can? I get a stick, sir? Have? you? Good? morning. Do? I? do it okay? Yes, ma 'am. This is what they serve? to soldiers before heading into combat."
+    },
+    {
+      "start": 7.9,
+      "end": 15.54,
+      "text": "there? you go sir thank you thank? you son? good morning oh? it's a protein bar you can't just in time brother Yes, sir."
+    }
+  ],
+  "words": [
+    {
+      "word": "Can",
+      "start": 0.0,
+      "end": 0.16,
+      "p": 0.06
+    },
+    {
+      "word": "I",
+      "start": 0.16,
+      "end": 0.2,
+      "p": 0.96
+    },
+    {
+      "word": "get",
+      "start": 0.2,
+      "end": 0.28,
+      "p": 0.97
+    },
+    {
+      "word": "a",
+      "start": 0.28,
+      "end": 0.38,
+      "p": 0.81
+    },
+    {
+      "word": "stick,",
+      "start": 0.38,
+      "end": 0.46,
+      "p": 0.93
+    },
+    {
+      "word": "sir?",
+      "start": 0.54,
+      "end": 0.6,
+      "p": 0.94
+    },
+    {
+      "word": "Thank",
+      "start": 0.92,
+      "end": 1.06,
+      "p": 0.42
+    },
+    {
+      "word": "you.",
+      "start": 1.06,
+      "end": 1.28,
+      "p": 0.99
+    },
+    {
+      "word": "Good",
+      "start": 1.4,
+      "end": 1.62,
+      "p": 0.33
+    },
+    {
+      "word": "morning.",
+      "start": 1.62,
+      "end": 1.78,
+      "p": 0.98
+    },
+    {
+      "word": "Y",
+      "start": 2.06,
+      "end": 2.1,
+      "p": 0.28
+    },
+    {
+      "word": "'all",
+      "start": 2.1,
+      "end": 2.16,
+      "p": 0.99
+    },
+    {
+      "word": "doing",
+      "start": 2.16,
+      "end": 2.3,
+      "p": 0.78
+    },
+    {
+      "word": "OK?",
+      "start": 2.3,
+      "end": 2.62,
+      "p": 0.33
+    },
+    {
+      "word": "Yes,",
+      "start": 2.94,
+      "end": 3.2,
+      "p": 0.84
+    },
+    {
+      "word": "ma",
+      "start": 3.46,
+      "end": 3.54,
+      "p": 0.89
+    },
+    {
+      "word": "'am.",
+      "start": 3.54,
+      "end": 3.78,
+      "p": 1.0
+    },
+    {
+      "word": "This",
+      "start": 4.38,
+      "end": 4.56,
+      "p": 0.98
+    },
+    {
+      "word": "is",
+      "start": 4.56,
+      "end": 4.72,
+      "p": 1.0
+    },
+    {
+      "word": "what",
+      "start": 4.72,
+      "end": 4.88,
+      "p": 1.0
+    },
+    {
+      "word": "they",
+      "start": 4.88,
+      "end": 5.06,
+      "p": 1.0
+    },
+    {
+      "word": "serve",
+      "start": 5.06,
+      "end": 5.3,
+      "p": 0.5
+    },
+    {
+      "word": "to",
+      "start": 5.3,
+      "end": 5.46,
+      "p": 0.99
+    },
+    {
+      "word": "soldiers",
+      "start": 5.46,
+      "end": 5.82,
+      "p": 0.98
+    },
+    {
+      "word": "before",
+      "start": 5.82,
+      "end": 6.24,
+      "p": 0.96
+    },
+    {
+      "word": "heading",
+      "start": 6.24,
+      "end": 6.54,
+      "p": 0.99
+    },
+    {
+      "word": "into",
+      "start": 6.54,
+      "end": 6.8,
+      "p": 0.97
+    },
+    {
+      "word": "combat.",
+      "start": 6.8,
+      "end": 7.08,
+      "p": 0.74
+    },
+    {
+      "word": "There",
+      "start": 8.3,
+      "end": 8.44,
+      "p": 0.67
+    },
+    {
+      "word": "you",
+      "start": 8.44,
+      "end": 8.54,
+      "p": 0.99
+    },
+    {
+      "word": "go.",
+      "start": 8.54,
+      "end": 8.66,
+      "p": 1.0
+    },
+    {
+      "word": "Thank",
+      "start": 8.72,
+      "end": 8.84,
+      "p": 0.38
+    },
+    {
+      "word": "you,",
+      "start": 8.84,
+      "end": 8.98,
+      "p": 0.99
+    },
+    {
+      "word": "sir.",
+      "start": 8.98,
+      "end": 8.98,
+      "p": 0.98
+    },
+    {
+      "word": "Thank",
+      "start": 9.28,
+      "end": 9.28,
+      "p": 0.31
+    },
+    {
+      "word": "you.",
+      "start": 9.28,
+      "end": 9.44,
+      "p": 0.97
+    },
+    {
+      "word": "Good",
+      "start": 9.88,
+      "end": 10.2,
+      "p": 0.8
+    },
+    {
+      "word": "morning.",
+      "start": 10.2,
+      "end": 10.52,
+      "p": 0.98
+    },
+    {
+      "word": "Thank",
+      "start": 11.0,
+      "end": 11.2,
+      "p": 0.52
+    },
+    {
+      "word": "you,",
+      "start": 11.2,
+      "end": 11.34,
+      "p": 0.97
+    },
+    {
+      "word": "son.",
+      "start": 11.36,
+      "end": 11.46,
+      "p": 0.49
+    },
+    {
+      "word": "Good",
+      "start": 11.6,
+      "end": 11.6,
+      "p": 0.98
+    },
+    {
+      "word": "morning.",
+      "start": 11.6,
+      "end": 11.82,
+      "p": 0.99
+    },
+    {
+      "word": "Always",
+      "start": 12.06,
+      "end": 12.24,
+      "p": 0.47
+    },
+    {
+      "word": "a",
+      "start": 12.24,
+      "end": 12.36,
+      "p": 0.73
+    },
+    {
+      "word": "protein",
+      "start": 12.36,
+      "end": 12.66,
+      "p": 0.96
+    },
+    {
+      "word": "bar.",
+      "start": 12.66,
+      "end": 12.94,
+      "p": 0.7
+    },
+    {
+      "word": "You",
+      "start": 13.06,
+      "end": 13.1,
+      "p": 0.99
+    },
+    {
+      "word": "can't",
+      "start": 13.1,
+      "end": 13.36,
+      "p": 0.89
+    },
+    {
+      "word": "just",
+      "start": 13.36,
+      "end": 13.52,
+      "p": 0.64
+    },
+    {
+      "word": "in",
+      "start": 13.52,
+      "end": 13.68,
+      "p": 0.9
+    },
+    {
+      "word": "time,",
+      "start": 13.68,
+      "end": 13.96,
+      "p": 0.99
+    },
+    {
+      "word": "brother.",
+      "start": 14.04,
+      "end": 14.2,
+      "p": 0.99
+    },
+    {
+      "word": "Yes,",
+      "start": 15.0,
+      "end": 15.28,
+      "p": 0.87
+    },
+    {
+      "word": "son.",
+      "start": 15.4,
+      "end": 15.54,
+      "p": 0.91
+    }
+  ]
+}

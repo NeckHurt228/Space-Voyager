@@ -1,0 +1,367 @@
+{
+  "clip": "references/UrgentPOVs/4600000_YUjuYlmpYLA.mp4",
+  "duration": 14.88,
+  "model": "whisper-small int8",
+  "has_speech": true,
+  "lines": [
+    {
+      "start": 0.0,
+      "end": 12.18,
+      "text": "Get out of my face. Get out of my face. Go over there. You. Come here. Don't see? it? before? I lose you.? Hurry up! Hurry up! You really didn't waste this opportunity. One, two, three. Why aren't you saying zero, Erisal? Zero.? Stand up, Erisal. Zero.? Alaskan,? you ain't shit."
+    },
+    {
+      "start": 12.9,
+      "end": 13.26,
+      "text": "Okay,?"
+    },
+    {
+      "start": 14.0,
+      "end": 14.48,
+      "text": "that's it. Sorry."
+    }
+  ],
+  "lines_windowed": [
+    {
+      "start": 0.0,
+      "end": 12.84,
+      "text": "Get out of my face, get out of my face, go over there, you, come here, don't see? it? before I lose you,? hurry up, hurry up! You really didn't waste this opportunity. One, two, three, why aren't you saying zero, Erisal? Zero!? Stand? up, Erisal! Zero!? I'm asking you ain't shit! Thank? you very? much."
+    },
+    {
+      "start": 13.6,
+      "end": 14.48,
+      "text": "Okay,? that's it. Sorry."
+    }
+  ],
+  "words": [
+    {
+      "word": "Get",
+      "start": 0.0,
+      "end": 0.22,
+      "p": 0.58
+    },
+    {
+      "word": "out",
+      "start": 0.22,
+      "end": 0.36,
+      "p": 0.91
+    },
+    {
+      "word": "of",
+      "start": 0.36,
+      "end": 0.4,
+      "p": 0.9
+    },
+    {
+      "word": "my",
+      "start": 0.4,
+      "end": 0.48,
+      "p": 0.99
+    },
+    {
+      "word": "face.",
+      "start": 0.48,
+      "end": 0.66,
+      "p": 0.99
+    },
+    {
+      "word": "Get",
+      "start": 0.82,
+      "end": 0.88,
+      "p": 0.81
+    },
+    {
+      "word": "out",
+      "start": 0.88,
+      "end": 0.98,
+      "p": 0.96
+    },
+    {
+      "word": "of",
+      "start": 0.98,
+      "end": 0.98,
+      "p": 0.94
+    },
+    {
+      "word": "my",
+      "start": 0.98,
+      "end": 1.06,
+      "p": 0.99
+    },
+    {
+      "word": "face.",
+      "start": 1.06,
+      "end": 1.26,
+      "p": 1.0
+    },
+    {
+      "word": "Go",
+      "start": 1.58,
+      "end": 1.68,
+      "p": 0.8
+    },
+    {
+      "word": "over",
+      "start": 1.68,
+      "end": 1.8,
+      "p": 0.99
+    },
+    {
+      "word": "there.",
+      "start": 1.8,
+      "end": 1.98,
+      "p": 1.0
+    },
+    {
+      "word": "You.",
+      "start": 2.16,
+      "end": 2.36,
+      "p": 0.9
+    },
+    {
+      "word": "Come",
+      "start": 2.56,
+      "end": 2.66,
+      "p": 0.94
+    },
+    {
+      "word": "here.",
+      "start": 2.66,
+      "end": 2.84,
+      "p": 0.99
+    },
+    {
+      "word": "Don't",
+      "start": 2.94,
+      "end": 3.08,
+      "p": 0.82
+    },
+    {
+      "word": "see",
+      "start": 3.08,
+      "end": 3.16,
+      "p": 0.39
+    },
+    {
+      "word": "it",
+      "start": 3.16,
+      "end": 3.26,
+      "p": 0.42
+    },
+    {
+      "word": "before",
+      "start": 3.26,
+      "end": 3.44,
+      "p": 0.48
+    },
+    {
+      "word": "I",
+      "start": 3.44,
+      "end": 3.64,
+      "p": 0.98
+    },
+    {
+      "word": "lose",
+      "start": 3.64,
+      "end": 3.78,
+      "p": 0.94
+    },
+    {
+      "word": "you.",
+      "start": 3.78,
+      "end": 3.96,
+      "p": 0.38
+    },
+    {
+      "word": "Hurry",
+      "start": 4.06,
+      "end": 4.26,
+      "p": 0.95
+    },
+    {
+      "word": "up!",
+      "start": 4.26,
+      "end": 4.46,
+      "p": 0.98
+    },
+    {
+      "word": "Hurry",
+      "start": 4.72,
+      "end": 4.84,
+      "p": 0.97
+    },
+    {
+      "word": "up!",
+      "start": 4.84,
+      "end": 5.04,
+      "p": 1.0
+    },
+    {
+      "word": "You",
+      "start": 5.06,
+      "end": 5.16,
+      "p": 0.72
+    },
+    {
+      "word": "really",
+      "start": 5.16,
+      "end": 5.48,
+      "p": 0.99
+    },
+    {
+      "word": "didn't",
+      "start": 5.48,
+      "end": 5.86,
+      "p": 1.0
+    },
+    {
+      "word": "waste",
+      "start": 5.86,
+      "end": 6.04,
+      "p": 0.98
+    },
+    {
+      "word": "this",
+      "start": 6.04,
+      "end": 6.34,
+      "p": 1.0
+    },
+    {
+      "word": "opportunity.",
+      "start": 6.34,
+      "end": 6.5,
+      "p": 0.97
+    },
+    {
+      "word": "One,",
+      "start": 6.52,
+      "end": 6.86,
+      "p": 0.63
+    },
+    {
+      "word": "two,",
+      "start": 6.94,
+      "end": 7.2,
+      "p": 0.98
+    },
+    {
+      "word": "three.",
+      "start": 7.38,
+      "end": 7.78,
+      "p": 1.0
+    },
+    {
+      "word": "Why",
+      "start": 7.92,
+      "end": 8.04,
+      "p": 0.93
+    },
+    {
+      "word": "aren't",
+      "start": 8.04,
+      "end": 8.2,
+      "p": 0.92
+    },
+    {
+      "word": "you",
+      "start": 8.2,
+      "end": 8.28,
+      "p": 0.99
+    },
+    {
+      "word": "saying",
+      "start": 8.28,
+      "end": 8.5,
+      "p": 1.0
+    },
+    {
+      "word": "zero,",
+      "start": 8.5,
+      "end": 8.76,
+      "p": 0.88
+    },
+    {
+      "word": "Erisal?",
+      "start": 8.84,
+      "end": 9.16,
+      "p": 0.55
+    },
+    {
+      "word": "Zero.",
+      "start": 9.26,
+      "end": 9.4,
+      "p": 0.09
+    },
+    {
+      "word": "Stand",
+      "start": 9.62,
+      "end": 9.82,
+      "p": 0.72
+    },
+    {
+      "word": "up,",
+      "start": 9.82,
+      "end": 10.02,
+      "p": 0.94
+    },
+    {
+      "word": "Erisal.",
+      "start": 10.14,
+      "end": 10.54,
+      "p": 1.0
+    },
+    {
+      "word": "Zero.",
+      "start": 10.92,
+      "end": 11.14,
+      "p": 0.24
+    },
+    {
+      "word": "Alaskan,",
+      "start": 11.38,
+      "end": 11.74,
+      "p": 0.42
+    },
+    {
+      "word": "you",
+      "start": 11.84,
+      "end": 11.84,
+      "p": 0.99
+    },
+    {
+      "word": "ain't",
+      "start": 11.84,
+      "end": 11.98,
+      "p": 0.97
+    },
+    {
+      "word": "shit.",
+      "start": 11.98,
+      "end": 12.18,
+      "p": 0.69
+    },
+    {
+      "word": "Okay,",
+      "start": 12.9,
+      "end": 13.26,
+      "p": 0.22
+    },
+    {
+      "word": "that's",
+      "start": 14.0,
+      "end": 14.18,
+      "p": 0.98
+    },
+    {
+      "word": "it.",
+      "start": 14.18,
+      "end": 14.26,
+      "p": 0.99
+    },
+    {
+      "word": "Sorry.",
+      "start": 14.32,
+      "end": 14.48,
+      "p": 0.97
+    }
+  ]
+}

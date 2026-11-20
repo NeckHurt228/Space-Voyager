@@ -1,0 +1,140 @@
+{
+  "clip": "references/UrgentPOVs/249000_tz44W3zFpbg.mp4",
+  "duration": 6.92,
+  "model": "whisper-small int8",
+  "has_speech": true,
+  "lines": [
+    {
+      "start": 0.0,
+      "end": 3.5,
+      "text": "This.? Look at this. Go airborne, they said."
+    },
+    {
+      "start": 4.56,
+      "end": 6.66,
+      "text": "I don't think they're going back. Not? doing it again."
+    }
+  ],
+  "lines_windowed": [
+    {
+      "start": 0.0,
+      "end": 3.48,
+      "text": "What's? this? Look at this. Go airborne, they said."
+    },
+    {
+      "start": 4.16,
+      "end": 5.74,
+      "text": "Don't think they're going back"
+    }
+  ],
+  "words": [
+    {
+      "word": "This.",
+      "start": 0.0,
+      "end": 0.48,
+      "p": 0.21
+    },
+    {
+      "word": "Look",
+      "start": 0.74,
+      "end": 1.02,
+      "p": 0.78
+    },
+    {
+      "word": "at",
+      "start": 1.02,
+      "end": 1.14,
+      "p": 0.98
+    },
+    {
+      "word": "this.",
+      "start": 1.14,
+      "end": 1.36,
+      "p": 0.99
+    },
+    {
+      "word": "Go",
+      "start": 1.9,
+      "end": 2.38,
+      "p": 0.66
+    },
+    {
+      "word": "airborne,",
+      "start": 2.38,
+      "end": 2.84,
+      "p": 0.8
+    },
+    {
+      "word": "they",
+      "start": 3.02,
+      "end": 3.16,
+      "p": 0.97
+    },
+    {
+      "word": "said.",
+      "start": 3.16,
+      "end": 3.5,
+      "p": 1.0
+    },
+    {
+      "word": "I",
+      "start": 4.56,
+      "end": 4.56,
+      "p": 0.61
+    },
+    {
+      "word": "don't",
+      "start": 4.56,
+      "end": 4.84,
+      "p": 1.0
+    },
+    {
+      "word": "think",
+      "start": 4.84,
+      "end": 4.94,
+      "p": 1.0
+    },
+    {
+      "word": "they're",
+      "start": 4.94,
+      "end": 5.18,
+      "p": 0.98
+    },
+    {
+      "word": "going",
+      "start": 5.18,
+      "end": 5.38,
+      "p": 0.99
+    },
+    {
+      "word": "back.",
+      "start": 5.38,
+      "end": 5.76,
+      "p": 1.0
+    },
+    {
+      "word": "Not",
+      "start": 6.0,
+      "end": 6.12,
+      "p": 0.45
+    },
+    {
+      "word": "doing",
+      "start": 6.12,
+      "end": 6.32,
+      "p": 0.72
+    },
+    {
+      "word": "it",
+      "start": 6.32,
+      "end": 6.46,
+      "p": 0.96
+    },
+    {
+      "word": "again.",
+      "start": 6.46,
+      "end": 6.66,
+      "p": 0.98
+    }
+  ]
+}

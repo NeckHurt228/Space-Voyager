@@ -1,0 +1,289 @@
+{
+  "clip": "references/UrgentPOVs/64000000_WnBQMCKjxis.mp4",
+  "duration": 14.81,
+  "model": "whisper-small int8",
+  "has_speech": true,
+  "lines": [
+    {
+      "start": 0.0,
+      "end": 4.42,
+      "text": "Stirling don't put your hand right there put your hand on the man? watch? him shoot a sterling for the first time"
+    },
+    {
+      "start": 9.1,
+      "end": 14.24,
+      "text": "Just? had to be that guy didn't you I? do? shit though. Did you hear? anything on my left here?"
+    }
+  ],
+  "lines_windowed": [
+    {
+      "start": 0.0,
+      "end": 4.32,
+      "text": "Stirling don't put your hand right there put your hand on the man? watch him shoot a sterling for the first time"
+    },
+    {
+      "start": 9.28,
+      "end": 10.74,
+      "text": "I? just had to be that guy didn't you?"
+    },
+    {
+      "start": 11.38,
+      "end": 14.24,
+      "text": "Shit? though did? you? I can't hear anything on my left ear"
+    }
+  ],
+  "words": [
+    {
+      "word": "Stirling",
+      "start": 0.0,
+      "end": 0.6,
+      "p": 0.66
+    },
+    {
+      "word": "don't",
+      "start": 0.6,
+      "end": 0.92,
+      "p": 0.79
+    },
+    {
+      "word": "put",
+      "start": 0.92,
+      "end": 1.02,
+      "p": 0.99
+    },
+    {
+      "word": "your",
+      "start": 1.02,
+      "end": 1.14,
+      "p": 1.0
+    },
+    {
+      "word": "hand",
+      "start": 1.14,
+      "end": 1.3,
+      "p": 0.98
+    },
+    {
+      "word": "right",
+      "start": 1.3,
+      "end": 1.42,
+      "p": 0.98
+    },
+    {
+      "word": "there",
+      "start": 1.42,
+      "end": 1.58,
+      "p": 0.97
+    },
+    {
+      "word": "put",
+      "start": 1.58,
+      "end": 1.7,
+      "p": 0.75
+    },
+    {
+      "word": "your",
+      "start": 1.7,
+      "end": 1.88,
+      "p": 0.91
+    },
+    {
+      "word": "hand",
+      "start": 1.88,
+      "end": 2.02,
+      "p": 0.98
+    },
+    {
+      "word": "on",
+      "start": 2.02,
+      "end": 2.14,
+      "p": 1.0
+    },
+    {
+      "word": "the",
+      "start": 2.14,
+      "end": 2.22,
+      "p": 0.87
+    },
+    {
+      "word": "man",
+      "start": 2.22,
+      "end": 2.34,
+      "p": 0.2
+    },
+    {
+      "word": "watch",
+      "start": 2.34,
+      "end": 2.58,
+      "p": 0.46
+    },
+    {
+      "word": "him",
+      "start": 2.58,
+      "end": 2.68,
+      "p": 0.98
+    },
+    {
+      "word": "shoot",
+      "start": 2.68,
+      "end": 2.9,
+      "p": 0.96
+    },
+    {
+      "word": "a",
+      "start": 2.9,
+      "end": 3.04,
+      "p": 0.71
+    },
+    {
+      "word": "sterling",
+      "start": 3.04,
+      "end": 3.52,
+      "p": 0.78
+    },
+    {
+      "word": "for",
+      "start": 3.52,
+      "end": 3.7,
+      "p": 1.0
+    },
+    {
+      "word": "the",
+      "start": 3.7,
+      "end": 3.82,
+      "p": 1.0
+    },
+    {
+      "word": "first",
+      "start": 3.82,
+      "end": 4.04,
+      "p": 1.0
+    },
+    {
+      "word": "time",
+      "start": 4.04,
+      "end": 4.42,
+      "p": 0.99
+    },
+    {
+      "word": "Just",
+      "start": 9.1,
+      "end": 9.44,
+      "p": 0.29
+    },
+    {
+      "word": "had",
+      "start": 9.44,
+      "end": 9.78,
+      "p": 0.99
+    },
+    {
+      "word": "to",
+      "start": 9.78,
+      "end": 9.88,
+      "p": 1.0
+    },
+    {
+      "word": "be",
+      "start": 9.88,
+      "end": 9.98,
+      "p": 1.0
+    },
+    {
+      "word": "that",
+      "start": 9.98,
+      "end": 10.16,
+      "p": 1.0
+    },
+    {
+      "word": "guy",
+      "start": 10.16,
+      "end": 10.32,
+      "p": 0.99
+    },
+    {
+      "word": "didn't",
+      "start": 10.32,
+      "end": 10.62,
+      "p": 0.95
+    },
+    {
+      "word": "you",
+      "start": 10.62,
+      "end": 10.74,
+      "p": 0.73
+    },
+    {
+      "word": "I",
+      "start": 10.74,
+      "end": 11.02,
+      "p": 0.32
+    },
+    {
+      "word": "do",
+      "start": 11.02,
+      "end": 11.16,
+      "p": 0.42
+    },
+    {
+      "word": "shit",
+      "start": 11.16,
+      "end": 11.76,
+      "p": 0.79
+    },
+    {
+      "word": "though.",
+      "start": 11.76,
+      "end": 11.94,
+      "p": 0.93
+    },
+    {
+      "word": "Did",
+      "start": 11.96,
+      "end": 12.1,
+      "p": 0.95
+    },
+    {
+      "word": "you",
+      "start": 12.1,
+      "end": 12.26,
+      "p": 0.77
+    },
+    {
+      "word": "hear",
+      "start": 12.26,
+      "end": 13.2,
+      "p": 0.39
+    },
+    {
+      "word": "anything",
+      "start": 13.2,
+      "end": 13.56,
+      "p": 0.99
+    },
+    {
+      "word": "on",
+      "start": 13.56,
+      "end": 13.74,
+      "p": 0.81
+    },
+    {
+      "word": "my",
+      "start": 13.74,
+      "end": 13.86,
+      "p": 1.0
+    },
+    {
+      "word": "left",
+      "start": 13.86,
+      "end": 14.06,
+      "p": 1.0
+    },
+    {
+      "word": "here?",
+      "start": 14.06,
+      "end": 14.24,
+      "p": 0.52
+    }
+  ]
+}

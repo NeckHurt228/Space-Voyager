@@ -1,0 +1,6 @@
+# Transcript: 27000000_p-Z7CYVrnkc.mp4 (8.8s)   '?' = low confidence, verify
+## Main pass
+   3.24- 8.48  This? is what happens when the whole squad gets bored. Hey,? you better address Forky. Yes,? sir!
+## Windowed pass (second opinion)
+   3.54- 8.48  This? is what happens when the whole squad gets bored. Hey, you better address Orkey.? Yes,? sir!
+Saved references/_study/UrgentPOVs/27000000_p-Z7CYVrnkc/transcript.json

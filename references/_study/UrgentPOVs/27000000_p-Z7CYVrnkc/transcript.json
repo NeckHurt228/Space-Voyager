@@ -1,0 +1,124 @@
+{
+  "clip": "references/UrgentPOVs/27000000_p-Z7CYVrnkc.mp4",
+  "duration": 8.8,
+  "model": "whisper-small int8",
+  "has_speech": true,
+  "lines": [
+    {
+      "start": 3.24,
+      "end": 8.48,
+      "text": "This? is what happens when the whole squad gets bored. Hey,? you better address Forky. Yes,? sir!"
+    }
+  ],
+  "lines_windowed": [
+    {
+      "start": 3.54,
+      "end": 8.48,
+      "text": "This? is what happens when the whole squad gets bored. Hey, you better address Orkey.? Yes,? sir!"
+    }
+  ],
+  "words": [
+    {
+      "word": "This",
+      "start": 3.24,
+      "end": 3.7,
+      "p": 0.13
+    },
+    {
+      "word": "is",
+      "start": 3.7,
+      "end": 4.16,
+      "p": 0.98
+    },
+    {
+      "word": "what",
+      "start": 4.16,
+      "end": 4.28,
+      "p": 0.98
+    },
+    {
+      "word": "happens",
+      "start": 4.28,
+      "end": 4.66,
+      "p": 1.0
+    },
+    {
+      "word": "when",
+      "start": 4.66,
+      "end": 4.88,
+      "p": 0.99
+    },
+    {
+      "word": "the",
+      "start": 4.88,
+      "end": 5.02,
+      "p": 0.99
+    },
+    {
+      "word": "whole",
+      "start": 5.02,
+      "end": 5.24,
+      "p": 1.0
+    },
+    {
+      "word": "squad",
+      "start": 5.24,
+      "end": 5.7,
+      "p": 0.98
+    },
+    {
+      "word": "gets",
+      "start": 5.7,
+      "end": 5.98,
+      "p": 0.99
+    },
+    {
+      "word": "bored.",
+      "start": 5.98,
+      "end": 6.32,
+      "p": 0.99
+    },
+    {
+      "word": "Hey,",
+      "start": 6.46,
+      "end": 6.52,
+      "p": 0.45
+    },
+    {
+      "word": "you",
+      "start": 6.58,
+      "end": 6.6,
+      "p": 0.99
+    },
+    {
+      "word": "better",
+      "start": 6.6,
+      "end": 6.7,
+      "p": 0.97
+    },
+    {
+      "word": "address",
+      "start": 6.7,
+      "end": 7.02,
+      "p": 0.68
+    },
+    {
+      "word": "Forky.",
+      "start": 7.02,
+      "end": 7.48,
+      "p": 0.54
+    },
+    {
+      "word": "Yes,",
+      "start": 7.72,
+      "end": 8.14,
+      "p": 0.14
+    },
+    {
+      "word": "sir!",
+      "start": 8.3,
+      "end": 8.48,
+      "p": 0.94
+    }
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "clip": "references/UrgentPOVs/581000_ZY0Nca_gvwA.mp4",
+  "duration": 11.63,
+  "model": "whisper-small int8",
+  "has_speech": true,
+  "lines": [
+    {
+      "start": 1.6,
+      "end": 4.96,
+      "text": "Watch this airdrop from a parachute rigors perspective."
+    }
+  ],
+  "lines_windowed": [
+    {
+      "start": 1.2,
+      "end": 4.88,
+      "text": "Watch this airdrop from a parachute rigors perspective."
+    }
+  ],
+  "words": [
+    {
+      "word": "Watch",
+      "start": 1.6,
+      "end": 2.48,
+      "p": 0.7
+    },
+    {
+      "word": "this",
+      "start": 2.48,
+      "end": 2.76,
+      "p": 1.0
+    },
+    {
+      "word": "airdrop",
+      "start": 2.76,
+      "end": 3.2,
+      "p": 0.86
+    },
+    {
+      "word": "from",
+      "start": 3.2,
+      "end": 3.46,
+      "p": 0.99
+    },
+    {
+      "word": "a",
+      "start": 3.46,
+      "end": 3.62,
+      "p": 0.98
+    },
+    {
+      "word": "parachute",
+      "start": 3.62,
+      "end": 3.92,
+      "p": 0.95
+    },
+    {
+      "word": "rigors",
+      "start": 3.92,
+      "end": 4.44,
+      "p": 0.54
+    },
+    {
+      "word": "perspective.",
+      "start": 4.44,
+      "end": 4.96,
+      "p": 0.98
+    }
+  ]
+}

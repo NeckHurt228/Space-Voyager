@@ -1,0 +1,11 @@
+# Transcript: 29000000_R8xibhyoSSY.mp4 (36.3s)   '?' = low confidence, verify
+## Main pass
+   3.04-13.22  Wow,? big! Watch this US Marine train a South Korean Marine. Like this? Right? back? Very, very, very hard. Pull back. Forward. During this grenade launcher exercise. Yeah,? pull back.
+  14.86-17.12  Here? we go. Full? trigger. Boom.
+  29.76-30.74  One,?
+  31.58-36.24  two, three,? four,? five, six, five,? six,? five, six,? five, six, five, six, five, six,
+## Windowed pass (second opinion)
+   3.10-13.22  Wow!? Big! Watch this US Marine train a South Korean Marine. Like this? Right? back? Very, very, very hard. Pull back. Forward. During this grenade launcher exercise. Yeah,? pull back.
+  14.46-17.08  Boom,? here? we go. Boom, trigger. Boom.
+  29.36-32.84  Fifteen seconds, okay, ready? Okay. One,? two, 15.?
+Saved references/_study/UrgentPOVs/29000000_R8xibhyoSSY/transcript.json

@@ -1,0 +1,8 @@
+# Transcript: 30000000_LaKnxzGaXnQ.mp4 (17.0s)   '?' = low confidence, verify
+## Main pass
+   3.26- 4.36  Go,? go, go, go, go, go!
+   8.46-13.80  This Marine didn't think anyone could drop it. I? was just getting out of the way so? you? don't have? to turn? over some ice mace? and? shit.
+## Windowed pass (second opinion)
+   3.38- 4.28  Go,? go, go, go, go, go!
+   8.06-10.70  This marine didn't think anyone could drop it.
+Saved references/_study/UrgentPOVs/30000000_LaKnxzGaXnQ/transcript.json

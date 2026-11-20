@@ -1,0 +1,190 @@
+{
+  "clip": "references/UrgentPOVs/7300000_bIgX99kEONs.mp4",
+  "duration": 7.45,
+  "model": "whisper-small int8",
+  "has_speech": true,
+  "lines": [
+    {
+      "start": 0.0,
+      "end": 7.3,
+      "text": "Has? steak and lobster. They know exactly what this means. I'll just take a lobster. All? right. I'm? here? to establish? a great reward for court? of law."
+    }
+  ],
+  "lines_windowed": [
+    {
+      "start": 0.0,
+      "end": 7.3,
+      "text": "Has? steak and lobster. They know exactly what this means. I'll just take a lobster. All? right. I'm? here? to establish? a great reward for court? of law."
+    }
+  ],
+  "words": [
+    {
+      "word": "Has",
+      "start": 0.0,
+      "end": 0.34,
+      "p": 0.09
+    },
+    {
+      "word": "steak",
+      "start": 0.34,
+      "end": 0.72,
+      "p": 0.91
+    },
+    {
+      "word": "and",
+      "start": 0.72,
+      "end": 1.02,
+      "p": 0.9
+    },
+    {
+      "word": "lobster.",
+      "start": 1.02,
+      "end": 1.36,
+      "p": 0.96
+    },
+    {
+      "word": "They",
+      "start": 1.56,
+      "end": 1.7,
+      "p": 0.86
+    },
+    {
+      "word": "know",
+      "start": 1.7,
+      "end": 1.94,
+      "p": 1.0
+    },
+    {
+      "word": "exactly",
+      "start": 1.94,
+      "end": 2.36,
+      "p": 0.99
+    },
+    {
+      "word": "what",
+      "start": 2.36,
+      "end": 2.72,
+      "p": 0.99
+    },
+    {
+      "word": "this",
+      "start": 2.72,
+      "end": 2.94,
+      "p": 0.99
+    },
+    {
+      "word": "means.",
+      "start": 2.94,
+      "end": 3.18,
+      "p": 0.98
+    },
+    {
+      "word": "I'll",
+      "start": 3.28,
+      "end": 3.42,
+      "p": 0.54
+    },
+    {
+      "word": "just",
+      "start": 3.42,
+      "end": 3.52,
+      "p": 0.98
+    },
+    {
+      "word": "take",
+      "start": 3.52,
+      "end": 3.72,
+      "p": 0.96
+    },
+    {
+      "word": "a",
+      "start": 3.72,
+      "end": 3.82,
+      "p": 0.79
+    },
+    {
+      "word": "lobster.",
+      "start": 3.82,
+      "end": 4.02,
+      "p": 0.94
+    },
+    {
+      "word": "All",
+      "start": 4.3,
+      "end": 4.32,
+      "p": 0.38
+    },
+    {
+      "word": "right.",
+      "start": 4.32,
+      "end": 4.52,
+      "p": 0.99
+    },
+    {
+      "word": "I'm",
+      "start": 4.76,
+      "end": 4.92,
+      "p": 0.34
+    },
+    {
+      "word": "here",
+      "start": 4.92,
+      "end": 5.02,
+      "p": 0.49
+    },
+    {
+      "word": "to",
+      "start": 5.02,
+      "end": 5.16,
+      "p": 0.76
+    },
+    {
+      "word": "establish",
+      "start": 5.16,
+      "end": 5.54,
+      "p": 0.14
+    },
+    {
+      "word": "a",
+      "start": 5.54,
+      "end": 5.96,
+      "p": 0.9
+    },
+    {
+      "word": "great",
+      "start": 5.96,
+      "end": 6.1,
+      "p": 0.67
+    },
+    {
+      "word": "reward",
+      "start": 6.1,
+      "end": 6.46,
+      "p": 0.93
+    },
+    {
+      "word": "for",
+      "start": 6.46,
+      "end": 6.76,
+      "p": 0.88
+    },
+    {
+      "word": "court",
+      "start": 6.76,
+      "end": 6.94,
+      "p": 0.32
+    },
+    {
+      "word": "of",
+      "start": 6.94,
+      "end": 7.1,
+      "p": 0.87
+    },
+    {
+      "word": "law.",
+      "start": 7.1,
+      "end": 7.3,
+      "p": 0.72
+    }
+  ]
+}
