@@ -6,6 +6,16 @@ are editorial defaults**: the competitors' videos have not been measured frame b
 the cloud sessions this was built in). Once `references/STYLE_PROFILE.md` exists, its measured numbers win: how often each
 channel tracks or masks, where in the video, at what size and height. Update this file to match it.
 
+## 0. Style presets
+- Default (no preset): **ArmoredPOVs** look. Montserrat ExtraBold CAPS on solid black boxes, coloured ROLE: tag, red italic punchline.
+- `"style": {"preset": "urgent"}`: **UrgentPOVs** look, calibrated against their covers (see `references/UrgentPOVs/NOTES.md`).
+  Sentence-case Open Sans at 84px on translucent boxes; CAPS only for a shouted/stressed word; tag colours per speaker
+  (`tag_color`: green / blue / yellow / orange / red); `Narrator:` red, `Context:` orange + italic bracketed text;
+  `*action*` and `"italic": true` lines in italic; `"note": "(Really mad)"` adds the small lime aside under a line;
+  `"label": true` makes an unboxed top-left info line (`*Drop 1/4*`, `*Time: 10:33*`). Speech in 2-5 word chunks,
+  verbatim, with `..` / `-` / `x2`. Narrator and context mid-frame; a speaker's line beside that speaker.
+  Titles in their format: `[Subject] [VERB IN CAPS]! 😂` (+ `(TT: @source)` when you know the source).
+
 ## 1. Placement (measured / calibrated)
 - Captions sit **next to whoever is speaking or acting**, several on screen at once if several people talk.
   Default: just below the subject's head/chest; action/context captions near the top of the band.

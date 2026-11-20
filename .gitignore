@@ -11,4 +11,10 @@ references/*
 !references/STYLE_PROFILE.md
 !references/STYLE_PROFILE.json
 !references/_study/
+# per-channel folders: keep the notes and ID lists, not the videos
+!references/*/
+references/*/*.mp4
+references/*/*.webm
+references/*/*.mkv
+references/*/.downloaded.txt
 references/_study/**/*.jpg

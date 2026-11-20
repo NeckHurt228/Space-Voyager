@@ -177,7 +177,16 @@ def build_ass(plan: dict, path: Path, behind_path: Path | None = None, tracks: d
     asterisks, optional small watermark at the bottom centre.
     Captions with "behind" go to `behind_path` (drawn under the subject cut-out); returns True if any did."""
     tracks = tracks or {}
-    st = plan.get("style", {})
+    st = dict(plan.get("style", {}))
+    urgent = st.get("preset") == "urgent"
+    if urgent:
+        # UrgentPOVs look (measured from their Short covers at 720x1280, scaled to 1080 wide): sentence-case
+        # Open Sans on translucent dark boxes, coloured speaker tag on its own box, italic *action* lines,
+        # small italic note line under a caption, red Narrator tag, orange Context tag
+        for k, v in {"size": 84, "tag_size": 47, "pad": 10, "pad_y": 0, "tag_pad": 7, "tag_pad_y": 0, "tag_gap": 0,
+                     "font": "Open Sans", "font_italic": "Open Sans", "font_tag": "Open Sans",
+                     "font_watermark": "Open Sans SemiBold", "caption_y": 900}.items():
+            st.setdefault(k, v)
     # sizes calibrated against ArmoredPOVs frames (rendered side by side at the same scale)
     size = st.get("size", 88)              # main caption font size (1080-wide canvas)
     tag_size = st.get("tag_size", 50)
@@ -193,13 +202,18 @@ def build_ass(plan: dict, path: Path, behind_path: Path | None = None, tracks: d
     f_ital = st.get("font_italic", "MontserratXBI")
     f_tag = st.get("font_tag", "MontserratB")
     f_mark = st.get("font_watermark", "MontserratSB")
+    box = st.get("box_color", "&H58141414" if urgent else "&H00070707")   # AABBGGRR, AA 00 = opaque
+    ital_col, ital_flag = ("&H00FFFFFF", -1) if urgent else ("&H002020E6", 0)
+    note_size = st.get("note_size", int(size * (0.43 if urgent else 0.6)))
     styles = [
-        f"Style: Box,{f_main},{size},&H00FFFFFF,&H00FFFFFF,&H00070707,&H00070707,0,0,0,0,100,100,0,0,3,{pad},0,8,40,40,0,1",
-        f"Style: BoxI,{f_ital},{size},&H002020E6,&H002020E6,&H00070707,&H00070707,0,0,0,0,100,100,0,0,3,{pad},0,8,40,40,0,1",
-        f"Style: Tag,{f_tag},{tag_size},&H0000E5FF,&H0000E5FF,&H00070707,&H00070707,0,0,0,0,100,100,0,0,3,{tag_pad},0,2,40,40,0,1",
+        f"Style: Box,{f_main},{size},&H00FFFFFF,&H00FFFFFF,{box},{box},0,0,0,0,100,100,0,0,3,{pad},0,8,40,40,0,1",
+        f"Style: BoxI,{f_ital},{size},{ital_col},{ital_col},{box},{box},0,{ital_flag},0,0,100,100,0,0,3,{pad},0,8,40,40,0,1",
+        f"Style: Tag,{f_tag},{tag_size},&H0000E5FF,&H0000E5FF,{box},{box},0,0,0,0,100,100,0,0,3,{tag_pad},0,2,40,40,0,1",
+        f"Style: Note,{f_ital},{note_size},&H0024D2F7,&H0024D2F7,{box},{box},0,-1,0,0,100,100,0,0,3,{pad},0,8,40,40,0,1",
         f"Style: Mark,{f_mark},{st.get('watermark_size', 50)},&H00FFFFFF,&H00FFFFFF,&H00000000,&H80000000,0,0,0,0,100,100,0,0,1,0,3,5,40,40,0,1",
         "Style: Draw,Arial,20,&H00FFFFFF,&H00FFFFFF,&H002020E6,&H00000000,0,0,0,0,100,100,0,0,1,0,0,7,0,0,0,1",
-        f"Style: Head,{f_main},{st.get('header_size', 58)},&H00FFFFFF,&H00FFFFFF,&H00070707,&H00070707,0,0,0,0,100,100,6,0,3,{pad},0,8,40,40,0,1",
+        f"Style: Head,{f_main},{st.get('header_size', 58)},&H00FFFFFF,&H00FFFFFF,{box},{box},0,0,0,0,100,100,6,0,3,{pad},0,8,40,40,0,1",
+        f"Style: Label,{f_ital},{int(size * 0.62)},&H00FFFFFF,&H00FFFFFF,&H00000000,&H80000000,0,-1,0,0,100,100,0,0,1,1,2,7,40,40,0,1",
     ]
     lines = _ass_header(styles)
     behind_lines = _ass_header(styles)
@@ -210,16 +224,29 @@ def build_ass(plan: dict, path: Path, behind_path: Path | None = None, tracks: d
 
     tag_colors = {"green": "&H3BEA3B&", "teal": "&HEAFC37&", "cyan": "&HEAFC37&", "yellow": "&H00E5FF&",
                   "white": "&HFFFFFF&", "red": "&H2020E6&", "orange": "&H0090FF&"}
+    if urgent:  # UrgentPOVs palette: narrator red, context orange, one colour per speaker
+        tag_colors.update({"red": "&H2F2FD3&", "orange": "&H3BA9F2&", "blue": "&HF2A63E&", "green": "&H64D94C&",
+                           "yellow": "&H3ED2F7&", "white": "&HFFFFFF&", "lime": "&H5AE6E6&"})
     any_behind = False
     for c in plan.get("captions", []):
         a, b = c["start"], c["end"]
         text = c["text"].replace("\n", r"\N")
         red = c.get("color") == "red"
-        if red:  # red italic, asterisks stay white
+        if urgent:
+            # italic for *actions* and stat callouts; red only when asked (e.g. "*~4,000 lbs recoiling*")
+            red = c.get("italic", c["text"].lstrip().startswith("*"))
+            if c.get("color") == "red":
+                text = rf"{{\c{tag_colors['red']}}}" + text
+            elif c.get("color") and c["color"] != "white":
+                text = rf"{{\c{tag_colors.get(c['color'], c['color'])}}}" + text
+        elif red:  # red italic, asterisks stay white
             text = text.replace("*", r"{\c&HFFFFFF&}*{\c&H2020E6&}")
-        elif c.get("color") and c["color"] != "white":
+        elif c.get("color") and c["color"] != "white" and not urgent:
             text = rf"{{\c{tag_colors.get(c['color'], c['color'])}}}" + text
         fs = rf"\fs{c['size']}" if c.get("size") else ""  # per-caption size, e.g. one big punch word
+        if c.get("label"):  # e.g. *Drop 1/4* or *Time: 10:33*: no box, small italic, anchored top-left
+            ev(2, a, b, "Label", rf"{{\an7\pos({c.get('x', 70)},{c.get('y', 330)})}}{text}")
+            continue
         if c.get("follow"):
             if c["follow"] not in tracks:
                 die(f"caption '{c['text']}' follows unknown track '{c['follow']}'")
@@ -238,6 +265,12 @@ def build_ass(plan: dict, path: Path, behind_path: Path | None = None, tracks: d
                 dty = - pad_y - tag_pad_y - gap - lift
                 tplace = rf"\pos({x},{y + dty})" if (x, y) == (x2, y2) else rf"\move({x},{y + dty},{x2},{y2 + dty},0,{ms})"
                 ev(3, pa, pb, "Tag", rf"{{{tplace}\xbord{tag_pad}\ybord{tag_pad_y}\c{tag_colors.get(c.get('tag_color', 'green'), c.get('tag_color'))}}}{c['tag']}", target)
+            if c.get("note"):  # small italic line under the caption, e.g. "(Really mad)" / "(Last thing you wanna hear)"
+                n_lines = c["text"].count("\n") + 1
+                dny = int(n_lines * c.get("size", size) * (1.04 if urgent else 1.2)) + pad_y
+                nplace = rf"\pos({x},{y + dny})" if (x, y) == (x2, y2) else rf"\move({x},{y + dny},{x2},{y2 + dny},0,{ms})"
+                ncol = tag_colors.get(c.get("note_color", "lime"), c.get("note_color", "lime"))
+                ev(2, pa, pb, "Note", rf"{{{nplace}\xbord{pad}\ybord{pad_y}\c{ncol}}}{c['note']}", target)
 
     for h in plan.get("header", []):  # optional progress tracker, in the same box style
         word, filled = h["word"], h["filled"]

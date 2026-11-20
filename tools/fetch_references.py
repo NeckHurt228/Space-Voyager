@@ -22,7 +22,9 @@ ROOT = Path(__file__).resolve().parent.parent
 
 def main() -> None:
     ap = argparse.ArgumentParser()
-    ap.add_argument("channels", nargs="+", help="handles like @ArmoredPOVs, or channel URLs")
+    ap.add_argument("channels", nargs="*", help="handles like @ArmoredPOVs, or channel URLs")
+    ap.add_argument("--ids-file", default=None,
+                    help="download exactly these video IDs (one per line) into the file's folder, e.g. references/UrgentPOVs/ids.txt")
     ap.add_argument("--top", type=int, default=25, help="most-viewed Shorts per channel (default 25)")
     ap.add_argument("--latest", type=int, default=5, help="also the N newest Shorts (default 5)")
     a = ap.parse_args()
@@ -31,6 +33,21 @@ def main() -> None:
     except ImportError:
         sys.exit("yt-dlp is missing: pip install -U yt-dlp")
 
+    if a.ids_file:
+        ids_path = Path(a.ids_file)
+        ids = [l.strip().split("|")[0] for l in ids_path.read_text().splitlines() if l.strip() and not l.startswith("#")]
+        out = ids_path.parent
+        opts = {"format": "bv*[height>=1080]+ba/bv*+ba/b", "merge_output_format": "mp4",
+                "outtmpl": str(out / "%(view_count)s_%(id)s.%(ext)s"), "download_archive": str(out / ".downloaded.txt"),
+                "quiet": True, "no_warnings": True, "noprogress": True}
+        with yt_dlp.YoutubeDL(opts) as y:
+            for vid in ids:
+                try:
+                    y.download([f"https://www.youtube.com/shorts/{vid}"])
+                    print(f"  ok  {vid}")
+                except Exception as ex:
+                    print(f"  skip {vid}: {str(ex)[:120]}")
+        print(f"done: {out}")
     for ch in a.channels:
         handle = ch.rstrip("/").split("/")[-1]
         if not handle.startswith("@") and "youtube.com" not in ch:
