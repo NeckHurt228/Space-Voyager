@@ -86,6 +86,7 @@ Watch the clip once with **the sound off**, then once with sound. Tick each one.
 | **Sandbag run (no audio joke)** | Skip | Nothing happens on screen |
 | **Your reunion clip** | **~100K (posted)** | Emotional, anyone gets it, shareable. Your best type so far |
 | **Your funny skit** | **40K+ (posted)** | Staged comedy that landed |
+| **"Someone's eating booty" street prank** | Skip (18+ risk) | Sexual slang joke plus a brown smear on his mouth that implies poop. Likely age-restricted. Also not military, so it's off-niche |
 
 ---
 
