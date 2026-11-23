@@ -77,28 +77,29 @@ It renders a 1080x1920 Short in the competitor style: jump cuts, bleeps, punch-i
 ArmoredPOVs-style captions (Montserrat on black boxes, coloured role tags, red italic punchlines), a centre band with blurred bars, a bass-hit SFX, and -14 LUFS loudness. It also mixes in the
 voiceover when one exists.
 
-## Niche finder (faceless Shorts niches proven by new channels)
+## Niche Finder app (faceless Shorts niches proven by new channels)
 
-```
-export YOUTUBE_API_KEY=...                 # free: Google Cloud console > enable YouTube Data API v3 > API key
-pip install "opencv-python-headless<5"     # optional: enables the faceless check
-python3 tools/niche_finder.py
-```
+**Open it:** double-click `Niche Finder.command` (Mac; the first time, right-click → Open) or `Niche Finder.bat` (Windows).
+Or run `python3 tools/niche_app.py`. It opens in your browser and runs on your computer. Only Python 3 is needed.
+Try it without a key first: `python3 tools/niche_app.py --demo` (made-up channels, clearly marked).
 
-It finds channels **created in the last 30 days** that pulled **10M+ views in the last 7 days** with Shorts,
-checks whether their thumbnails show faces, and groups them into niches by shared keywords. One new channel
-doing that is a signal. Several in the same niche means the niche is proven. Results go to
-`reports/niches/` as an HTML report with thumbnails, plus CSV and JSON files.
+1. **Connect YouTube** once: the app walks you through getting a free API key from Google Cloud.
+2. **Pick your bar:** how new the channel is (default 30 days), how many views (default 10 million) and in how long (default 7 days),
+   plus countries, topics to search, and "Only faceless channels".
+3. **Press Find niches.** In 1–3 minutes you get the niches ranked ("Proven" = 2+ new channels), every channel with its top
+   Shorts, and the ones that almost made it. Past searches stay in the sidebar. Download a spreadsheet or a printable report.
 
-- Every threshold can be changed: `--min-views 5000000 --max-channel-age 45 --days 7 --regions US,GB,IN --faceless-only`
-- Search queries live in `tools/niche_seeds.txt`. Each one costs 100 of your 10,000 free daily quota units;
-  a default run uses about 4,000.
-- The API gives no "views in the last 7 days" for other people's channels, so the tool uses the best number it has
-  and labels it: `exact` (channel 7 days old or younger), `snapshot` (difference from a run 6+ days ago),
-  or `uploads` (views on this week's uploads, a lower bound). **Run it daily**: snapshots make the numbers exact,
-  and channels it has already found are re-checked cheaply (`--recheck-only` does only that).
-- The faceless check is a heuristic (face detection on thumbnails). Open the report and look before you commit to a niche.
-- Offline test: `python3 tools/test_niche_finder.py`
+For the faceless check, also install `pip install "opencv-python-headless<5"`. Without it, channels show "Faces not checked".
+
+How views are counted: YouTube doesn't publish other channels' views for the last 7 days, so each number is labelled
+**Exact** (the channel is younger than the window), **Measured** (from your search of it 6+ days earlier) or **At least**
+(views on videos posted in the window, so the real number is higher). **Search daily**: more results become Measured, and
+channels found earlier are re-checked for almost nothing.
+
+YouTube gives 10,000 free units a day. Each topic searched costs 100; the default search uses about 4,200. The app shows
+the cost before you press the button. Your key is saved only in `reports/niches/settings.json` on your computer.
+
+Command-line version: `YOUTUBE_API_KEY=... python3 tools/niche_finder.py --help`. Offline test: `python3 tools/test_niche_finder.py`.
 
 ## Files
 - `.claude/skills/clip-coach/SKILL.md`: the agent's workflow
@@ -107,7 +108,8 @@ doing that is a signal. Several in the same niche means the niche is proven. Res
 - `.claude/skills/clip-coach/hook-library.md`: hook types, title formulas, caption style, sound palette, pacing templates
 - `.claude/skills/clip-coach/voiceover.md`: VO personas, voices, humour and timing rules, pipeline
 - `tools/clip_analyzer.py`: the measurement script
-- `tools/niche_finder.py` + `tools/niche_seeds.txt`: finds Shorts niches proven by new channels
+- `tools/niche_app.py` + `tools/niche_app/index.html`: the Niche Finder app (launchers: `Niche Finder.command` / `.bat`)
+- `tools/niche_finder.py` + `tools/niche_seeds.txt`: the niche search engine and its default topics (also a command-line tool)
 - `tools/vo_mix.py`: voiceover timing check and mixer
 - `tools/render_edit.py`: renders the finished edit from an edit plan
 - `tools/remove_overlay.py`: removes baked-in emojis, stickers or small text from a clip (needs `opencv-python-headless`)

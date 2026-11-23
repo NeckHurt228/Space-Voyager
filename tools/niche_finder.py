@@ -392,7 +392,8 @@ def group_niches(channels: list[Channel]) -> list[dict]:
         niches.append({"niche": term, "related": related, "channels": len(chs), "views_7d": views,
                        "faceless_channels": sum(1 for c in chs if c.faceless == "yes"),
                        "faceless_checked": sum(1 for c in chs if c.faceless != "unknown"),
-                       "channel_titles": [c.title for c in sorted(chs, key=lambda c: -c.views_7d)]})
+                       "channel_titles": [c.title for c in sorted(chs, key=lambda c: -c.views_7d)],
+                       "channel_ids": [c.id for c in sorted(chs, key=lambda c: -c.views_7d)]})
     niches.sort(key=lambda n: (-n["channels"], -n["views_7d"]))
     # drop niches whose channel set is identical to a stronger niche (same channels, weaker term)
     seen, out = set(), []
@@ -619,11 +620,17 @@ def run(args) -> int:
               "Credentials > Create credentials > API key.", file=sys.stderr)
         return 2
     api = YouTubeAPI(key, args.quota_budget, args.verbose)
-    return pipeline(api, args)
+    pipeline(api, args)
+    return 0
 
 
-def pipeline(api: YouTubeAPI, args) -> int:
-    log = (lambda *a: None) if args.quiet else (lambda *a: print(*a, file=sys.stderr))
+def pipeline(api: YouTubeAPI, args, log=None, on_stage=None) -> dict:
+    """Runs the whole search. `log(text)` receives progress lines and `on_stage(n, label)` is
+    called at each of the 5 stages (both optional; the desktop app uses them).
+    Returns {"stamp", "json", "html", "csv", "meta"}."""
+    if log is None:
+        log = (lambda *a: None) if args.quiet else (lambda *a: print(*a, file=sys.stderr))
+    stage = on_stage or (lambda n, label: None)
     ts = now_utc()
     out = Path(args.out)
     out.mkdir(parents=True, exist_ok=True)
@@ -631,7 +638,7 @@ def pipeline(api: YouTubeAPI, args) -> int:
     published_after = ts - timedelta(days=args.days)
     created_after = ts - timedelta(days=args.max_channel_age)
     regions = [r.strip().upper() for r in args.regions.split(",") if r.strip()]
-    seeds = load_seeds(Path(args.seeds))
+    seeds = getattr(args, "seed_list", None) or load_seeds(Path(args.seeds))
 
     log(f"Window: Shorts published since {published_after:%Y-%m-%d %H:%M} UTC; "
         f"channels created since {created_after:%Y-%m-%d}; threshold {fmt_num(args.min_views)} views/7d")
@@ -639,6 +646,7 @@ def pipeline(api: YouTubeAPI, args) -> int:
     # ---- 1. discovery
     video_ids: set[str] = set()
     found_by: dict[str, str] = {}
+    stage(1, "Searching this week's top Shorts")
     if not args.recheck_only:
         log(f"Discovering ({len(seeds)} seed queries x {len(regions)} region(s) x {args.pages} page(s), "
             f"budget {api.budget} units)...")
@@ -659,6 +667,7 @@ def pipeline(api: YouTubeAPI, args) -> int:
         f"(incl. watchlist)")
 
     # ---- 2. channel age filter
+    stage(2, "Checking channel ages")
     try:
         channels = fetch_channels(api, list(candidate_channels))
     except QuotaExhausted as e:
@@ -675,6 +684,7 @@ def pipeline(api: YouTubeAPI, args) -> int:
     log(f"  {len(young)} young channels have enough total views to possibly qualify; measuring...")
 
     # ---- 3. measure 7-day views
+    stage(3, "Measuring views")
     categories = load_categories(api)
     measured: list[Channel] = []
     for ch in young:
@@ -689,9 +699,12 @@ def pipeline(api: YouTubeAPI, args) -> int:
             ch.qualifies = ch.qualifies and any(v["views"] >= args.video_min_views for v in ch.top_videos)
         measured.append(ch)
         store.watch(ch, ts)
+        log(f"  measured {ch.title}: {fmt_num(ch.views_7d)} views in {args.days}d"
+            + ("  -> QUALIFIES" if ch.qualifies else ""))
     store.commit()
 
     # ---- 4. faceless check on qualifiers
+    stage(4, "Checking for faces")
     hits = [c for c in measured if c.qualifies]
     fc = FaceChecker() if args.faceless != "off" else None
     if fc and not fc.ok:
@@ -713,7 +726,8 @@ def pipeline(api: YouTubeAPI, args) -> int:
     niches = group_niches(hits)
 
     # ---- 5. outputs
-    stamp = ts.strftime("%Y-%m-%d_%H%M")
+    stage(5, "Grouping niches")
+    stamp = ts.strftime("%Y-%m-%d_%H%M%S")
     meta = {"generated": iso(ts), "days": args.days, "min_views": args.min_views,
             "max_channel_age_days": args.max_channel_age, "regions": regions, "seed_queries": len(seeds),
             "quota_used": api.used, "videos_scanned": len(vids), "channels_scanned": len(channels),
@@ -724,9 +738,11 @@ def pipeline(api: YouTubeAPI, args) -> int:
          "near_misses": [asdict(c) for c in near]}, indent=2))
     write_html(out / f"niches_{stamp}.html", meta, niches, hits, near)
 
-    print_summary(meta, niches, hits, near)
-    print(f"\nReport: {out / f'niches_{stamp}.html'}\nCSV:    {out / f'niches_{stamp}.csv'}")
-    return 0
+    if not args.quiet:
+        print_summary(meta, niches, hits, near)
+        print(f"\nReport: {out / f'niches_{stamp}.html'}\nCSV:    {out / f'niches_{stamp}.csv'}")
+    return {"stamp": stamp, "json": str(out / f"niches_{stamp}.json"), "html": str(out / f"niches_{stamp}.html"),
+            "csv": str(out / f"niches_{stamp}.csv"), "meta": meta}
 
 
 # --------------------------------------------------------------------------

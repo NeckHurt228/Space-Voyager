@@ -72,7 +72,7 @@ class FakeAPI(nf.YouTubeAPI):
         if endpoint == "videos" and p.get("chart"):
             return {"items": [{"id": "v8"}]}
         if endpoint == "search":
-            assert p["publishedAfter"] <= ago(6.9) and p["videoDuration"] == "short"
+            assert p["videoDuration"] == "short" and p["order"] == "viewCount"
             ids = ["v1", "v5", "v7", "v8"] if p.get("q") is None else []
             return {"items": [{"id": {"videoId": i}} for i in ids]}
         if endpoint == "videos":
@@ -103,7 +103,7 @@ def main():
         assert nf.load_seeds(seeds) == ["", "ai cat"]
         args = nf.build_parser().parse_args(["--seeds", str(seeds), "--out", tmp, "--faceless", "off", "--quiet"])
         api = FakeAPI()
-        assert nf.pipeline(api, args) == 0
+        assert nf.pipeline(api, args)["stamp"]
         data = json.loads(next(Path(tmp).glob("niches_*.json")).read_text())
         got = {c["id"]: c for c in data["channels"]}
         assert set(got) == {"UC_new_hit", "UC_baby"}, got.keys()
@@ -123,7 +123,7 @@ def main():
                                               "--quiet", "--recheck-only"])
         for f in Path(tmp).glob("niches_*"):
             f.unlink()
-        assert nf.pipeline(FakeAPI(), args2) == 0
+        assert nf.pipeline(FakeAPI(), args2)["stamp"]
         data = json.loads(next(Path(tmp).glob("niches_*.json")).read_text())
         hit = {c["id"]: c for c in data["channels"]}["UC_new_hit"]
         assert abs(hit["views_7d"] - 20_000_000) < 1000 and hit["views_7d_method"].startswith("snapshot"), hit
