@@ -1,0 +1,519 @@
+<title>Niche Finder</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap">
+<style>
+/* Layout: sticky top bar, sidebar of past searches + main panel with two tabs (Results / Search settings). */
+:root{
+  --bg:#f4f4f1; --panel:#ffffff; --panel-2:#f9f9f6; --line:#e4e3dd; --line-2:#d3d2cb;
+  --text:#1b1b19; --muted:#6a6964; --faint:#9a9992;
+  --accent:#e0402f; --accent-ink:#ffffff; --accent-soft:#fcebe8;
+  --good:#1d8549; --good-soft:#e3f3e9; --warn:#9c5d08; --warn-soft:#faf0dc; --info:#2d5fc4; --info-soft:#e7edfa;
+  --shadow:0 1px 2px rgba(24,20,10,.05),0 4px 14px rgba(24,20,10,.05);
+  --font-body:"Inter",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --font-display:"Space Grotesk","Inter",ui-sans-serif,system-ui,sans-serif;
+  --r:14px;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#121211; --panel:#1b1b19; --panel-2:#21211f; --line:#2d2d2a; --line-2:#3b3b37;
+  --text:#ecebe5; --muted:#a4a39c; --faint:#77766f;
+  --accent:#ff5d4a; --accent-ink:#1d0c09; --accent-soft:#3a1d18;
+  --good:#4fc681; --good-soft:#163222; --warn:#e3a44c; --warn-soft:#3a2b13; --info:#82a7ff; --info-soft:#1b2641;
+  --shadow:none; color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --bg:#121211; --panel:#1b1b19; --panel-2:#21211f; --line:#2d2d2a; --line-2:#3b3b37;
+  --text:#ecebe5; --muted:#a4a39c; --faint:#77766f;
+  --accent:#ff5d4a; --accent-ink:#1d0c09; --accent-soft:#3a1d18;
+  --good:#4fc681; --good-soft:#163222; --warn:#e3a44c; --warn-soft:#3a2b13; --info:#82a7ff; --info-soft:#1b2641;
+  --shadow:none; color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font:15px/1.5 var(--font-body);-webkit-font-smoothing:antialiased}
+button,input,select{font:inherit;color:inherit}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;display:flex;align-items:center;gap:12px;
+  padding-block:12px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
+  background:var(--bg);border-bottom:1px solid var(--line)}
+.logo{display:flex;align-items:center;gap:10px;font:700 17px/1 var(--font-display);letter-spacing:-.01em}
+.logo-mark{width:30px;height:30px;border-radius:9px;background:var(--accent);display:grid;place-items:center;flex:none}
+.logo-mark svg{width:15px;height:15px;fill:var(--accent-ink)}
+.top .spacer{flex:1}
+.status{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--muted)}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--faint);flex:none}
+.dot.on{background:var(--good)} .dot.off{background:var(--warn)}
+
+.layout{display:grid;grid-template-columns:230px minmax(0,1fr);gap:24px;max-width:1220px;margin:0 auto;
+  padding-block:24px 72px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.side h4{margin:4px 0 10px;font-size:12px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)}
+.hist{display:flex;flex-direction:column;gap:6px}
+.hist button{all:unset;box-sizing:border-box;cursor:pointer;display:block;padding:10px 12px;border-radius:10px;border:1px solid transparent}
+.hist button:hover{background:var(--panel)}
+.hist button:focus-visible{outline:2px solid var(--accent)}
+.hist button.active{background:var(--panel);border-color:var(--line-2)}
+.hist b{display:block;font-size:14px;font-weight:600}
+.hist span{font-size:12.5px;color:var(--muted)}
+.hist .empty{font-size:13px;color:var(--faint);padding:4px 2px}
+
+.tabs{display:flex;gap:4px;padding:4px;background:var(--panel-2);border:1px solid var(--line);border-radius:12px;width:max-content;max-width:100%;margin-bottom:20px}
+.tabs button{all:unset;cursor:pointer;padding:8px 16px;border-radius:9px;font-weight:600;font-size:14px;color:var(--muted)}
+.tabs button[aria-selected="true"]{background:var(--panel);color:var(--text);box-shadow:var(--shadow)}
+.tabs button:focus-visible{outline:2px solid var(--accent)}
+
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);padding:24px}
+h1{font:700 26px/1.2 var(--font-display);letter-spacing:-.02em;margin:0 0 6px;text-wrap:balance}
+h2{font:600 19px/1.3 var(--font-display);letter-spacing:-.01em;margin:0}
+.sub{color:var(--muted);margin:0;max-width:68ch}
+.section-title{display:flex;align-items:baseline;justify-content:space-between;gap:4px 12px;flex-wrap:wrap;margin:34px 0 12px}
+.section-title p{margin:0;color:var(--muted);font-size:13.5px}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:10px;border:1px solid var(--line-2);background:var(--panel);padding:9px 16px;font-weight:600;cursor:pointer;text-decoration:none;white-space:nowrap}
+.btn:hover{background:var(--panel-2)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+
+.banner{margin:16px 0 0;padding:12px 14px;border-radius:10px;background:var(--warn-soft);color:var(--warn);font-size:14px;font-weight:600}
+.note{margin:16px 0 0;padding:12px 14px;border-radius:10px;background:var(--panel-2);border:1px solid var(--line);color:var(--muted);font-size:14px}
+
+.tiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:20px}
+.tile{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px;box-shadow:var(--shadow)}
+.tile b{display:block;font:700 28px/1.1 var(--font-display);letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.tile span{font-size:13px;color:var(--muted)}
+
+.niches{display:flex;flex-direction:column;gap:10px}
+.niche{all:unset;box-sizing:border-box;cursor:pointer;display:grid;grid-template-columns:44px minmax(0,1fr) auto;align-items:center;gap:14px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px;box-shadow:var(--shadow);width:100%}
+.niche:hover{border-color:var(--line-2)}
+.niche:focus-visible{outline:2px solid var(--accent)}
+.niche.sel{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.rank{width:44px;height:44px;border-radius:12px;background:var(--panel-2);border:1px solid var(--line);display:grid;place-items:center;font:700 15px var(--font-display);color:var(--muted)}
+.niche h3{margin:0;font:600 17px/1.3 var(--font-display);text-transform:capitalize;overflow-wrap:anywhere}
+.niche p{margin:2px 0 0;font-size:13.5px;color:var(--muted);overflow-wrap:anywhere}
+.niche .num{text-align:right}
+.niche .num b{display:block;font:700 20px var(--font-display);font-variant-numeric:tabular-nums}
+.niche .num span{font-size:12px;color:var(--muted)}
+
+.badge{display:inline-flex;align-items:center;padding:2px 9px;border-radius:999px;font-size:12px;font-weight:600;white-space:nowrap}
+.b-proven,.b-face-yes,.b-m-exact{background:var(--good-soft);color:var(--good)}
+.b-signal,.b-m-snapshot{background:var(--info-soft);color:var(--info)}
+.b-face-no{background:var(--accent-soft);color:var(--accent)}
+.b-m-uploads{background:var(--warn-soft);color:var(--warn)}
+.b-plain{background:var(--panel-2);color:var(--muted);border:1px solid var(--line)}
+.badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+
+.filterbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:-2px 0 12px;font-size:14px;color:var(--muted)}
+.channels{display:grid;gap:14px}
+.ch{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:18px;box-shadow:var(--shadow)}
+.ch-top{display:grid;grid-template-columns:48px minmax(0,1fr) auto;gap:14px;align-items:center}
+.av{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;font:700 18px var(--font-display);color:#fff}
+.ch h3{margin:0;font:600 17px/1.3 var(--font-display);overflow-wrap:anywhere}
+.ch h3 a{text-decoration:none}
+.ch h3 a:hover{text-decoration:underline}
+.ch .meta{font-size:13.5px;color:var(--muted);margin-top:1px}
+.ch-views{text-align:right}
+.ch-views b{display:block;font:700 28px/1.1 var(--font-display);letter-spacing:-.02em;color:var(--accent);font-variant-numeric:tabular-nums}
+.ch-views span{font-size:12.5px;color:var(--muted)}
+.kw{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.kw span{font-size:12.5px;padding:2px 8px;border-radius:6px;background:var(--panel-2);border:1px solid var(--line);color:var(--muted)}
+.vids{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:14px}
+.vid{text-decoration:none;display:flex;flex-direction:column;justify-content:space-between;gap:10px;aspect-ratio:9/12;max-width:100%;border-radius:10px;padding:12px;color:#fff;position:relative;overflow:hidden}
+.vid::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 30%,rgba(0,0,0,.55))}
+.vid > *{position:relative;z-index:1}
+.vid .play{width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.22);display:grid;place-items:center}
+.vid .play svg{width:11px;height:11px;fill:#fff;margin-left:2px}
+.vid b{font:700 20px var(--font-display);font-variant-numeric:tabular-nums;display:block}
+.vid p{margin:2px 0 0;font-size:12.5px;line-height:1.35;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;opacity:.95}
+.vid:hover{filter:brightness(1.07)}
+
+.table-wrap{overflow-x:auto;background:var(--panel);border:1px solid var(--line);border-radius:12px}
+table{width:100%;min-width:480px;border-collapse:collapse;font-size:14px}
+th,td{padding:11px 14px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:0}
+th{font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:600}
+td.r,th.r{text-align:right;font-variant-numeric:tabular-nums}
+
+.explain{margin-top:34px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.explain div{padding:14px;border-radius:12px;background:var(--panel-2);border:1px solid var(--line);font-size:13.5px;color:var(--muted)}
+.foot{margin-top:24px;font-size:13px;color:var(--faint)}
+.empty-state{text-align:center;padding:40px 20px}
+
+/* settings */
+.q-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:22px 0 8px}
+.q{background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:16px}
+.q label{display:block;font-weight:600;margin-bottom:2px}
+.q small{display:block;color:var(--muted);font-size:13px;margin-bottom:10px}
+select,input[type=text]{background:var(--panel);border:1px solid var(--line-2);border-radius:10px;padding:10px 12px;outline:none;min-width:0}
+select:focus,input:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.q select{width:100%;font-size:16px;font-weight:600}
+.sentence{margin:18px 0 0;padding:14px 16px;border-radius:12px;background:var(--accent-soft);font-size:15px}
+.sentence b{color:var(--accent)}
+.field{margin-top:22px}
+.field-label{display:block;font-weight:600;margin-bottom:2px}
+.field-help{display:block;color:var(--muted);font-size:13px;margin-bottom:10px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:999px;border:1px solid var(--line-2);background:var(--panel);font-size:14px;cursor:pointer}
+.chip.on{background:var(--text);border-color:var(--text);color:var(--bg)}
+.chip.seed{cursor:default}
+.chip .x{all:unset;cursor:pointer;opacity:.55;font-size:15px;line-height:1;padding:0 2px}
+.chip .x:hover{opacity:1}
+.addrow{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+.addrow input{flex:1;min-width:0;flex-basis:200px}
+.toggle{display:flex;align-items:center;gap:14px;cursor:pointer;padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--panel-2)}
+.toggle input{position:absolute;opacity:0;width:1px;height:1px}
+.sw{display:block;width:44px;height:26px;border-radius:999px;background:var(--line-2);position:relative;flex:none;transition:.2s}
+.sw::after{content:"";position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:#fff;transition:.2s;box-shadow:0 1px 2px rgba(0,0,0,.2)}
+.toggle input:checked + .sw{background:var(--good)}
+.toggle input:checked + .sw::after{left:21px}
+.toggle input:focus-visible + .sw{outline:2px solid var(--accent);outline-offset:2px}
+.toggle b{display:block}
+.toggle span.d{font-size:13px;color:var(--muted)}
+.run{margin-top:26px;padding:18px;border-radius:12px;border:1px dashed var(--line-2);display:grid;grid-template-columns:minmax(0,1fr) auto;gap:14px;align-items:center}
+.run p{margin:0}
+.run code{display:inline-block;margin-top:6px;padding:6px 10px;border-radius:8px;background:var(--panel-2);border:1px solid var(--line);font:500 14px ui-monospace,SFMono-Regular,Menlo,monospace;user-select:all;overflow-wrap:anywhere}
+.saved{font-size:13px;color:var(--muted);margin-top:14px;min-height:20px}
+
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--text);color:var(--bg);padding:10px 16px;border-radius:10px;font-size:14px;z-index:20}
+
+@media (max-width:860px){
+  .layout{grid-template-columns:minmax(0,1fr);gap:16px}
+  .hist{flex-direction:row;overflow-x:auto;padding-bottom:4px}
+  .hist button{flex:none;max-width:230px;background:var(--panel);border-color:var(--line)}
+  .hist button.active{border-color:var(--accent)}
+  .tiles{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .q-grid,.explain{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:560px){
+  .card{padding:18px}
+  .niche{grid-template-columns:36px minmax(0,1fr)}.rank{width:36px;height:36px}.niche .num{grid-column:2;text-align:left}
+  .ch-top{grid-template-columns:44px minmax(0,1fr)}.ch-views{grid-column:1/-1;text-align:left}
+  .vids{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .run{grid-template-columns:minmax(0,1fr)}
+}
+</style>
+
+<header class="top">
+  <div class="logo"><div class="logo-mark"><svg viewBox="0 0 16 16"><path d="M4 2.5v11l9-5.5z"/></svg></div>Niche Finder</div>
+  <div class="spacer"></div>
+  <span class="status"><span class="dot" id="dbDot"></span><span id="dbText">Connecting…</span></span>
+</header>
+
+<div class="layout">
+  <aside class="side">
+    <h4>Past searches</h4>
+    <div class="hist" id="history"><div class="empty">Loading…</div></div>
+  </aside>
+
+  <main>
+    <div class="tabs" role="tablist">
+      <button type="button" role="tab" id="tabResults" aria-selected="true">Results</button>
+      <button type="button" role="tab" id="tabSettings" aria-selected="false">Search settings</button>
+    </div>
+
+    <section id="resultsView">
+      <div class="card empty-state" id="resultsEmpty">
+        <h2>Loading your searches…</h2>
+        <p class="sub" style="margin:8px auto 0">Your niche searches appear here as soon as they finish.</p>
+      </div>
+      <div id="results" hidden></div>
+    </section>
+
+    <section id="settingsView" hidden>
+      <div class="card">
+        <h1>What should the next search look for?</h1>
+        <p class="sub">Shows brand-new YouTube channels that are blowing up with Shorts right now. If a channel this new gets this many views, the niche works. Changes save on their own.</p>
+
+        <div class="q-grid">
+          <div class="q">
+            <label for="fAge">How new is the channel?</label>
+            <small>Started within the last…</small>
+            <select id="fAge"><option value="7">7 days</option><option value="14">14 days</option><option value="30">30 days</option><option value="45">45 days</option><option value="60">60 days</option><option value="90">90 days</option></select>
+          </div>
+          <div class="q">
+            <label for="fViews">How many views?</label>
+            <small>At least…</small>
+            <select id="fViews"><option value="1000000">1 million</option><option value="2000000">2 million</option><option value="5000000">5 million</option><option value="10000000">10 million</option><option value="20000000">20 million</option><option value="50000000">50 million</option></select>
+          </div>
+          <div class="q">
+            <label for="fDays">In how long?</label>
+            <small>Views gained in the last…</small>
+            <select id="fDays"><option value="3">3 days</option><option value="7">7 days</option><option value="14">14 days</option><option value="30">30 days</option></select>
+          </div>
+        </div>
+        <p class="sentence" id="sentence"></p>
+
+        <div class="field">
+          <label class="toggle" for="fFaceless">
+            <input type="checkbox" id="fFaceless"><span class="sw"></span>
+            <span><b>Only faceless channels</b><span class="d">Hide channels whose thumbnails show a person's face.</span></span>
+          </label>
+        </div>
+
+        <div class="field">
+          <span class="field-label">Countries</span>
+          <span class="field-help">Where to look for trending Shorts. Each extra country makes the search bigger.</span>
+          <div class="chips" id="regions"></div>
+        </div>
+
+        <div class="field">
+          <label class="field-label" for="seedInput">Niches to search</label>
+          <span class="field-help">Topics to look through. Add your own ideas, remove the ones you don't care about.</span>
+          <div class="chips" id="seeds"></div>
+          <div class="addrow">
+            <input type="text" id="seedInput" placeholder="Add a topic, e.g. ai cooking" autocomplete="off">
+            <button class="btn" id="addSeedBtn" type="button">Add</button>
+            <button class="btn" id="resetSeedsBtn" type="button">Reset topics</button>
+          </div>
+        </div>
+
+        <div class="run">
+          <div>
+            <p><b>Run it from the chat.</b> Send Claude this message and the results show up here when the search finishes:</p>
+            <code id="runMsg">Run my niche search</code>
+          </div>
+          <button class="btn primary" id="copyBtn" type="button">Copy message</button>
+        </div>
+        <p class="saved" id="saved"></p>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script>
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const safeUrl = u => (typeof u === "string" && u.startsWith("https://")) ? u : "#";
+const fmt = n => { if (n == null) return "–"; n = +n;
+  for (const [u, d] of [["B",1e9],["M",1e6],["K",1e3]]) if (Math.abs(n) >= d) { const v = n / d; return (v >= 100 ? v.toFixed(0) : v.toFixed(1).replace(/\.0$/, "")) + u; }
+  return String(Math.round(n)); };
+const WORDS = {1000000:"1 million",2000000:"2 million",5000000:"5 million",10000000:"10 million",20000000:"20 million",50000000:"50 million"};
+const words = n => WORDS[n] || fmt(n);
+const when = iso => { const d = new Date(iso); return isNaN(d) ? "" : d.toLocaleString(undefined, {month:"short", day:"numeric", hour:"numeric", minute:"2-digit"}); };
+function toast(t) { const d = document.createElement("div"); d.className = "toast"; d.setAttribute("role", "status"); d.textContent = t; document.body.append(d); setTimeout(() => d.remove(), 2600); }
+function hue(s) { let h = 2166136261; for (const ch of String(s)) { h ^= ch.charCodeAt(0); h = Math.imul(h, 16777619) >>> 0; } return h % 360; }
+const chUrl = c => c.handle ? "https://www.youtube.com/" + encodeURIComponent(c.handle).replace("%40", "@") : "https://www.youtube.com/channel/" + encodeURIComponent(c.id);
+
+const COUNTRIES = [["US","United States"],["GB","UK"],["CA","Canada"],["AU","Australia"],["IN","India"],["PH","Philippines"],
+  ["BR","Brazil"],["MX","Mexico"],["DE","Germany"],["FR","France"],["ES","Spain"],["ID","Indonesia"],["NG","Nigeria"],["ZA","South Africa"]];
+const DEFAULT_SEEDS = ["","#shorts","ai animation","ai story","ai cat","ai baby","ai animals","italian brainrot","fruit drama","3d animation",
+  "cartoon","anime edit","movie recap","reddit stories","minecraft parkour story","roblox","gta","satisfying","oddly satisfying","asmr",
+  "restoration","hydraulic press","facts","did you know","history","scary story","true crime","motivation","stoic","quiz","riddle",
+  "would you rather","guess the","geography","animals","life hacks","cooking","cars","football edit","space","bible"];
+const DEFAULTS = {max_channel_age:30, min_views:10000000, days:7, faceless_only:false, regions:["US"], seeds:DEFAULT_SEEDS};
+const METHOD = {
+  exact:{cls:"b-m-exact", label:"Exact", tip:"The channel is younger than the time window, so every view it has counts."},
+  snapshot:{cls:"b-m-snapshot", label:"Measured", tip:"Worked out from an earlier search of the same channel."},
+  uploads:{cls:"b-m-uploads", label:"At least", tip:"Counted from videos posted in the window. The real number is higher."},
+};
+const FACE = {yes:["b-face-yes","Faceless"], no:["b-face-no","Shows faces"], unknown:["b-plain","Faces not checked"]};
+
+let db = null, searches = [], viewingId = null, nicheFilter = null;
+let settings = structuredClone(DEFAULTS), settingsLoaded = false;
+
+/* ---------------- tabs ---------------- */
+function showTab(which) {
+  const res = which === "results";
+  $("#tabResults").setAttribute("aria-selected", res); $("#tabSettings").setAttribute("aria-selected", !res);
+  $("#resultsView").hidden = !res; $("#settingsView").hidden = res;
+}
+$("#tabResults").onclick = () => showTab("results");
+$("#tabSettings").onclick = () => showTab("settings");
+
+/* ---------------- history + results ---------------- */
+function renderHistory() {
+  const h = $("#history");
+  if (!searches.length) { h.innerHTML = '<div class="empty">Your searches will show up here.</div>'; return; }
+  h.innerHTML = searches.map(s => `<button type="button" data-id="${esc(s.id)}" class="${s.id === viewingId ? "active" : ""}">
+      <b>${esc(when(s.generated))}${s.example ? " · example" : ""}</b>
+      <span>${s.channels.length ? `${s.channels.length} channel${s.channels.length > 1 ? "s" : ""}, ${s.niches.length} niche${s.niches.length === 1 ? "" : "s"}` : "Nothing found"} · ${fmt(s.min_views)}+ views</span>
+    </button>`).join("");
+  h.querySelectorAll("button").forEach(b => b.onclick = () => { viewingId = b.dataset.id; nicheFilter = null; renderHistory(); renderResult(); showTab("results"); window.scrollTo(0, 0); });
+}
+
+function emptyResults(title, text) {
+  $("#results").hidden = true; $("#resultsEmpty").hidden = false;
+  $("#resultsEmpty").innerHTML = `<h2>${esc(title)}</h2><p class="sub" style="margin:8px auto 0">${text}</p>`;
+}
+
+function channelCard(c, days) {
+  const m = METHOD[c.method] || METHOD.uploads, f = FACE[c.faceless] || FACE.unknown;
+  const h = hue(c.id);
+  const vids = (c.videos || []).slice(0, 4).map(v => {
+    const vh = hue(v.id);
+    return `<a class="vid" href="${esc(safeUrl(v.url))}" target="_blank" rel="noopener" style="background:linear-gradient(150deg,hsl(${vh} 55% 42%),hsl(${(vh + 40) % 360} 60% 28%))">
+      <span class="play"><svg viewBox="0 0 10 10"><path d="M1 0v10l9-5z"/></svg></span>
+      <span><b>${fmt(v.views)}</b><p>${esc(v.title)}</p></span></a>`; }).join("");
+  const age = Math.max(1, Math.round(c.age_days));
+  return `<article class="ch">
+    <div class="ch-top">
+      <div class="av" style="background:hsl(${h} 45% 45%)" aria-hidden="true">${esc((c.title || "?").trim().charAt(0).toUpperCase())}</div>
+      <div>
+        <h3><a href="${esc(chUrl(c))}" target="_blank" rel="noopener">${esc(c.title)} ↗</a></h3>
+        <div class="meta">${age} day${age > 1 ? "s" : ""} old · ${c.subs == null ? "hidden" : fmt(c.subs)} subscribers · ${c.uploads_7d} video${c.uploads_7d === 1 ? "" : "s"} in ${days} days</div>
+        <div class="badges"><span class="badge ${f[0]}">${f[1]}</span><span class="badge ${m.cls}" title="${esc(m.tip)}">${m.label}</span>${c.category ? `<span class="badge b-plain">${esc(c.category)}</span>` : ""}</div>
+      </div>
+      <div class="ch-views"><b>${fmt(c.views_7d)}</b><span>views in ${days} days</span></div>
+    </div>
+    ${c.keywords?.length ? `<div class="kw">${c.keywords.map(k => `<span>${esc(k)}</span>`).join("")}</div>` : ""}
+    ${vids ? `<div class="vids">${vids}</div>` : ""}
+  </article>`;
+}
+
+function renderResult() {
+  const d = searches.find(s => s.id === viewingId);
+  if (!d) return;
+  $("#resultsEmpty").hidden = true; $("#results").hidden = false;
+  const chs = d.channels, niches = d.niches;
+  const faceless = chs.filter(c => c.faceless === "yes").length, checked = chs.filter(c => c.faceless !== "unknown").length;
+  const total = chs.reduce((a, c) => a + c.views_7d, 0);
+  const proven = niches.filter(n => n.channels >= 2).length;
+  const shown = nicheFilter ? chs.filter(c => nicheFilter.ids.includes(c.id)) : chs;
+
+  let html = `
+    <h1>${chs.length ? `${chs.length} new channel${chs.length > 1 ? "s are" : " is"} winning right now` : "No channel cleared the bar"}</h1>
+    <p class="sub">Searched ${esc(when(d.generated))} · channels started in the last ${esc(d.max_channel_age)} days with ${esc(words(d.min_views))}+ views in ${esc(d.days)} days · ${esc((d.regions || []).join(", "))}</p>
+    ${d.example ? '<div class="banner">Example data: these channels are made up, to show how results look. Your real searches appear here after you run one.</div>' : ""}
+    <div class="tiles">
+      <div class="tile"><b>${niches.length}</b><span>niches found${proven ? ` · ${proven} proven` : ""}</span></div>
+      <div class="tile"><b>${chs.length}</b><span>new channels</span></div>
+      <div class="tile"><b>${checked ? `${faceless}/${checked}` : "–"}</b><span>${checked ? "faceless" : "faces not checked"}</span></div>
+      <div class="tile"><b>${fmt(total)}</b><span>views in ${esc(d.days)} days</span></div>
+    </div>`;
+
+  if (!chs.length) {
+    html += `<div class="card empty-state" style="margin-top:20px"><h2>Nothing this time</h2>
+      <p class="sub" style="margin:8px auto 0">It checked ${esc(d.channels_scanned)} channels and ${esc(d.young_channels)} were new, but none reached ${esc(words(d.min_views))} views. That's normal: this bar is high. Lower the views or allow older channels in Search settings, then run it again.</p>
+      <p style="margin-top:16px"><button class="btn" type="button" id="goSettings">Open search settings</button></p></div>`;
+  } else {
+    html += `<div class="section-title"><h2>Niches</h2><p>Tap one to see its channels. "Proven" means 2 or more new channels.</p></div>
+    <div class="niches">${niches.slice(0, 12).map((n, i) => `
+      <button type="button" class="niche ${nicheFilter?.name === n.niche ? "sel" : ""}" data-i="${i}">
+        <div class="rank">${i + 1}</div>
+        <div><h3>${esc(n.niche)}</h3>
+          <p>${n.related?.length ? "with " + esc(n.related.join(", ")) + " · " : ""}${esc(n.channel_titles.slice(0, 3).join(", "))}</p>
+          <div class="badges">${n.channels >= 2 ? '<span class="badge b-proven">Proven</span>' : '<span class="badge b-signal">1 channel</span>'}
+            ${n.faceless_checked ? `<span class="badge ${n.faceless_channels === n.faceless_checked ? "b-face-yes" : n.faceless_channels ? "b-plain" : "b-face-no"}">${n.faceless_channels}/${n.faceless_checked} faceless</span>` : ""}</div></div>
+        <div class="num"><b>${fmt(n.views_7d)}</b><span>${n.channels} channel${n.channels > 1 ? "s" : ""}</span></div>
+      </button>`).join("")}</div>
+    <div class="section-title"><h2>Channels</h2><p>Biggest first. Tap a Short to watch it on YouTube.</p></div>
+    ${nicheFilter ? `<div class="filterbar">Showing channels in <b>${esc(nicheFilter.name)}</b> <button class="btn" type="button" id="clearFilter">Show all</button></div>` : ""}
+    <div class="channels">${shown.map(c => channelCard(c, d.days)).join("")}</div>`;
+  }
+
+  if (d.near_misses?.length) {
+    html += `<div class="section-title"><h2>Almost made it</h2><p>New channels that came close. Worth watching.</p></div>
+    <div class="table-wrap"><table><thead><tr><th>Channel</th><th class="r">Views in ${esc(d.days)} days</th><th class="r">Age</th><th>Topics</th></tr></thead><tbody>
+    ${d.near_misses.map(c => `<tr><td><a href="${esc(chUrl(c))}" target="_blank" rel="noopener">${esc(c.title)}</a></td>
+      <td class="r">${fmt(c.views_7d)}</td><td class="r">${Math.max(1, Math.round(c.age_days))}d</td><td>${esc((c.keywords || []).join(", "))}</td></tr>`).join("")}
+    </tbody></table></div>`;
+  }
+
+  html += `<div class="explain">
+    <div><span class="badge b-m-exact">Exact</span><br>The channel is younger than the time window, so every view it has is counted.</div>
+    <div><span class="badge b-m-snapshot">Measured</span><br>Worked out from an earlier search of the same channel. Search daily and more results become this.</div>
+    <div><span class="badge b-m-uploads">At least</span><br>Counted from videos posted in the window. The real number is higher, never lower.</div>
+  </div>
+  <p class="foot">"Faceless" is a best guess from face detection on thumbnails. Open the channel and check before you copy a niche. Used ${fmt(d.quota_used)} YouTube API units.</p>`;
+
+  const el = $("#results");
+  el.innerHTML = html;
+  el.querySelectorAll(".niche").forEach(b => b.onclick = () => {
+    const n = niches[+b.dataset.i];
+    nicheFilter = nicheFilter?.name === n.niche ? null : {name:n.niche, ids:n.channel_ids || []};
+    renderResult();
+    el.querySelector(".channels")?.scrollIntoView({behavior:"smooth", block:"start"});
+  });
+  el.querySelector("#clearFilter")?.addEventListener("click", () => { nicheFilter = null; renderResult(); });
+  el.querySelector("#goSettings")?.addEventListener("click", () => showTab("settings"));
+}
+
+/* ---------------- settings ---------------- */
+function ensureOption(sel, v, label) { if (![...$(sel).options].some(o => +o.value === +v)) $(sel).add(new Option(label, v)); $(sel).value = v; }
+function fillForm() {
+  ensureOption("#fAge", settings.max_channel_age, settings.max_channel_age + " days");
+  ensureOption("#fViews", settings.min_views, words(settings.min_views));
+  ensureOption("#fDays", settings.days, settings.days + " days");
+  $("#fFaceless").checked = !!settings.faceless_only;
+  renderForm();
+}
+function renderForm() {
+  $("#sentence").innerHTML = `Find channels started in the <b>last ${esc(settings.max_channel_age)} days</b> that got <b>${esc(words(settings.min_views))}+ views</b> in the <b>last ${esc(settings.days)} days</b>${settings.faceless_only ? ", <b>faceless only</b>" : ""}.`;
+  $("#regions").innerHTML = COUNTRIES.map(([c, n]) => `<button type="button" class="chip ${settings.regions.includes(c) ? "on" : ""}" aria-pressed="${settings.regions.includes(c)}" data-c="${c}">${n}</button>`).join("");
+  $("#regions").querySelectorAll(".chip").forEach(b => b.onclick = () => {
+    const c = b.dataset.c;
+    if (settings.regions.includes(c)) { if (settings.regions.length > 1) settings.regions = settings.regions.filter(x => x !== c); else return toast("Keep at least one country"); }
+    else settings.regions = [...settings.regions, c];
+    renderForm(); save();
+  });
+  $("#seeds").innerHTML = settings.seeds.map((q, i) => `<span class="chip seed">${q === "" ? "<i>Top Shorts overall</i>" : esc(q)}<button type="button" class="x" data-i="${i}" aria-label="Remove ${esc(q || "Top Shorts overall")}">×</button></span>`).join("")
+    || '<span class="sub">No topics. Add at least one.</span>';
+  $("#seeds").querySelectorAll(".x").forEach(b => b.onclick = () => { settings.seeds = settings.seeds.filter((_, i) => i !== +b.dataset.i); renderForm(); save(); });
+}
+for (const [id, key] of [["#fAge","max_channel_age"],["#fViews","min_views"],["#fDays","days"]])
+  $(id).onchange = () => { settings[key] = +$(id).value; renderForm(); save(); };
+$("#fFaceless").onchange = () => { settings.faceless_only = $("#fFaceless").checked; renderForm(); save(); };
+function addSeed() {
+  const v = $("#seedInput").value.trim().toLowerCase().slice(0, 60);
+  if (!v) return;
+  if (!settings.seeds.includes(v)) settings.seeds = [...settings.seeds, v];
+  $("#seedInput").value = ""; renderForm(); save();
+}
+$("#addSeedBtn").onclick = addSeed;
+$("#seedInput").onkeydown = e => { if (e.key === "Enter") addSeed(); };
+$("#resetSeedsBtn").onclick = () => { settings.seeds = [...DEFAULT_SEEDS]; renderForm(); save(); };
+$("#copyBtn").onclick = () => {
+  navigator.clipboard.writeText($("#runMsg").textContent).then(() => toast("Copied. Paste it in the chat."))
+    .catch(() => { const r = document.createRange(); r.selectNodeContents($("#runMsg")); const s = getSelection(); s.removeAllRanges(); s.addRange(r); toast("Selected. Copy it and paste it in the chat."); });
+};
+
+let saveTimer = null, writing = Promise.resolve();
+function save() {
+  if (!db) { $("#saved").textContent = "Can't save here: open this page signed in to claude.ai."; return; }
+  $("#saved").textContent = "Saving…";
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(() => {
+    const body = {...settings, regions:[...settings.regions], seeds:[...settings.seeds], updated:new Date().toISOString()};
+    writing = writing.then(() => db.doc("settings/current").set(body))
+      .then(() => { $("#saved").textContent = "Saved. The next search uses these settings."; })
+      .catch(e => { $("#saved").textContent = e?.code === "permission_denied" || e?.code === "not_granted" ? "You can view these settings but not change them." : "Couldn't save. Try again in a moment."; });
+  }, 500);
+}
+
+/* ---------------- boot ---------------- */
+fillForm();
+(async () => {
+  db = await window.claude?.use?.("db");
+  if (!db) {
+    $("#dbDot").className = "dot off"; $("#dbText").textContent = "Offline";
+    emptyResults("Sign in to see your searches", "This page keeps its searches in claude.ai. Open it while signed in to see them.");
+    $("#history").innerHTML = '<div class="empty">Not available here.</div>';
+    return;
+  }
+  let gotData = false;
+  const slow = setTimeout(() => { if (!gotData) { $("#dbDot").className = "dot off"; $("#dbText").textContent = "Can't reach your data yet"; } }, 10000);
+
+  db.collection("searches").orderBy("generated", "desc").limit(30).onSnapshot(snap => {
+    if (!snap.metadata.fromCache) { gotData = true; clearTimeout(slow); $("#dbDot").className = "dot on"; $("#dbText").textContent = "Up to date"; }
+    const prevNewest = searches[0]?.id;
+    searches = snap.docs.map(d => ({id:d.id, ...d.data()})).filter(s => Array.isArray(s.channels) && Array.isArray(s.niches));
+    if (!searches.length) {
+      viewingId = null;
+      emptyResults("No searches yet", "Set what to look for in <b>Search settings</b>, then send Claude “Run my niche search” in the chat. Results appear here.");
+    } else if (!viewingId || !searches.some(s => s.id === viewingId) || (searches[0].id !== prevNewest && prevNewest)) {
+      viewingId = searches[0].id; nicheFilter = null; renderResult();
+      if (prevNewest && searches[0].id !== prevNewest) toast("New search results arrived");
+    } else renderResult();
+    renderHistory();
+  }, () => { clearTimeout(slow); $("#dbDot").className = "dot off"; $("#dbText").textContent = "Can't load searches"; emptyResults("Couldn't load your searches", "Reload the page to try again."); });
+
+  db.doc("settings/current").onSnapshot(snap => {
+    if (snap.exists && !snap.metadata.hasPendingWrites) {
+      const d = snap.data();
+      settings = {...DEFAULTS, ...d, regions:Array.isArray(d.regions) && d.regions.length ? d.regions : DEFAULTS.regions, seeds:Array.isArray(d.seeds) ? d.seeds : DEFAULTS.seeds};
+      fillForm();
+    }
+    settingsLoaded = true;
+  }, () => {});
+})();
+</script>

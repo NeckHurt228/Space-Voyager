@@ -79,6 +79,11 @@ voiceover when one exists.
 
 ## Niche Finder app (faceless Shorts niches proven by new channels)
 
+**Inside Claude:** the app also lives in the chat as an Artifact (`tools/niche_artifact/niche-finder.html`). Set the search in its
+*Search settings* tab, tell Claude "Run my niche search", and the results appear on the page.
+
+**On your computer:**
+
 **Open it:** double-click `Niche Finder.command` (Mac; the first time, right-click → Open) or `Niche Finder.bat` (Windows).
 Or run `python3 tools/niche_app.py`. It opens in your browser and runs on your computer. Only Python 3 is needed.
 Try it without a key first: `python3 tools/niche_app.py --demo` (made-up channels, clearly marked).
