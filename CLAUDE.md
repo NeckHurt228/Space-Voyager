@@ -8,6 +8,8 @@ This repo is an editing assistant for military / airsoft POV clip Shorts.
   and always look at the contact sheets it writes before judging content.
 - Always transcribe the audio too: `python3 tools/transcribe.py <clip> --out reports`
   (first run: `bash tools/setup_asr.sh`). The joke is often spoken.
+- Niche research ("find viral / faceless niches", "what's blowing up"): run `python3 tools/niche_finder.py`
+  (needs `YOUTUBE_API_KEY`), open the HTML report it writes in `reports/niches/`, and judge the niches honestly.
 - Results tracking lives in `reports/history.csv`. Keep it up to date when the user reports views.
 - **Brutal honesty, always.** The user's words: "If it's ass it's ass, don't lie." Give the real verdict on
   every clip, edit, title and idea, including their own requests, first and without cushioning. See

@@ -77,6 +77,29 @@ It renders a 1080x1920 Short in the competitor style: jump cuts, bleeps, punch-i
 ArmoredPOVs-style captions (Montserrat on black boxes, coloured role tags, red italic punchlines), a centre band with blurred bars, a bass-hit SFX, and -14 LUFS loudness. It also mixes in the
 voiceover when one exists.
 
+## Niche finder (faceless Shorts niches proven by new channels)
+
+```
+export YOUTUBE_API_KEY=...                 # free: Google Cloud console > enable YouTube Data API v3 > API key
+pip install "opencv-python-headless<5"     # optional: enables the faceless check
+python3 tools/niche_finder.py
+```
+
+It finds channels **created in the last 30 days** that pulled **10M+ views in the last 7 days** with Shorts,
+checks whether their thumbnails show faces, and groups them into niches by shared keywords. One new channel
+doing that is a signal. Several in the same niche means the niche is proven. Results go to
+`reports/niches/` as an HTML report with thumbnails, plus CSV and JSON files.
+
+- Every threshold can be changed: `--min-views 5000000 --max-channel-age 45 --days 7 --regions US,GB,IN --faceless-only`
+- Search queries live in `tools/niche_seeds.txt`. Each one costs 100 of your 10,000 free daily quota units;
+  a default run uses about 4,000.
+- The API gives no "views in the last 7 days" for other people's channels, so the tool uses the best number it has
+  and labels it: `exact` (channel 7 days old or younger), `snapshot` (difference from a run 6+ days ago),
+  or `uploads` (views on this week's uploads, a lower bound). **Run it daily**: snapshots make the numbers exact,
+  and channels it has already found are re-checked cheaply (`--recheck-only` does only that).
+- The faceless check is a heuristic (face detection on thumbnails). Open the report and look before you commit to a niche.
+- Offline test: `python3 tools/test_niche_finder.py`
+
 ## Files
 - `.claude/skills/clip-coach/SKILL.md`: the agent's workflow
 - `.claude/skills/clip-coach/benchmarks.md`: the research data (top videos, second-by-second breakdowns)
@@ -84,6 +107,7 @@ voiceover when one exists.
 - `.claude/skills/clip-coach/hook-library.md`: hook types, title formulas, caption style, sound palette, pacing templates
 - `.claude/skills/clip-coach/voiceover.md`: VO personas, voices, humour and timing rules, pipeline
 - `tools/clip_analyzer.py`: the measurement script
+- `tools/niche_finder.py` + `tools/niche_seeds.txt`: finds Shorts niches proven by new channels
 - `tools/vo_mix.py`: voiceover timing check and mixer
 - `tools/render_edit.py`: renders the finished edit from an edit plan
 - `tools/remove_overlay.py`: removes baked-in emojis, stickers or small text from a clip (needs `opencv-python-headless`)

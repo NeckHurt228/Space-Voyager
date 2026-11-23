@@ -1,0 +1,47 @@
+// Search queries for niche_finder.py, one per line.
+// Each line costs 100 quota units per region per page (the free quota is 10,000 units a day).
+// Lines starting with // are comments. "(blank)" = no query: YouTube's overall top Shorts this week.
+// Lean towards faceless formats: the point is to find niches you can run without showing your face.
+// Add the niches you want to test, and delete the ones that keep returning nothing.
+
+(blank)
+#shorts
+ai animation
+ai story
+ai cat
+ai baby
+ai animals
+italian brainrot
+fruit drama
+3d animation
+cartoon
+anime edit
+movie recap
+reddit stories
+minecraft parkour story
+roblox
+gta
+satisfying
+oddly satisfying
+asmr
+restoration
+hydraulic press
+facts
+did you know
+history
+scary story
+true crime
+motivation
+stoic
+quiz
+riddle
+would you rather
+guess the
+geography
+animals
+life hacks
+cooking
+cars
+football edit
+space
+bible
